@@ -118,15 +118,20 @@ At an absolute minimum, **Biskwee** will:
 
 ### Timeframes
 
-> Use this section to estimate the time necessary to build out the various sections of your project. You may include an additional priority matrix, if you desire.
-
-| Task                | Priority | Estimated Time | Actual Time |
-| ------------------- | :------: | :------------: | :---------: |
-| Add Contact Form    |    L     |     3 hrs      |    3 hrs    |
-| Create CRUD Actions |    H     |     3 hrs      |     TBD     |
-| TOTAL               |          |     6 hrs      |     TBD     |
-
-> _Why is this necessary? Time frames are key to the development cycle. You have limited time to code your app, and your estimates can then be used to evalute possibilities of your MVP and post-MVP based on time needed. It's best you assume an additional hour for each component, as well as a few hours added to the total time, to play it safe._
+| Task                     | Priority | Estimated Time | Actual Time |
+| ------------------------ | :------: | :------------: | :---------: |
+| Set up server w/ CRUD    |    H     |     3 hrs      |             |
+| Create basic seed data   |    M     |    1.5 hrs     |             |
+| Set up auth backend      |    H     |    1.5 hrs     |             |
+| Scaffold frontend/routes |    H     |     8 hrs      |             |
+| Build out auth backend   |    M     |     3 hrs      |             |
+| Build out RecipeDetail   |    H     |     12 hrs     |             |
+| Build out AddEditRecipes |    H     |     8 hrs      |             |
+| Build out MyRecipes      |    M     |     5 hrs      |             |
+| Styling                  |    M     |     8 hrs      |             |
+| Additional seed data     |    L     |      n/a       |             |
+| Post-MVP                 |    L     |      n/a       |             |
+| TOTAL                    |          |     50 hrs     |             |
 
 <br>
 
@@ -139,7 +144,7 @@ At an absolute minimum, **Biskwee** will:
 | Mar 6th  | auth backend, scaffold frontend/routes                  |
 | Mar 7th  | OFF                                                     |
 | Mar 8th  | build out auth frontend                                 |
-| Mar 9th  | build out RecipeDetail                                  |
+| Mar 9th  | build out RecipeDetail/IngredientList/MethodList        |
 | Mar 10th | build out AddEditRecipes                                |
 | Mar 11th | build out MyRecipes/RecipeLI                            |
 | Mar 12th | styling                                                 |
