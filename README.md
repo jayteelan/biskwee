@@ -90,6 +90,7 @@ At an absolute minimum, **Biskwee** will:
 
 #### ERD Model
 
+(includes some post-MVP info)
 ![ERD](https://i.imgur.com/4O9tt7T.png)
 
 #### Endpoints
@@ -113,8 +114,6 @@ At an absolute minimum, **Biskwee** will:
 
 ## Planning
 
-> You've got a little over a week to reach your Minimum Viable Product. Use these sections to plan out your approach.
-
 <br>
 
 ### Timeframes
@@ -133,20 +132,18 @@ At an absolute minimum, **Biskwee** will:
 
 ### Schedule
 
-> Use this section to look at your project week and plan out when and what you want to do.
-
-| Day      | Deliverables                              |
-| -------- | ----------------------------------------- |
-| Mar 4th  | project proposal worksheet / psuedocoding |
-| Mar 5th  | project pitch / build out endpoints       |
-| Mar 6th  | Build out front-end components            |
-| Mar 7th  | OFF                                       |
-| Mar 8th  | impliment user auth                       |
-| Mar 9th  | styling                                   |
-| Mar 10th | MVP, begin post-MVP                       |
-| Mar 11th | post-MVP                                  |
-| Mar 12th | polishing                                 |
-| Mar 13th | final presentations                       |
+| Day      | Deliverables                                            |
+| -------- | ------------------------------------------------------- |
+| Mar 4th  | project proposal worksheet                              |
+| Mar 5th  | project pitch, build out endpoints with basic seed data |
+| Mar 6th  | auth backend, scaffold frontend/routes                  |
+| Mar 7th  | OFF                                                     |
+| Mar 8th  | build out auth frontend                                 |
+| Mar 9th  | build out RecipeDetail                                  |
+| Mar 10th | build out AddEditRecipes                                |
+| Mar 11th | build out MyRecipes/RecipeLI                            |
+| Mar 12th | styling                                                 |
+| Mar 13th | final presentations                                     |
 
 <br>
 
@@ -154,7 +151,13 @@ At an absolute minimum, **Biskwee** will:
 
 ## Post-MVP
 
-> Use this section to document ideas you've had that would be fun (or necessary) for your Post-MVP. This will be helpful when you return to your project after graduation!
+- allow user to add ingredients to database
+- add tags to recipes
+- unit conversions (e.g., oz to g, cups to L)
+- support for subrecipes (i.e., recipes used as ingredients in larger recipes)
+- support for recipe cost analysis
+- create printer-friendly recipes/export recipes to PDF
+- share recipes between users
 
 <br>
 
