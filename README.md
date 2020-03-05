@@ -1,1 +1,175 @@
-# biskwee
+# Biskwee
+
+- [Overview](#Overview)
+- [MVP](#MVP)
+  - [MVP Goals](#MVP-Goals)
+  - [MVP Libraries](#MVP-Libraries)
+  - [MVP Client (Front End)](#MVP-Client-Front-End)
+    - [Wireframes](#Wireframes)
+    - [Component Hierarchy](#Component-Hierarchy)
+    - [Component Breakdown](#Component-Breakdown)
+    - [Component Estimates](#Component-Estimates)
+  - [MVP Server (Back End)](#MVP-Server-Back-End)
+    - [ERD Model](#ERD-Model)
+    - [Data Heirarchy](#Data-Heirarchy)
+- [Post-MVP](#Post-MVP)
+- [Project Delivery](#Project-Delivery)
+- [Code Showcase](#Code-Showcase)
+- [Code Issues & Resolutions](#Code-Issues--Resolutions)
+
+<br>
+
+## Overview
+
+**Biskwee** (taken from the French pronounciation of "biscuit") is a recipe management app made specifically for use by pastry chefs. It will have a database of ingredients tailored for the sweet side of the kitchen (think: fewer meats, more chocolates) and will default to metric weight units for ingredient measurements. The primary challenges anticipated for this project are setting up associations between data tables, keeping feature creep at bay, and creating a streamlined seed data set for ingredients that still has a sufficient number of entries to handle the initial set of recipes.
+
+<br>
+
+## MVP
+
+<br>
+
+### MVP Goals
+
+At an absolute minimum, **Biskwee** will:
+
+- have a full-CRUD backend allowing for the creation of new User and Recipe records
+- include a signup/login pathway to authenticate users and allow each one a personal recipe library
+- allow the user to browse their recipe library and add new recipes
+
+<br>
+
+### MVP Libraries
+
+|   Library    | Description                                      |
+| :----------: | :----------------------------------------------- |
+|    React     | _Create front-end user interface_                |
+| React Router | _Route between front-end component paths_        |
+|    axios     | _Handle data flow between client and API server_ |
+|    Formik    | _Assist with creation of recipe input form_      |
+|    Rails     | _Initialize and run back-end server_             |
+
+<br>
+
+### MVP Client (Front End)
+
+#### Wireframes
+
+![wireframes](https://i.imgur.com/msMI2C4.png)
+
+#### Component Hierarchy
+
+> Use this section to show your React components and the data architecture of your app.
+
+![component hierarchy](https://i.imgur.com/DDlVNsm.png)
+
+#### Component Breakdown
+
+|    Component    | State | Description                                                    |
+| :-------------: | :---: | :------------------------------------------------------------- |
+|       App       |   n   | _Primary layout_                                               |
+|      Main       |   y   | _Container for entire app; will hold core functions and state_ |
+|       Nav       |   n   | _Container for navigation links and login form_                |
+|      Login      |   y   | _Login form/current user/sign out_                             |
+|     Content     |   n   | _Container for primary content_                                |
+|   LoginFailed   |   y   | _Inform user that login as failed; login form_                 |
+|    MyRecipes    |   n   | _Display all of user's recipes_                                |
+|    RecipeLI     |   n   | _"Card" with summary info for an individual recipe_            |
+|  AddEditRecipe  |   y   | _Form for user to input a new recipe or edit an existing one_  |
+|  RecipeDetail   |   n   | _A full-page display of an individual recipe_                  |
+| IngredientInput |   y   | _Input element for a recipe ingredient_                        |
+|   MethodInput   |   y   | _Input element for a step in the recipe instructions_          |
+| IngredientList  |   n   | _List the ingredients in a recipe_                             |
+|   MethodList    |   n   | _List the steps in a recipe's instructions_                    |
+|  IngredientLI   |   n   | _Layout for a single ingredient list element_                  |
+|    Method LI    |   n   | _Layout for a single instruction list element_                 |
+
+<br>
+
+### MVP Server (Back End)
+
+#### ERD Model
+
+![ERD](https://i.imgur.com/4O9tt7T.png)
+
+#### Endpoints
+
+- POST `/user`: create a new user
+- POST `/login`: authenticate user login
+- GET `/user/:user_id/recipes`: index of a user's recipes
+- GET `/user/:user_id/recipes/:recipe_id`: retrieve data for a specific recipe
+- POST `/user/:user_id/recipes/`: add a new recipe to the database
+- PUT `/user/:user_id/recipes/:recipe_id`: update an existing recipe
+- DELETE `/user/:user_id/recipes/:recipe_id`: delete a recipe from the database
+- GET `/ingredients`: index of all ingredients
+- GET `/ingredients/:ingredient_id`: retrieve data for a specific ingredient
+- POST `/ingredients`: add a new ingredient
+- PUT `/ingredients/:ingredient_id`: update an existing ingredient
+- DELETE `/ingredients/:ingredient_id`: delete an ingredient from the database
+
+<br>
+
+---
+
+## Planning
+
+> You've got a little over a week to reach your Minimum Viable Product. Use these sections to plan out your approach.
+
+<br>
+
+### Timeframes
+
+> Use this section to estimate the time necessary to build out the various sections of your project. You may include an additional priority matrix, if you desire.
+
+| Task                | Priority | Estimated Time | Actual Time |
+| ------------------- | :------: | :------------: | :---------: |
+| Add Contact Form    |    L     |     3 hrs      |    3 hrs    |
+| Create CRUD Actions |    H     |     3 hrs      |     TBD     |
+| TOTAL               |          |     6 hrs      |     TBD     |
+
+> _Why is this necessary? Time frames are key to the development cycle. You have limited time to code your app, and your estimates can then be used to evalute possibilities of your MVP and post-MVP based on time needed. It's best you assume an additional hour for each component, as well as a few hours added to the total time, to play it safe._
+
+<br>
+
+### Schedule
+
+> Use this section to look at your project week and plan out when and what you want to do.
+
+| Day      | Deliverables                              |
+| -------- | ----------------------------------------- |
+| Mar 4th  | project proposal worksheet / psuedocoding |
+| Mar 5th  | project pitch / build out endpoints       |
+| Mar 6th  | Build out front-end components            |
+| Mar 7th  | OFF                                       |
+| Mar 8th  | impliment user auth                       |
+| Mar 9th  | styling                                   |
+| Mar 10th | MVP, begin post-MVP                       |
+| Mar 11th | post-MVP                                  |
+| Mar 12th | polishing                                 |
+| Mar 13th | final presentations                       |
+
+<br>
+
+---
+
+## Post-MVP
+
+> Use this section to document ideas you've had that would be fun (or necessary) for your Post-MVP. This will be helpful when you return to your project after graduation!
+
+<br>
+
+---
+
+## Project Change Log
+
+> This section should be expanded and revised as you work on your project.
+
+## Code Showcase
+
+> Use this section to include a brief code snippet of functionality that you are proud of and a brief description.
+
+## Code Issues & Resolutions
+
+> Use this section to list of all major issues encountered and their resolution.
+
+---
