@@ -242,3 +242,24 @@ Processing by Admin::DashboardController#index as HTML
 Completed 200 OK in 91ms (Views: 65.5ms | ActiveRecord: 7.8ms | Allocations: 17902)
 
 
+Started POST "/admin/logout" for ::1 at 2020-03-06 12:10:51 -0500
+Processing by ActiveAdmin::Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"dN4DG4QqbMEAi66uuVDLlp9fBnAfcAmy4AEDxhFDSXvW/DnRR3b35xs/xNLvpurccR7snlQzcO6/nPxVYJ/mRw=="}
+  [1m[36mAdminUser Load (1.5ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Redirected to http://localhost:3000/admin
+Completed 302 Found in 16ms (ActiveRecord: 1.5ms | Allocations: 2665)
+
+
+Started GET "/admin" for ::1 at 2020-03-06 12:10:51 -0500
+Processing by Admin::DashboardController#index as HTML
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 317)
+
+
+Started GET "/admin/login" for ::1 at 2020-03-06 12:10:51 -0500
+Processing by ActiveAdmin::Devise::SessionsController#new as HTML
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/devise/shared/_links.erb (Duration: 1.5ms | Allocations: 520)
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/devise/sessions/new.html.erb within layouts/active_admin_logged_out (Duration: 7.8ms | Allocations: 3128)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.0ms | Allocations: 15490)
+
+
