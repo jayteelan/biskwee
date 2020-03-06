@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
     t.string "name"
     t.bigint "category_id", null: false
     t.bigint "unit_id", null: false
-    t.float "unit_cost"
-    t.float "unit_weight"
-    t.float "unit_volume"
+    t.float "unit_cost", precision:3
+    t.float "unit_weight", precision:3
+    t.float "unit_volume", precision:3
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.float "yield_qty"
+    t.float "yield_qty", precision:3
     t.bigint "unit_id", null: false
     t.text "ingredients", default: [], array: true
     t.text "method", default: [], array: true
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
   create_table "units", force: :cascade do |t|
     t.string "name"
     t.string "abbrev"
-    t.float "in_grams"
-    t.float "in_liters"
+    t.float "in_grams", precision:3
+    t.float "in_liters", precision:3
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
