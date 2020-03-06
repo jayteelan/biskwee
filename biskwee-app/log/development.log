@@ -2321,3 +2321,418 @@ Processing by RecipesController#index as HTML
 Completed 200 OK in 34ms (Views: 26.8ms | ActiveRecord: 6.7ms | Allocations: 8260)
 
 
+  [1m[35m (8.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdminUser Exists? (8.1ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = $1 LIMIT $2[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (97.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "biskwee_app_development"[0m
+  [1m[35m (69.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "biskwee_app_test"[0m
+  [1m[35m (383.5ms)[0m  [1m[35mCREATE DATABASE "biskwee_app_development" ENCODING = 'unicode'[0m
+  [1m[35m (95.8ms)[0m  [1m[35mCREATE DATABASE "biskwee_app_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments" CASCADE[0m
+  [1m[35m (7.8ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" bigserial primary key, "namespace" character varying, "body" text, "resource_type" character varying, "resource_id" bigint, "author_type" character varying, "author_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments"  ("author_type", "author_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_namespace" ON "active_admin_comments"  ("namespace")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments"  ("resource_type", "resource_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users" CASCADE[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admin_users_on_email" ON "admin_users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admin_users_on_reset_password_token" ON "admin_users"  ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "category" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "ingredients" CASCADE[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "ingredients" ("id" bigserial primary key, "name" character varying, "category_id" bigint NOT NULL, "unit_id" bigint NOT NULL, "unit_cost" float, "unit_weight" float, "unit_volume" float, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_ingredients_on_category_id" ON "ingredients"  ("category_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_ingredients_on_unit_id" ON "ingredients"  ("unit_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes" CASCADE[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "name" character varying, "yield_qty" float, "unit_id" bigint NOT NULL, "ingredients" text[] DEFAULT '{}', "method" text[] DEFAULT '{}', "image_url" character varying, "notes" text, "parent_recipes" text[] DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_recipes_on_unit_id" ON "recipes"  ("unit_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "units" CASCADE[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "units" ("id" bigserial primary key, "name" character varying, "abbrev" character varying, "in_grams" float, "in_liters" float, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "ingredients" ADD CONSTRAINT "fk_rails_8a79bd69f9"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "ingredients" ADD CONSTRAINT "fk_rails_a73cff4e35"
+FOREIGN KEY ("unit_id")
+  REFERENCES "units" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "recipes" ADD CONSTRAINT "fk_rails_d837bf084f"
+FOREIGN KEY ("unit_id")
+  REFERENCES "units" ("id")
+[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200306171757)[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200306170845),
+(20200306170849),
+(20200306171221),
+(20200306171324),
+(20200306171445);
+
+[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-06 21:43:25.951886"], ["updated_at", "2020-03-06 21:43:25.951886"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "2eda1e398590f81163a25004c547b8b48a58d147"], ["created_at", "2020-03-06 21:43:25.966631"], ["updated_at", "2020-03-06 21:43:25.966631"]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "active_admin_comments" CASCADE[0m
+  [1m[35m (9.8ms)[0m  [1m[35mCREATE TABLE "active_admin_comments" ("id" bigserial primary key, "namespace" character varying, "body" text, "resource_type" character varying, "resource_id" bigint, "author_type" character varying, "author_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_author_type_and_author_id" ON "active_admin_comments"  ("author_type", "author_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_namespace" ON "active_admin_comments"  ("namespace")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_active_admin_comments_on_resource_type_and_resource_id" ON "active_admin_comments"  ("resource_type", "resource_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "admin_users" CASCADE[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "admin_users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admin_users_on_email" ON "admin_users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_admin_users_on_reset_password_token" ON "admin_users"  ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories" CASCADE[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "categories" ("id" bigserial primary key, "category" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "ingredients" CASCADE[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "ingredients" ("id" bigserial primary key, "name" character varying, "category_id" bigint NOT NULL, "unit_id" bigint NOT NULL, "unit_cost" float, "unit_weight" float, "unit_volume" float, "notes" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_ingredients_on_category_id" ON "ingredients"  ("category_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_ingredients_on_unit_id" ON "ingredients"  ("unit_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes" CASCADE[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "name" character varying, "yield_qty" float, "unit_id" bigint NOT NULL, "ingredients" text[] DEFAULT '{}', "method" text[] DEFAULT '{}', "image_url" character varying, "notes" text, "parent_recipes" text[] DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_recipes_on_unit_id" ON "recipes"  ("unit_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "units" CASCADE[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "units" ("id" bigserial primary key, "name" character varying, "abbrev" character varying, "in_grams" float, "in_liters" float, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "ingredients" ADD CONSTRAINT "fk_rails_8a79bd69f9"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "ingredients" ADD CONSTRAINT "fk_rails_a73cff4e35"
+FOREIGN KEY ("unit_id")
+  REFERENCES "units" ("id")
+[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "recipes" ADD CONSTRAINT "fk_rails_d837bf084f"
+FOREIGN KEY ("unit_id")
+  REFERENCES "units" ("id")
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200306171757)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200306170845),
+(20200306170849),
+(20200306171221),
+(20200306171324),
+(20200306171445);
+
+[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-06 21:43:26.222909"], ["updated_at", "2020-03-06 21:43:26.222909"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.3ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-03-06 21:43:26.230295"], ["key", "environment"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "2eda1e398590f81163a25004c547b8b48a58d147"], ["created_at", "2020-03-06 21:43:26.236876"], ["updated_at", "2020-03-06 21:43:26.236876"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdminUser Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM "admin_users" WHERE "admin_users"."email" = $1 LIMIT $2[0m  [["email", "admin@example.com"], ["LIMIT", 1]]
+  [1m[36mAdminUser Create (0.9ms)[0m  [1m[32mINSERT INTO "admin_users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "admin@example.com"], ["encrypted_password", "$2a$11$cRvfb8m8.26AZtqgLpbMmemBz6kY1sl8ZlONtOaHQubwupVsCYo12"], ["created_at", "2020-03-06 21:43:26.462314"], ["updated_at", "2020-03-06 21:43:26.462314"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.7ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_grams", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "gram"], ["abbrev", "g"], ["in_grams", 1.0], ["created_at", "2020-03-06 21:43:26.475218"], ["updated_at", "2020-03-06 21:43:26.475218"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_grams", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "kilogram"], ["abbrev", "kg"], ["in_grams", 1000.0], ["created_at", "2020-03-06 21:43:26.479951"], ["updated_at", "2020-03-06 21:43:26.479951"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_grams", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "ounce"], ["abbrev", "oz"], ["in_grams", 28.35], ["created_at", "2020-03-06 21:43:26.484212"], ["updated_at", "2020-03-06 21:43:26.484212"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_grams", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "pound"], ["abbrev", "lb"], ["in_grams", 454.0], ["created_at", "2020-03-06 21:43:26.488152"], ["updated_at", "2020-03-06 21:43:26.488152"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "milliliters"], ["abbrev", "mL"], ["in_liters", 0.001], ["created_at", "2020-03-06 21:43:26.492461"], ["updated_at", "2020-03-06 21:43:26.492461"]]
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "liters"], ["abbrev", "L"], ["in_liters", 1.0], ["created_at", "2020-03-06 21:43:26.502877"], ["updated_at", "2020-03-06 21:43:26.502877"]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.5ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "teaspoon"], ["abbrev", "tsp"], ["in_liters", 0.005], ["created_at", "2020-03-06 21:43:26.515433"], ["updated_at", "2020-03-06 21:43:26.515433"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "tablespoon"], ["abbrev", "Tb"], ["in_liters", 0.015], ["created_at", "2020-03-06 21:43:26.522053"], ["updated_at", "2020-03-06 21:43:26.522053"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "fluid ounce"], ["abbrev", "fl oz"], ["in_liters", 0.02957], ["created_at", "2020-03-06 21:43:26.540321"], ["updated_at", "2020-03-06 21:43:26.540321"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "cup"], ["abbrev", "c"], ["in_liters", 0.24], ["created_at", "2020-03-06 21:43:26.546144"], ["updated_at", "2020-03-06 21:43:26.546144"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "pint"], ["abbrev", "pt"], ["in_liters", 0.4732], ["created_at", "2020-03-06 21:43:26.551161"], ["updated_at", "2020-03-06 21:43:26.551161"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "quart"], ["abbrev", "qt"], ["in_liters", 0.946], ["created_at", "2020-03-06 21:43:26.555209"], ["updated_at", "2020-03-06 21:43:26.555209"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "in_liters", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "gallon"], ["abbrev", "gal"], ["in_liters", 3.7854], ["created_at", "2020-03-06 21:43:26.559226"], ["updated_at", "2020-03-06 21:43:26.559226"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "recipe"], ["abbrev", "recipe"], ["created_at", "2020-03-06 21:43:26.566536"], ["updated_at", "2020-03-06 21:43:26.566536"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "each"], ["abbrev", "ea"], ["created_at", "2020-03-06 21:43:26.572013"], ["updated_at", "2020-03-06 21:43:26.572013"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "as needed"], ["abbrev", "as needed"], ["created_at", "2020-03-06 21:43:26.576488"], ["updated_at", "2020-03-06 21:43:26.576488"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.3ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "pinch"], ["abbrev", "pinch"], ["created_at", "2020-03-06 21:43:26.580453"], ["updated_at", "2020-03-06 21:43:26.580453"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Create (0.4ms)[0m  [1m[32mINSERT INTO "units" ("name", "abbrev", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "drop"], ["abbrev", "drop"], ["created_at", "2020-03-06 21:43:26.590362"], ["updated_at", "2020-03-06 21:43:26.590362"]]
+  [1m[35m (26.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.7ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "sugars and sweeteners"], ["created_at", "2020-03-06 21:43:26.633278"], ["updated_at", "2020-03-06 21:43:26.633278"]]
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.5ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "eggs and dairy"], ["created_at", "2020-03-06 21:43:26.644284"], ["updated_at", "2020-03-06 21:43:26.644284"]]
+  [1m[35m (22.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "flours"], ["created_at", "2020-03-06 21:43:26.673225"], ["updated_at", "2020-03-06 21:43:26.673225"]]
+  [1m[35m (24.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.8ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "nuts"], ["created_at", "2020-03-06 21:43:26.704038"], ["updated_at", "2020-03-06 21:43:26.704038"]]
+  [1m[35m (6.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "fruits"], ["created_at", "2020-03-06 21:43:26.723341"], ["updated_at", "2020-03-06 21:43:26.723341"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "chocolates"], ["created_at", "2020-03-06 21:43:26.729846"], ["updated_at", "2020-03-06 21:43:26.729846"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "extracts, flavors, and colors"], ["created_at", "2020-03-06 21:43:26.735357"], ["updated_at", "2020-03-06 21:43:26.735357"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("category", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["category", "gums, additives, and misc."], ["created_at", "2020-03-06 21:43:26.740191"], ["updated_at", "2020-03-06 21:43:26.740191"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.5ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.4ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (1.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "granulated sugar"], ["category_id", 1], ["unit_id", 1], ["notes", "white"], ["created_at", "2020-03-06 21:43:26.786125"], ["updated_at", "2020-03-06 21:43:26.786125"]]
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.6ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "powdered sugar"], ["category_id", 1], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.805811"], ["updated_at", "2020-03-06 21:43:26.805811"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Trimoline"], ["category_id", 1], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.815900"], ["updated_at", "2020-03-06 21:43:26.815900"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "glucose syrup"], ["category_id", 1], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.824214"], ["updated_at", "2020-03-06 21:43:26.824214"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "glucose powder"], ["category_id", 1], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.832799"], ["updated_at", "2020-03-06 21:43:26.832799"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.4ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "egg"], ["category_id", 2], ["unit_id", 15], ["notes", "whole, large"], ["created_at", "2020-03-06 21:43:26.842689"], ["updated_at", "2020-03-06 21:43:26.842689"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "egg white"], ["category_id", 2], ["unit_id", 15], ["notes", "large"], ["created_at", "2020-03-06 21:43:26.851162"], ["updated_at", "2020-03-06 21:43:26.851162"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "egg yolk"], ["category_id", 2], ["unit_id", 15], ["notes", "large"], ["created_at", "2020-03-06 21:43:26.859584"], ["updated_at", "2020-03-06 21:43:26.859584"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "milk"], ["category_id", 2], ["unit_id", 1], ["notes", "whole"], ["created_at", "2020-03-06 21:43:26.867498"], ["updated_at", "2020-03-06 21:43:26.867498"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "heavy cream"], ["category_id", 2], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.875325"], ["updated_at", "2020-03-06 21:43:26.875325"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "butter"], ["category_id", 2], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.884886"], ["updated_at", "2020-03-06 21:43:26.884886"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "nonfat milk powder"], ["category_id", 2], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.895293"], ["updated_at", "2020-03-06 21:43:26.895293"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "sweetened condensed milk"], ["category_id", 2], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.903402"], ["updated_at", "2020-03-06 21:43:26.903402"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "all-purpose flour"], ["category_id", 3], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.912609"], ["updated_at", "2020-03-06 21:43:26.912609"]]
+  [1m[35m (17.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "cake flour"], ["category_id", 3], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.941267"], ["updated_at", "2020-03-06 21:43:26.941267"]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "almond paste"], ["category_id", 4], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.960401"], ["updated_at", "2020-03-06 21:43:26.960401"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "praline paste"], ["category_id", 4], ["unit_id", 1], ["created_at", "2020-03-06 21:43:26.970505"], ["updated_at", "2020-03-06 21:43:26.970505"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.4ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "peanut butter"], ["category_id", 4], ["unit_id", 1], ["notes", "smooth"], ["created_at", "2020-03-06 21:43:27.001309"], ["updated_at", "2020-03-06 21:43:27.001309"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "sliced almonds"], ["category_id", 4], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.010370"], ["updated_at", "2020-03-06 21:43:27.010370"]]
+  [1m[35m (18.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "lemon juice"], ["category_id", 5], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.040834"], ["updated_at", "2020-03-06 21:43:27.040834"]]
+  [1m[35m (9.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "lemons, zest only"], ["category_id", 5], ["unit_id", 15], ["created_at", "2020-03-06 21:43:27.064625"], ["updated_at", "2020-03-06 21:43:27.064625"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "lychee puree"], ["category_id", 5], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.072844"], ["updated_at", "2020-03-06 21:43:27.072844"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "mango puree"], ["category_id", 5], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.080491"], ["updated_at", "2020-03-06 21:43:27.080491"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "white chocolate couverture"], ["category_id", 6], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.088020"], ["updated_at", "2020-03-06 21:43:27.088020"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "milk chocolate courverture"], ["category_id", 6], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.095569"], ["updated_at", "2020-03-06 21:43:27.095569"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "dark chocolate couverture"], ["category_id", 6], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.103436"], ["updated_at", "2020-03-06 21:43:27.103436"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "cocoa powder"], ["category_id", 6], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.111842"], ["updated_at", "2020-03-06 21:43:27.111842"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "vanilla bean"], ["category_id", 7], ["unit_id", 15], ["notes", "halved and scraped"], ["created_at", "2020-03-06 21:43:27.121015"], ["updated_at", "2020-03-06 21:43:27.121015"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "matcha"], ["category_id", 7], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.128275"], ["updated_at", "2020-03-06 21:43:27.128275"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Vietnamese cinnamon powder"], ["category_id", 7], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.135504"], ["updated_at", "2020-03-06 21:43:27.135504"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "water"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.143099"], ["updated_at", "2020-03-06 21:43:27.143099"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "gelatin sheet"], ["category_id", 8], ["unit_id", 15], ["notes", "silver/160 bloom"], ["created_at", "2020-03-06 21:43:27.152053"], ["updated_at", "2020-03-06 21:43:27.152053"]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "agar powder"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.162355"], ["updated_at", "2020-03-06 21:43:27.162355"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "ice cream stabilizer"], ["category_id", 8], ["unit_id", 1], ["notes", "Cremodan 30"], ["created_at", "2020-03-06 21:43:27.170120"], ["updated_at", "2020-03-06 21:43:27.170120"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "sorbet stabilizer"], ["category_id", 8], ["unit_id", 1], ["notes", "Cremodan 64"], ["created_at", "2020-03-06 21:43:27.177136"], ["updated_at", "2020-03-06 21:43:27.177136"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "baking soda"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.184243"], ["updated_at", "2020-03-06 21:43:27.184243"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "baking powder"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.191517"], ["updated_at", "2020-03-06 21:43:27.191517"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "salt"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.199552"], ["updated_at", "2020-03-06 21:43:27.199552"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = $1 LIMIT $2[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "category_id", "unit_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "pastry cream"], ["category_id", 8], ["unit_id", 1], ["created_at", "2020-03-06 21:43:27.208094"], ["updated_at", "2020-03-06 21:43:27.208094"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Create (1.3ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "yield_qty", "unit_id", "ingredients", "method", "image_url", "notes", "parent_recipes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Pâte à Choux "], ["yield_qty", 800.0], ["unit_id", 1], ["ingredients", "{\"{:qty=>180, :unit_id=>1, :ingredient_id=>31}\",\"{:qty=>120, :unit_id=>1, :ingredient_id=>2}\",\"{:qty=>120, :unit_id=>1, :ingredient_id=>11, :notes=>\\\"cut into pieces\\\"}\",\"{:qty=>30, :unit_id=>1, :ingredient_id=>13}\",\"{:qty=>2, :unit_id=>1, :ingredient_id=>38}\",\"{:qty=>150, :unit_id=>1, :ingredient_id=>14}\",\"{:qty=>4, :unit_id=>15, :ingredient_id=>6}\"}"], ["method", "{\"Place water, milk, butter, condensed milk, and salt into saucepan and bring to a full rolling boil.\",\"Add the flour all at once to the boiling mixture. Stir with wooden spoon or heatproof spatula until a\nsmooth mass forms.\",\"Keep cooking and stirring it around over moderate heat to dry out the dough as much as possible, about\n2-3 minutes.\",\"Transfer dough to mixer bowl. With the paddle attachment, beat at medium speed to release steam and\ncool a bit for one minute.\",\"At low speed, beat in the eggs, one at a time, beating until incorporated between additions.\nThe dough should look smooth and glossy, stiff but not dry.\",\"Transfer dough to a pastry bag with a plain tip and pipe out as desired.\"}"], ["image_url", "https://assets.marthastewart.com/styles/wmax-1500/d22/mb_1008_pate_a_choux_2/mb_1008_pate_a_choux_2_horiz.jpg"], ["notes", "yield is approximate"], ["parent_recipes", "{3}"], ["created_at", "2020-03-06 21:43:27.228281"], ["updated_at", "2020-03-06 21:43:27.228281"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Load (0.3ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mRecipe Create (0.5ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "yield_qty", "unit_id", "ingredients", "method", "image_url", "notes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Green Tea Biscuit"], ["yield_qty", 1.0], ["unit_id", 15], ["ingredients", "{\"{:qty=>60, :unit_id=>1, :ingredient_id=>15}\",\"{:qty=>15, :unit_id=>1, :ingredient_id=>29}\",\"{:qty=>150, :unit_id=>1, :ingredient_id=>24, :notes=>\\\"melted\\\"}\",\"{:qty=>120, :unit_id=>1, :ingredient_id=>11, :notes=>\\\"softened\\\"}\",\"{:qty=>75, :unit_id=>1, :ingredient_id=>8}\",\"{:qty=>25, :unit_id=>1, :ingredient_id=>3}\",\"{:qty=>1, :unit_id=>15, :ingredient_id=>21, :notes=>\\\"finely grated\\\"}\",\"{:qty=>125, :unit_id=>1, :ingredient_id=>7}\",\"{:qty=>65, :unit_id=>1, :ingredient_id=>1}\"}"], ["method", "{\"Sift cake flour with matcha and reserve. Thoroughly incorporate butter into melted chocolate. Stir in egg\nyolks, trimoline, and lemon zest.\",\"Meanwhile, begin whipping egg whites, gradually adding sugar, to soft peaks.\",\"Fold in sifted cake flour, followed by white chocolate base. Transfer into a prepared half sheet pan.\",\"Bake at 325ºF for 10 to 13 minutes. Allow to cool, store wrapped under refrigeration.\"}"], ["image_url", "https://3.bp.blogspot.com/-HUG2O_5yoW4/TdjlJ8Oju5I/AAAAAAAACOI/7YnrLzIWoJ4/s1600/biscocho.jpg"], ["notes", ""], ["created_at", "2020-03-06 21:43:27.236307"], ["updated_at", "2020-03-06 21:43:27.236307"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "yield_qty", "unit_id", "ingredients", "method", "image_url", "notes", "parent_recipes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Praline Cream"], ["yield_qty", 450.0], ["unit_id", 1], ["ingredients", "{\"{:qty=>120, :unit_id=>1, :ingredient_id=>11}\",\"{:qty=>90, :unit_id=>1, :ingredient_id=>17}\",\"{:qty=>240, :unit_id=>1, :ingredient_id=>39}\"}"], ["method", "{\"Combine butter and praline paste in a mixer bowl and whip until thoroughly combined. Slowly add\npastry cream.\",\"Chill for use later, or store at room temperature until assembly of dessert.\"}"], ["image_url", ""], ["notes", ""], ["parent_recipes", "{3}"], ["created_at", "2020-03-06 21:43:27.243659"], ["updated_at", "2020-03-06 21:43:27.243659"]]
+  [1m[35m (16.1ms)[0m  [1m[35mCOMMIT[0m
