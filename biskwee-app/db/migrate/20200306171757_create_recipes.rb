@@ -4,11 +4,12 @@ class CreateRecipes < ActiveRecord::Migration[6.0]
       t.string :name
       t.float :yield_qty
       t.references :unit, null: false, foreign_key: true
-      t.array :ingredients
-      t.array :method
+			t.text :ingredients, array:true, default:[]
+      t.text :method, array:true, default:[]
       t.string :image_url
       t.text :notes
-      t.array :parent_recipes
+			t.text :parent_recipes, array:true, default:[]
+			
 
       t.timestamps
     end
