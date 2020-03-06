@@ -1780,3 +1780,87 @@ Processing by CategoriesController#index as HTML
 Completed 200 OK in 27ms (Views: 13.2ms | ActiveRecord: 12.4ms | Allocations: 4201)
 
 
+Started GET "/admin" for ::1 at 2020-03-06 14:49:46 -0500
+  [1m[35m (7.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Admin::DashboardController#index as HTML
+  [1m[36mAdminUser Load (0.8ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/page/index.html.arb
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/page/index.html.arb (Duration: 153.0ms | Allocations: 29976)
+Completed 200 OK in 209ms (Views: 160.5ms | ActiveRecord: 7.0ms | Allocations: 39381)
+
+
+Started GET "/admin/units" for ::1 at 2020-03-06 14:49:52 -0500
+Processing by Admin::UnitsController#index as HTML
+  [1m[36mAdminUser Load (0.7ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb
+  [1m[35m (4.3ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "units"[0m
+  [1m[35mCACHE  (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mUnit Load (4.0ms)[0m  [1m[34mSELECT "units".* FROM "units" ORDER BY "units"."id" desc LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mIngredient Load (0.8ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb (Duration: 277.7ms | Allocations: 90050)
+Completed 200 OK in 300ms (Views: 254.4ms | ActiveRecord: 35.0ms | Allocations: 94209)
+
+
+Started GET "/admin/categories" for ::1 at 2020-03-06 14:49:55 -0500
+Processing by Admin::CategoriesController#index as HTML
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "categories"[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (5.8ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" desc LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mIngredient Load (0.4ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb (Duration: 125.8ms | Allocations: 53547)
+Completed 200 OK in 152ms (Views: 121.1ms | ActiveRecord: 24.0ms | Allocations: 56887)
+
+
+Started GET "/admin/categories?order=id_asc" for ::1 at 2020-03-06 14:49:57 -0500
+Processing by Admin::CategoriesController#index as HTML
+  Parameters: {"order"=>"id_asc"}
+  [1m[36mAdminUser Load (0.4ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "categories"[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "categories" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mCategory Load (1.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" ORDER BY "categories"."id" asc LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mIngredient Load (3.1ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb (Duration: 113.8ms | Allocations: 50876)
+Completed 200 OK in 122ms (Views: 109.4ms | ActiveRecord: 5.9ms | Allocations: 53021)
+
+
+Started GET "/admin/units" for ::1 at 2020-03-06 14:53:39 -0500
+Processing by Admin::UnitsController#index as HTML
+  [1m[36mAdminUser Load (4.1ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb
+  [1m[35m (5.6ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "units"[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mUnit Load (1.3ms)[0m  [1m[34mSELECT "units".* FROM "units" ORDER BY "units"."id" desc LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mIngredient Load (0.5ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  [1m[36mRecipe Load (8.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb (Duration: 370.0ms | Allocations: 79130)
+Completed 200 OK in 445ms (Views: 360.3ms | ActiveRecord: 20.0ms | Allocations: 81274)
+
+
+Started GET "/admin/units?order=id_asc" for ::1 at 2020-03-06 14:53:44 -0500
+Processing by Admin::UnitsController#index as HTML
+  Parameters: {"order"=>"id_asc"}
+  [1m[36mAdminUser Load (1.7ms)[0m  [1m[34mSELECT "admin_users".* FROM "admin_users" WHERE "admin_users"."id" = $1 ORDER BY "admin_users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "units"[0m
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM "units" LIMIT $1 OFFSET $2) subquery_for_count[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mUnit Load (2.9ms)[0m  [1m[34mSELECT "units".* FROM "units" ORDER BY "units"."id" asc LIMIT $1 OFFSET $2[0m  [["LIMIT", 30], ["OFFSET", 0]]
+  [1m[36mIngredient Load (0.4ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/activeadmin-2.6.1/app/views/active_admin/resource/index.html.arb (Duration: 230.7ms | Allocations: 79127)
+Completed 200 OK in 246ms (Views: 231.6ms | ActiveRecord: 8.5ms | Allocations: 81242)
+
+
