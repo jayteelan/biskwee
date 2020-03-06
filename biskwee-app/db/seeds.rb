@@ -49,10 +49,11 @@ Ingredient.create!(name: "glucose powder", category_id: 1, unit_id:1)
 Ingredient.create!(name: "egg", category_id: 2,unit_id: 15, notes: "whole, large")
 Ingredient.create!(name: "egg white", category_id: 2,unit_id: 15, notes: "large")
 Ingredient.create!(name: "egg yolk", category_id: 2,unit_id: 15, notes:"large")
-Ingredient.create!(name: "milk", category_id: 2,unit_id: 5, notes: "whole")
-Ingredient.create!(name: "heavy cream", category_id: 2,unit_id: 5)
+Ingredient.create!(name: "milk", category_id: 2,unit_id: 1, notes: "whole")
+Ingredient.create!(name: "heavy cream", category_id: 2,unit_id: 1)
 Ingredient.create!(name: "butter", category_id: 2,unit_id: 1)
 Ingredient.create!(name: "nonfat milk powder", category_id: 2,unit_id: 1)
+Ingredient.create!(name: "sweetened condensed milk", category_id:2,unit_id:1)
 
 Ingredient.create!(name: "all-purpose flour", category_id: 3, unit_id: 1)
 Ingredient.create!(name: "cake flour", category_id: 3, unit_id: 1)
@@ -72,13 +73,38 @@ Ingredient.create!(name: "milk chocolate courverture", category_id: 6, unit_id: 
 Ingredient.create!(name: "dark chocolate couverture", category_id: 6, unit_id: 1)
 Ingredient.create!(name: "cocoa powder", category_id: 6, unit_id: 1)
 
-Ingredient.create!(name: "vanilla bean", category_id: 7, unit_id: 5, notes: "halved and scraped")
+Ingredient.create!(name: "vanilla bean", category_id: 7, unit_id: 15, notes: "halved and scraped")
 Ingredient.create!(name: "Earl Grey tea leaves", category_id: 7, unit_id: 1)
 Ingredient.create!(name: "Vietnamese cinnamon powder", category_id: 7, unit_id: 1)
 
-Ingredient.create!(name: "gelatin sheet", category_id: 8, unit_id: 5, notes: "silver/160 bloom")
+Ingredient.create!(name: "water", category_id:8, unit_id:1)
+Ingredient.create!(name: "gelatin sheet", category_id: 8, unit_id: 15, notes: "silver/160 bloom")
 Ingredient.create!(name: "agar powder", category_id: 8, unit_id: 1)
 Ingredient.create!(name: "ice cream stabilizer", category_id: 8, unit_id: 1, notes: "Cremodan 30")
 Ingredient.create!(name: "sorbet stabilizer", category_id: 8, unit_id: 1, notes: "Cremodan 64")
 Ingredient.create!(name: "baking soda", category_id: 8, unit_id: 1)
 Ingredient.create!(name: "baking powder", category_id: 8, unit_id: 1)
+Ingredient.create!(name:"salt",category_id:8, unit_id:1)
+
+# Sample [Recipes]
+Recipe.create!(name: "Pâte à Choux ",yield_qty: 800,unit_id: 1,ingredients: [
+	{qty: 180, unit_id:1, ingredient_id: 31},
+	{qty: 120, unit_id:1, ingredient_id: 2},
+	{qty: 120, unit_id:1, ingredient_id: 11, notes:"cut into pieces"},
+	{qty: 30, unit_id:1, ingredient_id: 13},
+	{qty: 2, unit_id:1, ingredient_id: 38},
+	{qty: 150, unit_id:1, ingredient_id: 14},
+	{qty: 4, unit_id:15, ingredient_id: 6}],
+method: ["Place water, milk, butter, condensed milk, and salt into saucepan and bring to a full rolling boil.",
+"Add the flour all at once to the boiling mixture. Stir with wooden spoon or heatproof spatula until a
+smooth mass forms.",
+"Keep cooking and stirring it around over moderate heat to dry out the dough as much as possible, about
+2-3 minutes.",
+"Transfer dough to mixer bowl. With the paddle attachment, beat at medium speed to release steam and
+cool a bit for one minute.",
+"At low speed, beat in the eggs, one at a time, beating until incorporated between additions.
+The dough should look smooth and glossy, stiff but not dry.",
+"Transfer dough to a pastry bag with a plain tip and pipe out as desired."
+],image_url: "https://assets.marthastewart.com/styles/wmax-1500/d22/mb_1008_pate_a_choux_2/mb_1008_pate_a_choux_2_horiz.jpg", notes: "yield is approximate", parent_recipes: [2])
+# Recipe.create!(name: "",yield_qty: ,unit_id: ,ingredients: [],method: [],image_url: "", notes: "", parent_recipes: [])
+# Recipe.create!(name: "",yield_qty: ,unit_id: ,ingredients: [],method: [],image_url: "", notes: "", parent_recipes: [])

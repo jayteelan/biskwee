@@ -37,6 +37,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+# add multi-level data support
+gem 'nested-hstore'
 # Use pry instead of irb and make it pretty
 gem 'pry-rails'
 gem 'awesome_print'
