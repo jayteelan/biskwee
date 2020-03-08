@@ -48,6 +48,8 @@ At an absolute minimum, **Biskwee** will:
 |     axios     | _Handle data flow between client and API server_ |
 |    Formik     | _Assist with creation of recipe input form_      |
 |     Rails     | _Initialize and run back-end server_             |
+|    devise     | _Simplifies user auth_                           |
+|  activeadmin  | _Simplifies API administration_                  |
 | nested-hstore | _Adds multi-level data access to ActiveRecord_   |
 
 <br>
@@ -119,20 +121,20 @@ At an absolute minimum, **Biskwee** will:
 
 ### Timeframes
 
-| Task                     | Priority | Estimated Time |    Actual Time    |
-| ------------------------ | :------: | :------------: | :---------------: |
-| Set up server w/ CRUD    |    H     |     3 hrs      | 11-12.55, 14-1430 |
-| Create basic seed data   |    M     |    1.5 hrs     |    14.30-15.25    |
-| Set up auth backend      |    H     |    1.5 hrs     |                   |
-| Scaffold frontend/routes |    H     |     8 hrs      |                   |
-| Build out auth backend   |    M     |     3 hrs      |                   |
-| Build out RecipeDetail   |    H     |     12 hrs     |                   |
-| Build out AddEditRecipes |    H     |     8 hrs      |                   |
-| Build out MyRecipes      |    M     |     5 hrs      |                   |
-| Styling                  |    M     |     8 hrs      |                   |
-| Additional seed data     |    L     |      n/a       |                   |
-| Post-MVP                 |    L     |      n/a       |                   |
-| TOTAL                    |          |     50 hrs     |                   |
+| Task                     | Priority | Estimated Time | Actual Time |
+| ------------------------ | :------: | :------------: | :---------: |
+| Set up server w/ CRUD    |    H     |     3 hrs      |   2.5 hrs   |
+| Create basic seed data   |    M     |    1.5 hrs     |  2.25 hrs   |
+| Set up auth backend      |    H     |    1.5 hrs     |             |
+| Scaffold frontend/routes |    H     |     8 hrs      |             |
+| Build out auth backend   |    M     |     3 hrs      |             |
+| Build out RecipeDetail   |    H     |     12 hrs     |             |
+| Build out AddEditRecipes |    H     |     8 hrs      |             |
+| Build out MyRecipes      |    M     |     5 hrs      |             |
+| Styling                  |    M     |     8 hrs      |             |
+| Additional seed data     |    L     |      n/a       |             |
+| Post-MVP                 |    L     |      n/a       |             |
+| TOTAL                    |          |     50 hrs     |             |
 
 <br>
 
