@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_171757) do
+ActiveRecord::Schema.define(version: 2020_03_08_195333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
     t.string "name"
     t.bigint "category_id", null: false
     t.bigint "unit_id", null: false
-    t.float "unit_cost", precision:3
-    t.float "unit_weight", precision:3
-    t.float "unit_volume", precision:3
+    t.float "unit_cost"
+    t.float "unit_weight"
+    t.float "unit_volume"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.float "yield_qty", precision:3
+    t.float "yield_qty"
     t.bigint "unit_id", null: false
     t.text "ingredients", default: [], array: true
     t.text "method", default: [], array: true
@@ -78,10 +78,22 @@ ActiveRecord::Schema.define(version: 2020_03_06_171757) do
   create_table "units", force: :cascade do |t|
     t.string "name"
     t.string "abbrev"
-    t.float "in_grams", precision:3
-    t.float "in_liters", precision:3
+    t.float "in_grams"
+    t.float "in_liters"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "ingredients", "categories"

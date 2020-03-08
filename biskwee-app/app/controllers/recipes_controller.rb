@@ -25,8 +25,10 @@ class RecipesController < ApiController
   end
 
   # PATCH/PUT /recipes/1
-  def update
-    if @recipe.update(recipe_params)
+	def update
+		@recipe=Recipe.find(params[:id])
+		@recipe.update(recipe_params)
+    if @recipe
       render json: @recipe
     else
       render json: @recipe.errors, status: :unprocessable_entity
@@ -46,6 +48,6 @@ class RecipesController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def recipe_params
-      params.require(:recipe).permit(:name, :yield_qty, :unit_id, :ingredients, :method, :image_url, :notes, :parent_recipes)
+      params.require(:recipe).permit(:name, :yield_qty, :unit_id, {:ingredients=>[]}, {:method=>[]}, :image_url, :notes, {:parent_recipes=>[]})
     end
 end
