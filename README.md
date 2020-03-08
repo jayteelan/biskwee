@@ -123,7 +123,7 @@ At an absolute minimum, **Biskwee** will:
 
 | Task                     | Priority | Estimated Time | Actual Time |
 | ------------------------ | :------: | :------------: | :---------: |
-| Set up server w/ CRUD    |    H     |     3 hrs      |   2.5 hrs   |
+| Set up server w/ CRUD    |    H     |     3 hrs      |    3 hrs    |
 | Create basic seed data   |    M     |    1.5 hrs     |  2.25 hrs   |
 | Set up auth backend      |    H     |    1.5 hrs     |             |
 | Scaffold frontend/routes |    H     |     8 hrs      |             |
