@@ -127,7 +127,7 @@ At an absolute minimum, **Biskwee** will:
 | Create basic seed data   |    M     |    1.5 hrs     |  2.25 hrs   |
 | Set up auth backend      |    H     |    1.5 hrs     |    1 hr     |
 | Scaffold frontend/routes |    H     |     8 hrs      |             |
-| Build out auth backend   |    M     |     3 hrs      |             |
+| Build out auth frontend  |    M     |     3 hrs      |             |
 | Build out RecipeDetail   |    H     |     12 hrs     |             |
 | Build out AddEditRecipes |    H     |     8 hrs      |             |
 | Build out MyRecipes      |    M     |     5 hrs      |             |
