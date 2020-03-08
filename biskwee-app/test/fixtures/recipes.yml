@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  yield_qty: 1.5
+  unit: one
+  ingredients: 
+  method: 
+  image_url: MyString
+  notes: MyText
+  parent_recipes: 
+
+two:
+  name: MyString
+  yield_qty: 1.5
+  unit: two
+  ingredients: 
+  method: 
+  image_url: MyString
+  notes: MyText
+  parent_recipes: 

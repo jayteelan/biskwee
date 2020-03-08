@@ -41,13 +41,16 @@ At an absolute minimum, **Biskwee** will:
 
 ### MVP Libraries
 
-|   Library    | Description                                      |
-| :----------: | :----------------------------------------------- |
-|    React     | _Create front-end user interface_                |
-| React Router | _Route between front-end component paths_        |
-|    axios     | _Handle data flow between client and API server_ |
-|    Formik    | _Assist with creation of recipe input form_      |
-|    Rails     | _Initialize and run back-end server_             |
+|    Library    | Description                                      |
+| :-----------: | :----------------------------------------------- |
+|     React     | _Create front-end user interface_                |
+| React Router  | _Route between front-end component paths_        |
+|     axios     | _Handle data flow between client and API server_ |
+|    Formik     | _Assist with creation of recipe input form_      |
+|     Rails     | _Initialize and run back-end server_             |
+|    devise     | _Simplifies user auth_                           |
+|  activeadmin  | _Simplifies API administration_                  |
+| nested-hstore | _Adds multi-level data access to ActiveRecord_   |
 
 <br>
 
@@ -120,8 +123,8 @@ At an absolute minimum, **Biskwee** will:
 
 | Task                     | Priority | Estimated Time | Actual Time |
 | ------------------------ | :------: | :------------: | :---------: |
-| Set up server w/ CRUD    |    H     |     3 hrs      |             |
-| Create basic seed data   |    M     |    1.5 hrs     |             |
+| Set up server w/ CRUD    |    H     |     3 hrs      |   2.5 hrs   |
+| Create basic seed data   |    M     |    1.5 hrs     |  2.25 hrs   |
 | Set up auth backend      |    H     |    1.5 hrs     |             |
 | Scaffold frontend/routes |    H     |     8 hrs      |             |
 | Build out auth backend   |    M     |     3 hrs      |             |
