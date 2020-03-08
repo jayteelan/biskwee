@@ -125,7 +125,7 @@ At an absolute minimum, **Biskwee** will:
 | ------------------------ | :------: | :------------: | :---------: |
 | Set up server w/ CRUD    |    H     |     3 hrs      |    3 hrs    |
 | Create basic seed data   |    M     |    1.5 hrs     |  2.25 hrs   |
-| Set up auth backend      |    H     |    1.5 hrs     |             |
+| Set up auth backend      |    H     |    1.5 hrs     |    1 hr     |
 | Scaffold frontend/routes |    H     |     8 hrs      |             |
 | Build out auth backend   |    M     |     3 hrs      |             |
 | Build out RecipeDetail   |    H     |     12 hrs     |             |
