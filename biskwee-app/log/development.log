@@ -2736,3 +2736,18 @@ FOREIGN KEY ("unit_id")
   [1m[36mUnit Load (0.2ms)[0m  [1m[34mSELECT "units".* FROM "units" WHERE "units"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
   [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "yield_qty", "unit_id", "ingredients", "method", "image_url", "notes", "parent_recipes", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Praline Cream"], ["yield_qty", 450.0], ["unit_id", 1], ["ingredients", "{\"{:qty=>120, :unit_id=>1, :ingredient_id=>11}\",\"{:qty=>90, :unit_id=>1, :ingredient_id=>17}\",\"{:qty=>240, :unit_id=>1, :ingredient_id=>39}\"}"], ["method", "{\"Combine butter and praline paste in a mixer bowl and whip until thoroughly combined. Slowly add\npastry cream.\",\"Chill for use later, or store at room temperature until assembly of dessert.\"}"], ["image_url", ""], ["notes", ""], ["parent_recipes", "{3}"], ["created_at", "2020-03-06 21:43:27.243659"], ["updated_at", "2020-03-06 21:43:27.243659"]]
   [1m[35m (16.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/api/ingredients" for ::1 at 2020-03-06 16:44:19 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by IngredientsController#index as HTML
+  [1m[36mIngredient Load (26.4ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients"[0m
+  ↳ app/controllers/ingredients_controller.rb:8:in `index'
+Completed 200 OK in 107ms (Views: 30.3ms | ActiveRecord: 75.9ms | Allocations: 13557)
+
+
+Started GET "/api/recipes" for ::1 at 2020-03-06 16:44:28 -0500
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.7ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 27ms (Views: 21.0ms | ActiveRecord: 5.8ms | Allocations: 8887)
+
+
