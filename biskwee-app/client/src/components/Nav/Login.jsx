@@ -1,20 +1,21 @@
 import React, { Component } from "react";
+import loginUser from "../../api-helper";
 
-class Register extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
   }
   // componentDidUpdate() {
-  //   console.log("Register state", this.state);
+  //   console.log("Login state", this.state);
   //   console.log("register props", this.props);
   // }
 
   render() {
     return (
-      <form onSubmit={this.props.handleRegister}>
-        <h1>Register</h1>
+      <form onSubmit={this.props.handleLogin}>
+        <h1>Login</h1>
         <input
           type="email"
           name="email"
@@ -29,10 +30,10 @@ class Register extends Component {
           value={this.props.user_form.password}
           onChange={this.props.handleUserChange}
         />
-        <button>Register</button>
+        <button>Log In</button>
       </form>
     );
   }
 }
 
-export default Register;
+export default Login;

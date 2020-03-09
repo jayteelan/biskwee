@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import { newUser } from "./api-helper";
+import { createNewUser, loginUser } from "./api-helper";
 import Main from "./components/Main";
-import Register from "./components/Nav/Register";
+import NavBar from "./components/Nav/NavBar";
+// import Register from "./components/Nav/Register";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       current_user: null,
-      new_user: {
+      user_form: {
         email: "",
         // change to password_hash later
         password: ""
@@ -23,20 +24,27 @@ class App extends Component {
     console.log("update", this.state);
   }
 
-  handleChange = e => {
+  handleUserChange = e => {
     const { name, value } = e.target;
     this.setState(prevState => ({
-      new_user: { ...prevState.new_user, [name]: value }
+      user_form: { ...prevState.user_form, [name]: value }
     }));
   };
 
   handleRegister = async e => {
     e.preventDefault();
-    const formInput = this.state.new_user;
-    const user = await newUser(formInput);
+    const formInput = this.state.user_form;
+    const user = await createNewUser(formInput);
     // console.log("current", currentUser);
     this.setState({ current_user: user });
     console.log(this.state);
+  };
+
+  handleLogin = async e => {
+    e.preventDefault();
+    const formInput = this.state.user_form;
+    const user = await loginUser(formInput);
+    this.setState({ current_user: user });
   };
 
   handleLogout = () => {
@@ -44,23 +52,19 @@ class App extends Component {
     this.setState({
       currentUser: null
     });
+    console.log("logged out", localStorage.authToken);
   };
 
   render() {
     return (
       <div className="App">
-        {/* <Route exact path="/" render={() => <Main />} /> */}
-        <Route
-          exact
-          // path="/register"
-          path="/"
-          render={() => (
-            <Register
-              handleRegister={this.handleRegister}
-              handleChange={this.handleChange}
-              new_user={this.state.new_user}
-            />
-          )}
+        <p>app</p>
+        <Main
+          handleLogin={this.handleLogin}
+          handleLogout={this.handleLogout}
+          handleRegister={this.handleRegister}
+          handleUserChange={this.handleUserChange}
+          user_form={this.state.user_form}
         />
       </div>
     );

@@ -13,10 +13,12 @@ const loginUser = async formData => {
   console.log("login", res);
   localStorage.setItem("authToken", res.data.token);
   api.defaults.headers.common.authorization = `Bearer ${res.data.token}`;
+
+  console.log("auth", localStorage.authToken);
   return res.data.token;
 };
 
-const newUser = async formData => {
+const createNewUser = async formData => {
   try {
     // create new user
     const res = await api.post(`/users`, formData);
@@ -29,4 +31,4 @@ const newUser = async formData => {
   }
 };
 
-export { loginUser, newUser };
+export { loginUser, createNewUser };
