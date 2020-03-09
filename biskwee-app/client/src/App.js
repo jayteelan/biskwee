@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
-import newUser from "./api-helper";
 
+import { newUser } from "./api-helper";
+import Main from "./components/Main";
 import Register from "./components/Nav/Register";
 
 class App extends Component {
@@ -12,8 +14,8 @@ class App extends Component {
       new_user: {
         email: "",
         // change to password_hash later
-        password: "",
-        confirm: ""
+        password: ""
+        // confirm: ""
       }
     };
   }
@@ -26,28 +28,39 @@ class App extends Component {
     this.setState(prevState => ({
       new_user: { ...prevState.new_user, [name]: value }
     }));
-    // console.log("new", this.state.new_user);
-    // console.log("key:val", name, value);
   };
 
   handleRegister = async e => {
     e.preventDefault();
     const formInput = this.state.new_user;
-    // hash password and conf
-    const register = await newUser(formInput);
-    formInput.password === formInput.confirm
-      ? // ? this.setState({ current_user: register })
-        console.log("hooray")
-      : console.log("confirmation does not match password");
-    console.log(this.state.current_user);
+    const user = await newUser(formInput);
+    // console.log("current", currentUser);
+    this.setState({ current_user: user });
+    console.log(this.state);
+  };
+
+  handleLogout = () => {
+    localStorage.removeItem("authToken");
+    this.setState({
+      currentUser: null
+    });
   };
 
   render() {
     return (
       <div className="App">
-        <Register
-          handleChange={this.handleChange}
-          new_user={this.state.new_user}
+        {/* <Route exact path="/" render={() => <Main />} /> */}
+        <Route
+          exact
+          // path="/register"
+          path="/"
+          render={() => (
+            <Register
+              handleRegister={this.handleRegister}
+              handleChange={this.handleChange}
+              new_user={this.state.new_user}
+            />
+          )}
         />
       </div>
     );
