@@ -1,34 +1,54 @@
 import React, { Component } from "react";
-import loginUser from "../../api-helper";
+import { loginUser } from "../../api-helper";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      user_form: {
+        email: "",
+        password: ""
+      }
+    };
   }
-  // componentDidUpdate() {
-  //   console.log("Login state", this.state);
-  //   console.log("register props", this.props);
-  // }
+  componentDidMount() {
+    //   console.log("Login state", this.state);
+    console.log("Login props", this.props);
+  }
+
+  /* ---------- EXISTING USER LOGIN ---------- */
+  handleLoginInput = e => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      user_form: { ...prevState.user_form, [name]: value }
+    }));
+  };
+
+  handleLogin = async e => {
+    e.preventDefault();
+    const formInput = this.state.user_form;
+    const user = await loginUser(formInput);
+    this.setState({ current_user: user });
+  };
 
   render() {
     return (
-      <form onSubmit={this.props.handleLogin}>
+      <form onSubmit={this.handleLogin}>
         <h1>Login</h1>
         <input
           type="email"
           name="email"
           placeholder="email"
-          value={this.props.user_form.email}
-          onChange={this.props.handleUserChange}
+          // value={this.props.user_form.email}
+          onChange={this.handleLoginInput}
         />
         <input
           type="password"
           name="password"
           placeholder="password"
-          value={this.props.user_form.password}
-          onChange={this.props.handleUserChange}
+          // value={this.props.user_form.password}
+          onChange={this.handleLoginInput}
         />
         <button>Log In</button>
       </form>

@@ -9,11 +9,14 @@ const Main = props => {
     <div>
       <h1>MAIN</h1>
       <NavBar
-        handleLogin={props.handleLogin}
-        handleLogout={props.handleLogout}
-        handleRegister={props.handleRegister}
-        handleUserChange={props.handleUserChange}
-        user_form={props.user_form}
+        {...props}
+        // handleLogin={props.handleLogin}
+        // handleLoginInput={props.handleLoginInput}
+        // user_form={props.user_form}
+        // handleRegister={props.handleRegister}
+        // handleRegisterInput={props.handleRegisterInput}
+        // signup={props.signup}
+        // handleLogout={props.handleLogout}
       />
       <Content />
     </div>

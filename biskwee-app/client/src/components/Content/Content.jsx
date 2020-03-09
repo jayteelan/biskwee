@@ -1,13 +1,13 @@
 import React from "react";
 
-import Recipes from "./Recipes";
+import Welcome from "./Welcome";
 
 function Content() {
   return (
     <div className="content">
       <h1>content</h1>
       {/* <Switch> */}
-      <Recipes />
+      <Welcome />
       {/* </Switch> */}
     </div>
   );
