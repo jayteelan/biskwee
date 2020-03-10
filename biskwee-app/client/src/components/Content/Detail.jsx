@@ -20,12 +20,12 @@ class Detail extends Component {
 
   parseIngredients = async => {
     const objects = this.state.recipe.ingredients;
-    objects.map(obj => console.log(obj));
+    // objects.map(obj => console.log(obj));
     //regex :->"" =>->":"
     //JSON.parse(regex'd obj)
     //ingredient = getData("ingredients", obj.ingredient_id)
     //return ingredient.name
-    // console.log("ingredients", objects);
+    console.log("ingredients", objects);
   };
 
   componentDidMount = async () => {

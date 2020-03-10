@@ -51,6 +51,7 @@ At an absolute minimum, **Biskwee** will:
 |    devise     | _Simplifies user auth_                           |
 |  activeadmin  | _Simplifies API administration_                  |
 | nested-hstore | _Adds multi-level data access to ActiveRecord_   |
+|   jbuilder    | _Parses strings returned by API into JSON_       |
 
 <br>
 
@@ -181,6 +182,12 @@ At an absolute minimum, **Biskwee** will:
 
 ## Code Issues & Resolutions
 
-> Use this section to list of all major issues encountered and their resolution.
+# 10. Mar
+
+- API returns hashes within arrays as strings since the array needs to be defined as `text` in the model; because of this, none of the data within was immediately accessible. Finding no straightfoward way to convert a string into a Ruby hash into JSON, I tried instead to run the the string through chained methods with regexps to turn, e.g., `{:key=>value}` into `{key:value}`, and then `JSON.parse`ing the result; however, I had difficulty with this too. I consulted our TA, who then suggested an alternate approach that ultimately proved successful: install the `jbuilder` gem, then use it parse the strings into JSON directly on the API backend.
+
+# 6. Mar
+
+- Rails could not return nested data (e.g., recipes model -> ingredients array -> ingredient hash -> ingredient ID); suspecting this had to have been a problem for someone else, searched for and found a gem, `nested_hstore`, to enable this
 
 ---

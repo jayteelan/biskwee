@@ -10752,3 +10752,755 @@ Processing by RecipesController#show as */*
 Completed 200 OK in 17ms (Views: 9.0ms | ActiveRecord: 1.0ms | Allocations: 5944)
 
 
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:27:59 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (28.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (182.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 13.9ms | Allocations: 827)
+Completed 200 OK in 499ms (Views: 98.4ms | ActiveRecord: 210.9ms | Allocations: 7120)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:28:43 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (36.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (1.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 3.6ms | Allocations: 756)
+Completed 200 OK in 92ms (Views: 10.2ms | ActiveRecord: 37.7ms | Allocations: 2477)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:29:19 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 2.7ms | Allocations: 828)
+Completed 200 OK in 49ms (Views: 24.3ms | ActiveRecord: 1.4ms | Allocations: 5906)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:29:31 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 368.2ms | Allocations: 103787)
+Completed 500 Internal Server Error in 386ms (ActiveRecord: 0.6ms | Allocations: 108874)
+
+
+  
+ActionView::Template::Error (undefined method `json' for #<#<Class:0x00007fd63998ee70>:0x00007fd63998d250>
+Did you mean?  JSON):
+    1: json.recipe @recipe.name
+    2: json.array @recipe.ingredients do |i|
+    3: 	json eval i
+    4: end
+  
+app/views/recipes/show.json.jbuilder:3
+app/views/recipes/show.json.jbuilder:2
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:29:43 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.2ms | Allocations: 832)
+Completed 200 OK in 18ms (Views: 11.4ms | ActiveRecord: 0.7ms | Allocations: 5952)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:30:20 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (25.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (29.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 2.7ms | Allocations: 756)
+Completed 200 OK in 207ms (Views: 13.6ms | ActiveRecord: 55.7ms | Allocations: 2477)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:30:31 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (12.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (15.1ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 8.3ms | Allocations: 756)
+Completed 200 OK in 78ms (Views: 22.5ms | ActiveRecord: 27.3ms | Allocations: 2476)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:32:00 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 5.1ms | Allocations: 643)
+Completed 500 Internal Server Error in 37ms (ActiveRecord: 0.8ms | Allocations: 5710)
+
+
+  
+ActionView::Template::Error (undefined method `array' for nil:NilClass):
+    1: json.name @recipe.name
+    2: json.
+    3: json.array @recipe.ingredients do |i|
+    4: 	json.ingredient eval i
+    5: end
+  
+app/views/recipes/show.json.jbuilder:3
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:32:15 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 2.2ms | Allocations: 642)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.6ms | Allocations: 5708)
+
+
+  
+ActionView::Template::Error (undefined method `array' for nil:NilClass):
+    1: json.recipe @recipe.name
+    2: json.
+    3: json.array @recipe.ingredients do |i|
+    4: 	json.ingredient eval i
+    5: end
+  
+app/views/recipes/show.json.jbuilder:3
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:32:17 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.3ms | Allocations: 570)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.8ms | Allocations: 3025)
+
+
+  
+ActionView::Template::Error (undefined method `array' for nil:NilClass):
+    1: json.recipe @recipe.name
+    2: json.
+    3: json.array @recipe.ingredients do |i|
+    4: 	json.ingredient eval i
+    5: end
+  
+app/views/recipes/show.json.jbuilder:3
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:32:39 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.1ms | Allocations: 569)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.7ms | Allocations: 3023)
+
+
+  
+ActionView::Template::Error (undefined method `array' for nil:NilClass):
+    1: json.recipe @recipe.name
+    2: json.
+    3: json.array @recipe.ingredients do |i|
+    4: 	json.ingredient eval i
+    5: end
+  
+app/views/recipes/show.json.jbuilder:3
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:32:53 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.7ms | Allocations: 832)
+Completed 200 OK in 27ms (Views: 20.6ms | ActiveRecord: 0.8ms | Allocations: 5938)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:33:02 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 4.5ms | Allocations: 827)
+Completed 200 OK in 21ms (Views: 12.9ms | ActiveRecord: 0.7ms | Allocations: 5923)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:33:11 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.7ms | Allocations: 827)
+Completed 200 OK in 23ms (Views: 15.2ms | ActiveRecord: 0.9ms | Allocations: 5923)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:33:39 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 355.2ms | Allocations: 103860)
+Completed 500 Internal Server Error in 376ms (ActiveRecord: 0.6ms | Allocations: 108947)
+
+
+  
+ActionView::Template::Error (undefined method `ingredient' for #<#<Class:0x00007fd639c23cf8>:0x00007fd639c22150>
+Did you mean?  ingredient_url):
+    1: json.name @recipe.name
+    2: json.ingredients @recipe.ingredients do |i|
+    3: 	ingredient eval i
+    4: end
+  
+app/views/recipes/show.json.jbuilder:3
+app/views/recipes/show.json.jbuilder:2
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:33:47 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.8ms | Allocations: 462)
+Completed 200 OK in 13ms (Views: 8.3ms | ActiveRecord: 0.8ms | Allocations: 5586)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:34:01 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.2ms | Allocations: 832)
+Completed 200 OK in 17ms (Views: 11.6ms | ActiveRecord: 0.5ms | Allocations: 5914)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:34:20 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.2ms | Allocations: 827)
+Completed 200 OK in 26ms (Views: 19.2ms | ActiveRecord: 0.5ms | Allocations: 5909)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:51:31 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (20.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (7.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 12.6ms | Allocations: 174)
+Completed 500 Internal Server Error in 158ms (ActiveRecord: 27.8ms | Allocations: 5427)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients
+
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients
+4:    
+5:    end
+  
+app/views/recipes/show.json.jbuilder:7: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:7: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:7: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:7: syntax error, unexpected end, expecting end-of-input
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:51:40 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 9.5ms | Allocations: 847)
+Completed 200 OK in 29ms (Views: 21.1ms | ActiveRecord: 2.3ms | Allocations: 5965)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:52:16 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 8.3ms | Allocations: 165)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.8ms | Allocations: 5241)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @ recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @ recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    end
+  
+app/views/recipes/show.json.jbuilder:2: `@' without identifiers is not allowed as an instance variable name
+app/views/recipes/show.json.jbuilder:2: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:2: `@' without identifiers is not allowed as an instance variable name
+app/views/recipes/show.json.jbuilder:2: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:2: `@' without identifiers is not allowed as an instance variable name
+app/views/recipes/show.json.jbuilder:2: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:2: `@' without identifiers is not allowed as an instance variable name
+app/views/recipes/show.json.jbuilder:2: syntax error, unexpected end-of-input, expecting end
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:52:29 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.2ms | Allocations: 847)
+Completed 200 OK in 39ms (Views: 30.1ms | ActiveRecord: 1.2ms | Allocations: 5944)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:52:50 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.0ms | Allocations: 273)
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 1.0ms | Allocations: 5367)
+
+
+  
+ActionView::Template::Error (no implicit conversion of Array into String):
+    2: json.yield_qty @recipe.yield_qty
+    3: json.ingredients @recipe.ingredients do |i|
+    4: 	json.line eval i
+    5: json.ingred eval @recipe.ingredients
+    6: end
+  
+app/views/recipes/show.json.jbuilder:5:in `eval'
+app/views/recipes/show.json.jbuilder:5
+app/views/recipes/show.json.jbuilder:3
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:53:46 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.9ms | Allocations: 177)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 1.3ms | Allocations: 5252)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+json.ingred @recipe.ingredients do |i| eval @recipe.ingredients[i]
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    json.ingred @recipe.ingredients do |i| eval @recipe.ingredients[i]
+6:    end
+  
+app/views/recipes/show.json.jbuilder:8: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:8: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:8: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:8: syntax error, unexpected end-of-input, expecting end
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:53:55 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.3ms | Allocations: 846)
+Completed 200 OK in 18ms (Views: 8.5ms | ActiveRecord: 0.9ms | Allocations: 5961)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:54:25 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.6ms | Allocations: 178)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.9ms | Allocations: 5250)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+json.method @recipe.method do |i|
+	json.line eval i
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    json.method @recipe.method do |i|
+6:    	json.line eval i
+7:    end
+  
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:54:47 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 3.4ms | Allocations: 181)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.6ms | Allocations: 5278)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+json.method @recipe.method do |i|
+	json.mline eval i
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    json.method @recipe.method do |i|
+6:    	json.mline eval i
+7:    end
+  
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end-of-input, expecting end
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:55:04 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 8.2ms | Allocations: 501)
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.6ms | Allocations: 5594)
+
+
+  
+SyntaxError ((eval):1: syntax error, unexpected in
+... into melted chocolate. Stir in egg
+...                             ^~
+(eval):2: syntax error, unexpected and, expecting '='
+yolks, trimoline, and lemon zest.
+                  ^~~
+(eval):2: syntax error, unexpected end-of-input):
+  
+(eval):1: syntax error, unexpected in
+(eval):2: syntax error, unexpected and, expecting '='
+(eval):2: syntax error, unexpected end-of-input
+(eval):1: syntax error, unexpected in
+(eval):2: syntax error, unexpected and, expecting '='
+(eval):2: syntax error, unexpected end-of-input
+app/views/recipes/show.json.jbuilder:7:in `eval'
+app/views/recipes/show.json.jbuilder:7
+app/views/recipes/show.json.jbuilder:6
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:55:23 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.4ms | Allocations: 997)
+Completed 200 OK in 64ms (Views: 57.1ms | ActiveRecord: 0.7ms | Allocations: 6105)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:55:40 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.1ms | Allocations: 889)
+Completed 200 OK in 15ms (Views: 7.7ms | ActiveRecord: 0.6ms | Allocations: 5973)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:55:49 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.6ms | Allocations: 178)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.6ms | Allocations: 5248)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+end
+json.method @recipe.method
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    end
+6:    json.method @recipe.method
+7:    end
+  
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:9: syntax error, unexpected end, expecting end-of-input
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:56:04 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.8ms | Allocations: 889)
+Completed 200 OK in 16ms (Views: 10.2ms | ActiveRecord: 0.6ms | Allocations: 5972)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:56:19 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.6ms | Allocations: 180)
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 2.5ms | Allocations: 5280)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+end
+json.method json.@recipe.method do |m|
+	m
+end
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    end
+6:    json.method json.@recipe.method do |m|
+7:    	m
+8:    end
+  
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected tIVAR
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected do (for block), expecting end
+app/views/recipes/show.json.jbuilder:10: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected tIVAR
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected do (for block), expecting end
+app/views/recipes/show.json.jbuilder:10: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected tIVAR
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected do (for block), expecting end
+app/views/recipes/show.json.jbuilder:10: syntax error, unexpected end, expecting end-of-input
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected tIVAR
+app/views/recipes/show.json.jbuilder:6: syntax error, unexpected do (for block), expecting end
+app/views/recipes/show.json.jbuilder:10: syntax error, unexpected end, expecting end-of-input
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:56:37 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 2.6ms | Allocations: 997)
+Completed 200 OK in 16ms (Views: 10.8ms | ActiveRecord: 0.6ms | Allocations: 6108)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:56:46 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 1.1ms | Allocations: 627)
+Completed 200 OK in 18ms (Views: 8.2ms | ActiveRecord: 1.4ms | Allocations: 5725)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:56:55 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 4.7ms | Allocations: 993)
+Completed 200 OK in 20ms (Views: 14.4ms | ActiveRecord: 0.5ms | Allocations: 6073)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:58:40 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 5.8ms | Allocations: 1052)
+Completed 200 OK in 51ms (Views: 26.8ms | ActiveRecord: 1.0ms | Allocations: 6140)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:58:59 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 3.2ms | Allocations: 488)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.9ms | Allocations: 5561)
+
+
+  
+ActionView::Template::Error (wrong number of arguments (given 0, expected 1..4)):
+     8: end
+     9: json.image_url @recipe.image_url
+    10: json.notes @recipe.notes
+    11: json.parent_recipes @recipe.parent_recipes eval
+  
+app/views/recipes/show.json.jbuilder:11:in `eval'
+app/views/recipes/show.json.jbuilder:11
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:59:09 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.6ms | Allocations: 184)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.6ms | Allocations: 5283)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check json.name @recipe.name
+json.yield_qty @recipe.yield_qty
+json.ingredients @recipe.ingredients do |i|
+	json.line eval i
+end
+json.method @recipe.method do |m|
+	json.line m
+end
+json.image_url @recipe.image_url
+json.notes @recipe.notes
+json.parent_recipes @recipe.parent_recipes do eval
+):
+1:    json.name @recipe.name
+2:    json.yield_qty @recipe.yield_qty
+3:    json.ingredients @recipe.ingredients do |i|
+4:    	json.line eval i
+5:    end
+6:    json.method @recipe.method do |m|
+7:    	json.line m
+8:    end
+9:    json.image_url @recipe.image_url
+10:    json.notes @recipe.notes
+11:    json.parent_recipes @recipe.parent_recipes do eval
+  
+app/views/recipes/show.json.jbuilder:13: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:13: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:13: syntax error, unexpected end-of-input, expecting end
+app/views/recipes/show.json.jbuilder:13: syntax error, unexpected end-of-input, expecting end
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 14:59:26 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 3.1ms | Allocations: 1071)
+Completed 200 OK in 28ms (Views: 19.8ms | ActiveRecord: 0.9ms | Allocations: 6158)
+
+
+Started GET "/api/recipes/3" for ::1 at 2020-03-10 14:59:32 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"3", "recipe"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 0.7ms | Allocations: 463)
+Completed 200 OK in 8ms (Views: 1.5ms | ActiveRecord: 0.8ms | Allocations: 2949)
+
+
+Started GET "/api/recipes/3" for ::1 at 2020-03-10 14:59:54 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"tom@to.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "id"=>"3", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 4.8ms | Allocations: 561)
+Completed 200 OK in 19ms (Views: 13.3ms | ActiveRecord: 0.6ms | Allocations: 5663)
+
+
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 15:11:49 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (56.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (1.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+  Rendering recipes/show.json.jbuilder
+  Rendered recipes/show.json.jbuilder (Duration: 7.5ms | Allocations: 970)
+Completed 200 OK in 271ms (Views: 18.5ms | ActiveRecord: 95.1ms | Allocations: 2864)
+
+
