@@ -31,4 +31,9 @@ const createNewUser = async formData => {
   }
 };
 
+const getData = async (type, id) => {
+  const res = await api.get(`/api/${type}/${id}`);
+  return res.data;
+};
+
 export { loginUser, createNewUser };
