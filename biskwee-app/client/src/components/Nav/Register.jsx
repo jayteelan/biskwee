@@ -13,10 +13,11 @@ class Register extends Component {
       }
     };
   }
-  componentDidMount() {
-    console.log("Register state", this.state);
-    console.log("register props", this.props);
-  }
+  // componentDidMount() {
+  //   console.log("Register state", this.state);
+  //   console.log("register props", this.props);
+  // }
+
   /* ---------- NEW USER REGISTRATION ---------- */
   handleRegisterInput = e => {
     const { name, value } = e.target;
@@ -42,21 +43,18 @@ class Register extends Component {
           type="email"
           name="email"
           placeholder="email"
-          // value={this.state.signup.email}
           onChange={this.handleRegisterInput}
         />
         <input
           type="password"
           name="password"
           placeholder="password"
-          // value={this.state.signup.password}
           onChange={this.handleRegisterInput}
         />
         <input
           type="password"
           name="password_confirmation"
           placeholder="confirm password"
-          // value={this.state.signup.password_confirmation}
           onChange={this.handleRegisterInput}
         />
         <button>Register</button>

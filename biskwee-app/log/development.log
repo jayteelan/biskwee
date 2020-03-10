@@ -8903,3 +8903,346 @@ Processing by Api::V1::AuthenticationController#create as HTML
 Completed 200 OK in 187ms (Views: 1.3ms | ActiveRecord: 1.5ms | Allocations: 846)
 
 
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:27:22 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 174ms (Views: 1.1ms | ActiveRecord: 2.8ms | Allocations: 949)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:31:46 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 179ms (Views: 1.0ms | ActiveRecord: 1.0ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:34:37 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 194ms (Views: 3.3ms | ActiveRecord: 2.4ms | Allocations: 847)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:35:59 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 190ms (Views: 3.6ms | ActiveRecord: 1.6ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:43:27 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 173ms (Views: 1.0ms | ActiveRecord: 1.3ms | Allocations: 949)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:44:36 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 177ms (Views: 1.0ms | ActiveRecord: 1.2ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:45:42 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 189ms (Views: 1.9ms | ActiveRecord: 1.4ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:47:09 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 198ms (Views: 1.9ms | ActiveRecord: 1.1ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:49:12 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 188ms (Views: 1.9ms | ActiveRecord: 1.1ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:51:11 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 219ms (Views: 1.8ms | ActiveRecord: 3.0ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:51:53 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 200ms (Views: 1.6ms | ActiveRecord: 1.3ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:52:00 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 171ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:54:09 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 19ms (Views: 2.8ms | ActiveRecord: 1.4ms | Allocations: 687)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:54:33 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 186ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:55:03 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 194ms (Views: 1.0ms | ActiveRecord: 1.4ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:55:55 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 198ms (Views: 3.3ms | ActiveRecord: 1.6ms | Allocations: 846)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:55:58 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "yellowleather@red.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 169ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 846)
+
+
+Started POST "/users" for ::1 at 2020-03-09 19:56:14 -0400
+Processing by RegistrationsController#create as HTML
+  Parameters: {"email"=>"asdfghj@jkjkk.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "registration"=>{"email"=>"asdfghj@jkjkk.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :registration[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/registrations_controller.rb:6:in `create'
+  [1m[36mUser Exists? (6.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "asdfghj@jkjkk.net"], ["LIMIT", 1]]
+  ↳ app/controllers/registrations_controller.rb:6:in `create'
+  [1m[36mUser Create (14.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "asdfghj@jkjkk.net"], ["encrypted_password", "$2a$11$Edfmmzo7wXcV.6uo/JSqfOqLJ/8fHM5QxgoXPLtA4ueG9rIAs.Vcy"], ["created_at", "2020-03-09 23:56:15.169814"], ["updated_at", "2020-03-09 23:56:15.169814"]]
+  ↳ app/controllers/registrations_controller.rb:6:in `create'
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/registrations_controller.rb:6:in `create'
+Completed 200 OK in 281ms (Views: 1.4ms | ActiveRecord: 35.0ms | Allocations: 3724)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-09 19:56:15 -0400
+Processing by Api::V1::AuthenticationController#create as HTML
+  Parameters: {"email"=>"asdfghj@jkjkk.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "authentication"=>{"email"=>"asdfghj@jkjkk.net", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "asdfghj@jkjkk.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 172ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 848)
+
+
+Started GET "/" for ::1 at 2020-03-10 11:15:39 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/jeff-generalassembly/.rbenv/versions/2.6.5/lib/ruby/gems/2.6.0/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 604.0ms | Allocations: 196)
+Completed 200 OK in 681ms (Views: 631.4ms | ActiveRecord: 0.0ms | Allocations: 819)
+
+
+Started GET "/api/recipes" for ::1 at 2020-03-10 11:15:50 -0400
+Processing by RecipesController#index as HTML
+Completed 401 Unauthorized in 26ms (ActiveRecord: 0.0ms | Allocations: 364)
+
+
+Started GET "/api/v1/auth" for ::1 at 2020-03-10 11:15:58 -0400
+Processing by Api::V1::AuthenticationController#fetch as HTML
+Completed 401 Unauthorized in 14ms (ActiveRecord: 0.0ms | Allocations: 305)
+
+
+Started GET "/api/v1/auth?email=yellowleather@red.net&password=[FILTERED]" for ::1 at 2020-03-10 11:16:32 -0400
+Processing by Api::V1::AuthenticationController#fetch as HTML
+  Parameters: {"email"=>"yellowleather@red.net", "password"=>"[FILTERED]"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 305)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-10 11:17:32 -0400
+Processing by Api::V1::AuthenticationController#create as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (45.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ylkjljl@jkkjk.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 313ms (Views: 1.1ms | ActiveRecord: 74.3ms | Allocations: 834)
+
+
+Started POST "/api/v1/auth" for ::1 at 2020-03-10 11:17:37 -0400
+Processing by Api::V1::AuthenticationController#create as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ylkjljl@jkkjk.net"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:4:in `create'
+Completed 200 OK in 186ms (Views: 9.0ms | ActiveRecord: 0.6ms | Allocations: 731)
+
+
+Started POST "/api/recipes" for ::1 at 2020-03-10 11:17:43 -0400
+Processing by RecipesController#create as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "recipe"=>{}}
+  [1m[36mUser Load (6.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+Completed 400 Bad Request in 62ms (ActiveRecord: 91.4ms | Allocations: 1066)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: recipe):
+  
+app/controllers/recipes_controller.rb:51:in `recipe_params'
+app/controllers/recipes_controller.rb:18:in `create'
+Started POST "/api/recipes/3" for ::1 at 2020-03-10 11:17:50 -0400
+  
+ActionController::RoutingError (No route matches [POST] "/api/recipes/3"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/api/recipes/3" for ::1 at 2020-03-10 11:19:45 -0400
+  [1m[35m (38.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/api/recipes/3"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/recipes/3" for ::1 at 2020-03-10 11:19:51 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "id"=>"3", "recipe"=>{}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ config/initializers/devise.rb:313:in `authenticate!'
+  [1m[36mRecipe Load (37.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:46:in `set_recipe'
+Completed 200 OK in 135ms (Views: 3.4ms | ActiveRecord: 86.7ms | Allocations: 14179)
+
+
+Started GET "/api/recipes/" for ::1 at 2020-03-10 11:19:54 -0400
+Processing by RecipesController#index as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "recipe"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 10ms (Views: 3.2ms | ActiveRecord: 0.8ms | Allocations: 3467)
+
+
+Started GET "/api/recipes/5" for ::1 at 2020-03-10 11:23:45 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "id"=>"5", "recipe"=>{}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:46:in `set_recipe'
+Completed 404 Not Found in 37ms (ActiveRecord: 2.1ms | Allocations: 2220)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Recipe with 'id'=5):
+  
+app/controllers/recipes_controller.rb:46:in `set_recipe'
+Started GET "/api/recipes/2" for ::1 at 2020-03-10 11:23:50 -0400
+Processing by RecipesController#show as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "id"=>"2", "recipe"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:46:in `set_recipe'
+Completed 200 OK in 13ms (Views: 3.7ms | ActiveRecord: 1.0ms | Allocations: 2559)
+
+
+Started GET "/api/ingredients/2" for ::1 at 2020-03-10 11:23:57 -0400
+Processing by IngredientsController#show as */*
+  Parameters: {"email"=>"ylkjljl@jkkjk.net", "password"=>"[FILTERED]", "id"=>"2", "ingredient"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Load (5.4ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/ingredients_controller.rb:44:in `set_ingredient'
+Completed 200 OK in 31ms (Views: 0.8ms | ActiveRecord: 13.3ms | Allocations: 8143)
+
+
+Started GET "/api/categories/2" for ::1 at 2020-03-10 11:24:15 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/categories/2"):
+  
+actionpack (6.0.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'

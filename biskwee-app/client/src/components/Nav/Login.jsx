@@ -40,14 +40,12 @@ class Login extends Component {
           type="email"
           name="email"
           placeholder="email"
-          // value={this.props.user_form.email}
           onChange={this.handleLoginInput}
         />
         <input
           type="password"
           name="password"
           placeholder="password"
-          // value={this.props.user_form.password}
           onChange={this.handleLoginInput}
         />
         <button>Log In</button>

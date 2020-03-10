@@ -8,24 +8,14 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    console.log("Nav Props", this.props);
-  }
+
   handleUserStatus = () => {
     return localStorage.authToken && localStorage.authToken.length > 9 ? (
       <button onClick={this.props.handleLogout}>Log Out</button>
     ) : (
-      <Login
-        // handleLogin={this.props.handleLogin}
-        // handleUserChange={this.props.handleUserChange}
-        user_form={this.props.user_form}
-      />
+      <Login {...this.props} />
     );
   };
-
-  componentDidUpdate() {
-    this.handleUserStatus();
-  }
 
   render() {
     return (
