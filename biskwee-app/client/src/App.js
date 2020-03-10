@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// import { createNewUser, loginUser } from "./api-helper";
+import Main from "./components/Main";
+// import NavBar from "./components/Nav/NavBar";
+import Register from "./components/Nav/Register";
+import LoginFailed from "./components/Content/LoginFailed";
+// import Register from "./components/Nav/Register";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      current_user: null
+    };
+  }
+  componentDidMount() {
+    console.log("update", this.state);
+  }
+
+  /* ---------- LOG OUT ---------- */
+  handleLogout = () => {
+    localStorage.removeItem("authToken");
+    this.setState({
+      currentUser: null
+    });
+    console.log("logged out", localStorage.authToken);
+  };
+
+  /* ---------- RENDER ---------- */
+  render() {
+    return (
+      <div className="App">
+        <p>app</p>
+        <Main
+          // handleLogin={this.handleLogin}
+          // handleUserChange={this.handleLoginInput}
+          // user_form={this.state.user_form}
+          // handleRegister={this.handleRegister}
+          // handleRegisterInput={this.handleRegisterInput}
+          // signup={this.state.signup}
+          current_user={this.state.current_user}
+          handleLogout={this.handleLogout}
+        />
+        <Route
+          exact
+          path="/register"
+          component={props => {
+            return (
+              <Register
+                handleRegister={this.handleRegister}
+                handleRegisterInput={this.handleRegisterInput}
+                signup={this.state.signup}
+              />
+            );
+          }}
+        />
+        <Route exact path="/login" component={LoginFailed} />
+      </div>
+    );
+  }
 }
 
 export default App;
