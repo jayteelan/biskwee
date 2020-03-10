@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-// import { createNewUser, loginUser } from "./api-helper";
+import { getAllData } from "./api-helper";
 import Main from "./components/Main";
 // import NavBar from "./components/Nav/NavBar";
 import Register from "./components/Nav/Register";
@@ -16,8 +16,17 @@ class App extends Component {
       current_user: null
     };
   }
+
+  setReferenceData = async () => {
+    this.setState({ ingredients: await getAllData("ingredients") });
+    this.setState({ units: await getAllData("units") });
+    this.setState({ categories: await getAllData("categories") });
+    // console.log(this.state);
+  };
+
   componentDidMount() {
-    console.log("update", this.state);
+    this.setReferenceData();
+    // console.log("update", this.state);
   }
 
   /* ---------- LOG OUT ---------- */
@@ -61,7 +70,13 @@ class App extends Component {
           exact
           path="/recipes/:recipe_id"
           component={props => {
-            return <Detail {...props} match={props.match.params.recipe_id} />;
+            return (
+              <Detail
+                // {...props}
+                match={props.match.params.recipe_id}
+                state={this.state}
+              />
+            );
           }}
         />
         <Route exact path="/login" component={LoginFailed} />
