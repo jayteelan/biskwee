@@ -9,8 +9,7 @@ class RecipesController < ApiController
   end
 
   # GET /recipes/1
-  def show
-    render json: @recipe
+	def show
   end
 
   # POST /recipes

@@ -3,7 +3,8 @@ import axios from "axios";
 const baseUrl = "http://localhost:3000";
 const api = axios.create({
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.authToken}`
   },
   baseURL: baseUrl
 });
@@ -31,9 +32,9 @@ const createNewUser = async formData => {
   }
 };
 
-const getData = async (type, id) => {
-  const res = await api.get(`/api/${type}/${id}`);
+const getData = async (endpoint, id) => {
+  const res = await api.get(`/api/${endpoint}/${id}`);
   return res.data;
 };
 
-export { loginUser, createNewUser };
+export { loginUser, createNewUser, getData };

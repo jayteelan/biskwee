@@ -7,7 +7,7 @@ import Main from "./components/Main";
 // import NavBar from "./components/Nav/NavBar";
 import Register from "./components/Nav/Register";
 import LoginFailed from "./components/Content/LoginFailed";
-// import Register from "./components/Nav/Register";
+import Detail from "./components/Content/Detail";
 
 class App extends Component {
   constructor(props) {
@@ -55,6 +55,13 @@ class App extends Component {
                 signup={this.state.signup}
               />
             );
+          }}
+        />
+        <Route
+          exact
+          path="/recipes/:recipe_id"
+          component={props => {
+            return <Detail {...props} match={props.match.params.recipe_id} />;
           }}
         />
         <Route exact path="/login" component={LoginFailed} />
