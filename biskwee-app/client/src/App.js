@@ -18,9 +18,9 @@ class App extends Component {
   }
 
   setReferenceData = async () => {
-    this.setState({ ingredients: await getAllData("ingredients") });
-    this.setState({ units: await getAllData("units") });
-    this.setState({ categories: await getAllData("categories") });
+    this.setState({ all_ingredients: await getAllData("ingredients") });
+    this.setState({ all_units: await getAllData("units") });
+    this.setState({ all_categories: await getAllData("categories") });
     // console.log(this.state);
   };
 
