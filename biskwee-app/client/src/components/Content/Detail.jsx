@@ -24,6 +24,7 @@ class Detail extends Component {
       },
       () => {
         this.parseIngreds();
+        // console.log(this.state.recipe);
       }
     );
   };
@@ -32,6 +33,9 @@ class Detail extends Component {
   parseIngreds() {
     const { all_units, all_ingredients } = this.props;
     const ingredParsed = this.state.ingredArr.map(obj => {
+      if (!this.state.ingredArr) {
+        setTimeout(() => this.getRecipe, 2000);
+      }
       return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
         all_ingredients[obj.line.ingredient_id - 1].name
       }`;
@@ -51,7 +55,7 @@ class Detail extends Component {
   };
 
   componentWillUnmount() {
-    this.setState({ _isMounted: false });
+    this.setState({ _isMounted: false, recipeIsLoaded: false });
   }
 
   render() {
@@ -61,8 +65,9 @@ class Detail extends Component {
         <IngredList
           id={this.props.match}
           parsedIngreds={this.state.parsedIngreds}
+          // recipe={this.state.recipe}
         />
-        <MethodList {...this.props} />
+        <MethodList {...this.props} recipe={this.state.recipe} />
       </div>
     );
   }

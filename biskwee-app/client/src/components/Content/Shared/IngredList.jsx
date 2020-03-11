@@ -6,7 +6,7 @@ class IngredList extends Component {
     this.state = {};
   }
 
-  mapLI = () => {
+  mapIngredLI = () => {
     if (!this.props.parsedIngreds) {
       return <p>loading ingredients...</p>;
     }
@@ -15,18 +15,8 @@ class IngredList extends Component {
     ));
   };
 
-  componentDidMount = async () => {
-    // console.log("inli", this.props);
-    // setTimeout(() => console.log(this.props.parsedIngreds), 1500);
-  };
-
   render() {
-    return (
-      <ul>
-        {/* <h3>LIST</h3> */}
-        {this.mapLI()}
-      </ul>
-    );
+    return <ul>{this.mapIngredLI()}</ul>;
   }
 }
 

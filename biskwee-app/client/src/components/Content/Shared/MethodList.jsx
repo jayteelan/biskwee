@@ -6,9 +6,28 @@ class MethodList extends Component {
 
     this.state = {};
   }
+  mapMethodLI = () => {
+    if (!this.props.recipe) {
+      console.log(this.props);
+      return <p>loading method...</p>;
+    }
+    console.log("method", this.props.recipe.method);
+    if (this.props.recipe.method) {
+      return this.props.recipe.method.map((step, index) => (
+        <li key={index}>
+          <p>{step.step}</p>
+        </li>
+      ));
+    }
+  };
 
   render() {
-    return <h1>METHOD</h1>;
+    return (
+      <div>
+        <h1>Method</h1>
+        <ol>{this.mapMethodLI()}</ol>
+      </div>
+    );
   }
 }
 
