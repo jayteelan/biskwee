@@ -4,10 +4,11 @@ import "./App.css";
 
 import { getAllData } from "./api-helper";
 import Main from "./components/Main";
-// import NavBar from "./components/Nav/NavBar";
+import NavBar from "./componengit sts/Nav/NavBar";
 import Register from "./components/Nav/Register";
 import LoginFailed from "./components/Content/LoginFailed";
 import Detail from "./components/Content/Detail";
+import Edit from "./components/Content/Edit";
 
 class App extends Component {
   constructor(props) {
