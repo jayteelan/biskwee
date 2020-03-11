@@ -16,7 +16,10 @@ class App extends Component {
     this.state = {
       _isMounted: false,
       current_user: null,
-      current_recipe: {}
+      current_recipe: {},
+      all_units: [],
+      all_ingredients: [],
+      all_categories: []
     };
   }
 
@@ -38,35 +41,42 @@ class App extends Component {
   /* ---------- RETRIEVE TARGET RECIPE ---------- */
   getRecipe = async id => {
     const recipe = await getData("recipes", id);
-    this.setState({
-      current_recipe: recipe,
-      recipe: recipe,
-      ingredArr: recipe.ingredients,
-      recipeIsLoaded: true
-      // },
-      // () => {
-      // this.parseIngreds();
-      // this.props.setState({ current_recipe: recipe })
-      // console.log(this.props)
-    });
+    this.setState(
+      {
+        current_recipe: recipe,
+        recipe: recipe,
+        ingredArr: recipe.ingredients,
+        recipeIsLoaded: true
+      },
+      () => {
+        // setTimeout(console.log("loading"), 4000);
+        setTimeout(() => this.parseIngreds(), 1000);
+        // this.props.setState({ current_recipe: recipe })
+        // console.log(this.props)
+      }
+    );
   };
 
   /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
-  parseIngreds() {
-    const { all_units, all_ingredients } = this.props;
+  parseIngreds = () => {
+    // const { all_units, all_ingredients } = this.state;
+
     const ingredParsed = this.state.ingredArr.map(obj => {
       // if (!this.state.ingredArr) {
-      //   setTimeout(() => this.getRecipe, 2000);
+      //   setTimeout(() => console.log("loading"), 2000);
       // }
-      console.log(obj);
-      // return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-      //   all_ingredients[obj.line.ingredient_id - 1].name
-      // }`;
+      // // if (!this.state.all_units) {
+      // setTimeout(console.log("loading"), 2000);
+      // }
+      // console.log("PARSE", this.state.all_units[obj.line.unit_id - 1]);
+      return `${obj.line.qty}${
+        this.state.all_units[obj.line.unit_id - 1].abbrev
+      } ${this.state.all_ingredients[obj.line.ingredient_id - 1].name}`;
     });
     this.setState({ parsedIngreds: ingredParsed }, () => {
-      // console.log("parsed!", this.state.parsedIngreds);
+      console.log("parsed!", this.state.parsedIngreds);
     });
-  }
+  };
 
   componentDidMount = async () => {
     this.setState({ _isMounted: true });
@@ -120,7 +130,8 @@ class App extends Component {
                 all_units={this.state.all_units}
                 current_recipe={this.state.current_recipe}
                 getRecipe={this.getRecipe}
-                parseIngreds={this.parseIngreds}
+                parsedIngreds={this.state.parsedIngreds}
+                recipeIsLoaded={this.state.recipeIsLoaded}
                 // all_recipes={this.state.all_recipes}
               />
             );

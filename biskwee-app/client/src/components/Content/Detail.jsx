@@ -57,11 +57,12 @@ class Detail extends Component {
 
   componentDidMount = () => {
     // setTimeout(async () => await this.getRecipe(this.props.match), 1000);
-    if (!this.state.recipeIsLoaded) {
-      console.log("loading", this.props.match);
-      // this.props.getRecipe(this.props.match);
+    if (!this.props.recipeIsLoaded) {
+      // console.log("loading", this.props.match);
+      this.props.getRecipe(this.props.match);
     }
     this.setState({ _isMounted: true });
+    // console.log(this.props);
   };
 
   componentWillUnmount() {
@@ -69,14 +70,14 @@ class Detail extends Component {
   }
 
   render() {
-    if (!this.state.recipe) {
+    if (!this.props.current_recipe) {
       console.log(this.props);
       return <p>...</p>;
     }
     return (
       <div>
         {/* <img src={require(`${this.state.recipe.img_url}`)} /> */}
-        <h1>{this.state.recipe.name}</h1>
+        <h1>{this.props.current_recipe.name}</h1>
         {/* <Route exact path={`/recipes/${this.props.match}/edit`}>
           Edit
         </Route> */}
@@ -93,10 +94,10 @@ class Detail extends Component {
         {/* {this.waitForProp("this.state.recipe.name")} */}
         <IngredList
           id={this.props.match}
-          parsedIngreds={this.state.parsedIngreds}
-          // recipe={this.state.recipe}
+          parsedIngreds={this.props.parsedIngreds}
+          recipe={this.props.current_recipe}
         />
-        <MethodList {...this.props} recipe={this.state.recipe} />
+        <MethodList {...this.props} recipe={this.props.current_recipe} />
       </div>
     );
   }
