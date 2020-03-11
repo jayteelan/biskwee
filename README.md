@@ -129,7 +129,7 @@ At an absolute minimum, **Biskwee** will:
 | Set up auth backend      |    H     |    1.5 hrs     |    1 hr     |
 | Scaffold frontend/routes |    H     |     8 hrs      |   1.5 hrs   |
 | Build out auth frontend  |    M     |     3 hrs      |    9 hrs    |
-| Build out RecipeDetail   |    H     |     12 hrs     |    1120-    |
+| Build out RecipeDetail   |    H     |     12 hrs     |    9 hrs    |
 | Build out AddEditRecipes |    H     |     8 hrs      |             |
 | Build out MyRecipes      |    M     |     5 hrs      |             |
 | Styling                  |    M     |     8 hrs      |             |
@@ -174,7 +174,10 @@ At an absolute minimum, **Biskwee** will:
 
 ## Project Change Log
 
-> This section should be expanded and revised as you work on your project.
+# 10. Mar
+
+- Initially planned to make an API call to get a recipe, then further API calls to get information on each of its ingredients (stored in the recipe as a hash of quantity and foreign keys for unit of measurement and ingredient IDs). After writing and compiling a nested iterative API call, realized this was exceptionally slow and inefficient; restructured the frontend to fetch all data from the units, categories, and ingredients tables when the App first mounts, then store it in state to be referred upon later. Consider adding a loading screen as post-MVP.
+- Further restructuring on the `Detail` component: originally wrote 100+ lines of code with several helper methods to create arrays of each ingredient's quantity, unit of measurement, and name (with consistent indices for each ingredient); set the arrays to state; and retrieve data from all three arrays to compose an ingredient line (e.g., "150 grams flour"). Again, realized this was an idiotic approach and replaced it with a five-line method that just grabs all the relevant information from the original recipe data and mutate inside of a template literal.
 
 ## Code Showcase
 
