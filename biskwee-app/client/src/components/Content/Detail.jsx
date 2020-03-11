@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { getData } from "../../api-helper";
 import IngredList from "../Content/Shared/IngredList";
 import MethodList from "../Content/Shared/MethodList";
@@ -13,37 +13,39 @@ class Detail extends Component {
     };
   }
 
-  /* ---------- RETRIEVE TARGET RECIPE ---------- */
-  getRecipe = async id => {
-    const recipe = await getData("recipes", id);
-    this.setState(
-      {
-        recipe: recipe,
-        ingredArr: recipe.ingredients,
-        recipeIsLoaded: true
-      },
-      () => {
-        this.parseIngreds();
-        // console.log(this.state.recipe);
-      }
-    );
-  };
+  // /* ---------- RETRIEVE TARGET RECIPE ---------- */
+  // getRecipe = async id => {
+  //   const recipe = await getData("recipes", id);
+  //   this.setState(
+  //     {
+  //       current_recipe: recipe,
+  //       recipe: recipe,
+  //       ingredArr: recipe.ingredients,
+  //       recipeIsLoaded: true
+  //     },
+  //     () => {
+  //       this.parseIngreds();
+  //       // this.props.setState({ current_recipe: recipe })
+  //       // console.log(this.props)
+  //     }
+  //   );
+  // };
 
-  /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
-  parseIngreds() {
-    const { all_units, all_ingredients } = this.props;
-    const ingredParsed = this.state.ingredArr.map(obj => {
-      if (!this.state.ingredArr) {
-        setTimeout(() => this.getRecipe, 2000);
-      }
-      return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-        all_ingredients[obj.line.ingredient_id - 1].name
-      }`;
-    });
-    this.setState({ parsedIngreds: ingredParsed }, () => {
-      // console.log("parsed!", this.state.parsedIngreds);
-    });
-  }
+  // /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
+  // parseIngreds() {
+  //   const { all_units, all_ingredients } = this.props;
+  //   const ingredParsed = this.state.ingredArr.map(obj => {
+  //     if (!this.state.ingredArr) {
+  //       setTimeout(() => this.getRecipe, 2000);
+  //     }
+  //     return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
+  //       all_ingredients[obj.line.ingredient_id - 1].name
+  //     }`;
+  //   });
+  //   this.setState({ parsedIngreds: ingredParsed }, () => {
+  //     // console.log("parsed!", this.state.parsedIngreds);
+  //   });
+  // }
 
   // waitForProp = prop => {
   //   if (!this.state.recipe) {
@@ -56,8 +58,8 @@ class Detail extends Component {
   componentDidMount = () => {
     // setTimeout(async () => await this.getRecipe(this.props.match), 1000);
     if (!this.state.recipeIsLoaded) {
-      console.log("loading");
-      this.getRecipe(this.props.match);
+      console.log("loading", this.props.match);
+      // this.props.getRecipe(this.props.match);
     }
     this.setState({ _isMounted: true });
   };
@@ -75,12 +77,15 @@ class Detail extends Component {
       <div>
         {/* <img src={require(`${this.state.recipe.img_url}`)} /> */}
         <h1>{this.state.recipe.name}</h1>
+        {/* <Route exact path={`/recipes/${this.props.match}/edit`}>
+          Edit
+        </Route> */}
         <Link
           to={{
             pathname: `/recipes/${this.props.match}/edit`,
-            state: {
-              ...this.state
-            }
+            state: this.state,
+
+            props: this.props
           }}
         >
           Edit

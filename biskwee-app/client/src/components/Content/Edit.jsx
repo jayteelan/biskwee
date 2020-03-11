@@ -60,7 +60,7 @@ class Edit extends Component {
 
   render() {
     if (!this.state.recipe) {
-      console.log(this.props);
+      // console.log(this.props);
       return <p>...</p>;
     }
     return (
