@@ -10,6 +10,7 @@ class Edit extends Component {
     this.state = {
       _isMounted: false,
       recipeIsLoaded: false,
+      all_units: this.props.all_units,
       newRecipe: {
         name: "",
         ingredients: [],
@@ -42,20 +43,22 @@ class Edit extends Component {
 
         <label for="unit">unit</label>
         <select id="unit" className="unit_id">
-          <option selected="selected">
-            {this.props.all_units[unit_id].name}
-          </option>
+          {this.props.all_units &&
+            console.log("UNITS", this.state.all_units[unit_id - 1])}
+          {/* <option selected="selected">
+            {this.props.all_units[unit_id - 1].name}
+          </option> */}
           {/* {this.props.all_units.map(unit => return(
           <option value={`${unit.name}`}>{unit.abbrev}</option>
         ))} */}
         </select>
 
-        <label for="ingredient">unit</label>
+        <label for="ingredient">ingredient</label>
         <select id="ingredient" className="ingredient_id">
+          (!this.props.all_ingredients)?<p>...</p>:
           <option selected="selected">
-            {this.props.all_ingredients[ingredient_id].name}
+            {/* {this.props.all_ingredients[ingredient_id - 1].name} */}
           </option>
-
           {/* {this.props.all_ingredients.map(ingred => (
           <option value={`${ingred.name}`}>{ingred.name}</option>
         ))} */}
@@ -71,6 +74,11 @@ class Edit extends Component {
     }
     return (
       <form>
+        {!this.props.ingredients ? (
+          <p>...</p>
+        ) : (
+          <p>{this.props.all_ingredients[12].name}</p>
+        )}
         {this.makeInput("Recipe name", this.props.current_recipe.name)}
         {this.makeIngred(12, 12, 12)}
         <ul>
