@@ -13,46 +13,50 @@ class Edit extends Component {
     };
   }
 
-  /* ---------- RETRIEVE TARGET RECIPE ---------- */
-  getRecipe = async id => {
-    const recipe = await getData("recipes", id);
-    this.setState(
-      {
-        recipe: recipe,
-        ingredArr: recipe.ingredients,
-        recipeIsLoaded: true
-      },
-      () => {
-        this.parseIngreds();
-      }
-    );
-  };
-
-  /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
-  parseIngreds() {
-    const { all_units, all_ingredients } = this.props;
-    const ingredParsed = this.state.ingredArr.map(obj => {
-      if (!this.state.ingredArr) {
-        setTimeout(() => this.getRecipe, 2000);
-      }
-      return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-        all_ingredients[obj.line.ingredient_id - 1].name
-      }`;
-    });
-    this.setState({ parsedIngreds: ingredParsed }, () => {});
+  componentDidMount() {
+    console.log("edit state", this.state);
+    console.log("edit props", this.props);
   }
+  // /* ---------- RETRIEVE TARGET RECIPE ---------- */
+  // getRecipe = async id => {
+  //   const recipe = await getData("recipes", id);
+  //   this.setState(
+  //     {
+  //       recipe: recipe,
+  //       ingredArr: recipe.ingredients,
+  //       recipeIsLoaded: true
+  //     },
+  //     () => {
+  //       this.parseIngreds();
+  //     }
+  //   );
+  // };
 
-  componentDidMount = () => {
-    if (!this.state.recipeIsLoaded) {
-      console.log("loading");
-      this.getRecipe(this.props.match);
-    }
-    this.setState({ _isMounted: true });
-  };
+  // /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
+  // parseIngreds() {
+  //   const { all_units, all_ingredients } = this.props;
+  //   const ingredParsed = this.state.ingredArr.map(obj => {
+  //     if (!this.state.ingredArr) {
+  //       setTimeout(() => this.getRecipe, 2000);
+  //     }
+  //     return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
+  //       all_ingredients[obj.line.ingredient_id - 1].name
+  //     }`;
+  //   });
+  //   this.setState({ parsedIngreds: ingredParsed }, () => {});
+  // }
 
-  componentWillUnmount() {
-    this.setState({ _isMounted: false, recipeIsLoaded: false });
-  }
+  // componentDidMount = () => {
+  //   if (!this.state.recipeIsLoaded) {
+  //     console.log("loading");
+  //     this.getRecipe(this.props.match);
+  //   }
+  //   this.setState({ _isMounted: true });
+  // };
+
+  // componentWillUnmount() {
+  //   this.setState({ _isMounted: false, recipeIsLoaded: false });
+  // }
 
   render() {
     if (!this.state.recipe) {

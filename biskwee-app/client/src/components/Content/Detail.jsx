@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { getData } from "../../api-helper";
 import IngredList from "../Content/Shared/IngredList";
 import MethodList from "../Content/Shared/MethodList";
@@ -75,6 +75,16 @@ class Detail extends Component {
       <div>
         {/* <img src={require(`${this.state.recipe.img_url}`)} /> */}
         <h1>{this.state.recipe.name}</h1>
+        <Link
+          to={{
+            pathname: `/recipes/${this.props.match}/edit`,
+            state: {
+              ...this.state
+            }
+          }}
+        >
+          Edit
+        </Link>
         {/* {this.waitForProp("this.state.recipe.name")} */}
         <IngredList
           id={this.props.match}
