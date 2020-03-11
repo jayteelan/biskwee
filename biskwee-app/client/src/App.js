@@ -56,14 +56,7 @@ class App extends Component {
     return (
       <div className="App">
         <p>app</p>
-        {/* <Switch> */}
         <Main
-          // handleLogin={this.handleLogin}
-          // handleUserChange={this.handleLoginInput}
-          // user_form={this.state.user_form}
-          // handleRegister={this.handleRegister}
-          // handleRegisterInput={this.handleRegisterInput}
-          // signup={this.state.signup}
           current_user={this.state.current_user}
           handleLogout={this.handleLogout}
         />
@@ -87,7 +80,20 @@ class App extends Component {
           component={props => {
             return (
               <Detail
-                // {...props}
+                match={props.match.params.recipe_id}
+                all_ingredients={this.state.all_ingredients}
+                all_units={this.state.all_units}
+                all_recipes={this.state.all_recipes}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/recipes/:recipe_id/edit"
+          component={props => {
+            return (
+              <Edit
                 match={props.match.params.recipe_id}
                 all_ingredients={this.state.all_ingredients}
                 all_units={this.state.all_units}
