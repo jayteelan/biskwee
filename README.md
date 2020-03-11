@@ -185,6 +185,11 @@ At an absolute minimum, **Biskwee** will:
 
 ## Code Issues & Resolutions
 
+# 11.Mar
+
+- Although unit, ingredient, etc data is loaded into state when the App mounts, React is unhappy any time there's an attempt to access that data, e.g., in `this.props.all_ingredients[1].name`; it seems methods try to retrieve data before the component has fully mounted.
+  The only solution found so far has been to wrap every single call in guard operators and 2-second timeout delays.
+
 # 10. Mar
 
 - API returns hashes within arrays as strings since the array needs to be defined as `text` in the model; because of this, none of the data within was immediately accessible. Finding no straightfoward way to convert a string into a Ruby hash into JSON, I tried instead to run the the string through chained methods with regexps to turn, e.g., `{:key=>value}` into `{key:value}`, and then `JSON.parse`ing the result; however, I had difficulty with this too. I consulted our TA, who then suggested an alternate approach that ultimately proved successful: install the `jbuilder` gem, then use it parse the strings into JSON directly on the API backend.

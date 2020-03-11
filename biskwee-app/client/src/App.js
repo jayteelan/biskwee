@@ -37,6 +37,58 @@ class App extends Component {
     });
   };
 
+  makeIngred = (qty, unit_id, ingredient_id) => {
+    return (
+      <span>
+        <label for="qty">amount:</label>
+        <input id="qty" type="number" value={qty} />
+
+        <label for="unit">unit</label>
+        <select id="unit" className="unit_id">
+          {/* this will work */}
+          {/* {this.state.all_units &&
+            console.log("UNITS", this.state.all_units[unit_id - 1])} */}
+
+          {/* but everything breaks if i just add ".name" */}
+          {/* {this.state.all_units &&
+            console.log("UNITS", this.state.all_units[unit_id - 1].name)} */}
+
+          {/* ...and yet, it still returns the expected data if I wrap it in a setTimeout() */}
+          {/* {this.state.all_units &&
+            setTimeout(
+              () =>
+                console.log("UNITS", this.state.all_units[unit_id - 1].name),
+              2000
+            )} */}
+
+          <option selected="selected">
+            {this.state.all_units &&
+              setTimeout(() => this.state.all_units[unit_id - 1].name, 2000)}
+          </option>
+
+          {this.state.all_units &&
+            setTimeout(() =>
+              this.state.all_units.map(
+                unit => <option value={`${unit.name}`}>{unit.abbrev}</option>,
+                2000
+              )
+            )}
+        </select>
+
+        <label for="ingredient">ingredient</label>
+        <select id="ingredient" className="ingredient_id">
+          (!this.props.all_ingredients)?<p>...</p>:
+          <option selected="selected">
+            {/* {this.props.all_ingredients[ingredient_id - 1].name} */}
+          </option>
+          {/* {this.props.all_ingredients.map(ingred => (
+          <option value={`${ingred.name}`}>{ingred.name}</option>
+        ))} */}
+        </select>
+      </span>
+    );
+  };
+
   /* ---------- RETRIEVE TARGET RECIPE ---------- */
   getRecipe = async id => {
     const recipe = await getData("recipes", id);
@@ -132,6 +184,7 @@ class App extends Component {
                 all_units={this.state.all_units}
                 current_recipe={this.state.current_recipe}
                 parsedIngreds={this.state.parsedIngreds}
+                makeIngred={this.makeIngred}
               />
             );
           }}

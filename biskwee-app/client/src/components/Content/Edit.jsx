@@ -20,8 +20,8 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    console.log("edit state", this.state);
-    console.log("edit props", this.props);
+    // console.log("edit state", this.state);
+    // console.log("edit props", this.props);
     this.setState({ _isMounted: true });
   }
 
@@ -35,37 +35,37 @@ class Edit extends Component {
 
   makeOptions = type => {};
 
-  makeIngred = (qty, unit_id, ingredient_id) => {
-    return (
-      <span>
-        <label for="qty">amount:</label>
-        <input id="qty" type="number" value={qty} />
+  // makeIngred = (qty, unit_id, ingredient_id) => {
+  //   return (
+  //     <span>
+  //       <label for="qty">amount:</label>
+  //       <input id="qty" type="number" value={qty} />
 
-        <label for="unit">unit</label>
-        <select id="unit" className="unit_id">
-          {this.props.all_units &&
-            console.log("UNITS", this.state.all_units[unit_id - 1])}
-          {/* <option selected="selected">
-            {this.props.all_units[unit_id - 1].name}
-          </option> */}
-          {/* {this.props.all_units.map(unit => return(
-          <option value={`${unit.name}`}>{unit.abbrev}</option>
-        ))} */}
-        </select>
+  //       <label for="unit">unit</label>
+  //       <select id="unit" className="unit_id">
+  //         {this.props.all_units &&
+  //           console.log("UNITS", this.state.all_units[unit_id - 1])}
+  //         {/* <option selected="selected">
+  //           {this.props.all_units[unit_id - 1].name}
+  //         </option> */}
+  //         {/* {this.props.all_units.map(unit => return(
+  //         <option value={`${unit.name}`}>{unit.abbrev}</option>
+  //       ))} */}
+  //       </select>
 
-        <label for="ingredient">ingredient</label>
-        <select id="ingredient" className="ingredient_id">
-          (!this.props.all_ingredients)?<p>...</p>:
-          <option selected="selected">
-            {/* {this.props.all_ingredients[ingredient_id - 1].name} */}
-          </option>
-          {/* {this.props.all_ingredients.map(ingred => (
-          <option value={`${ingred.name}`}>{ingred.name}</option>
-        ))} */}
-        </select>
-      </span>
-    );
-  };
+  //       <label for="ingredient">ingredient</label>
+  //       <select id="ingredient" className="ingredient_id">
+  //         (!this.props.all_ingredients)?<p>...</p>:
+  //         <option selected="selected">
+  //           {/* {this.props.all_ingredients[ingredient_id - 1].name} */}
+  //         </option>
+  //         {/* {this.props.all_ingredients.map(ingred => (
+  //         <option value={`${ingred.name}`}>{ingred.name}</option>
+  //       ))} */}
+  //       </select>
+  //     </span>
+  //   );
+  // };
 
   render() {
     if (!this.props.current_recipe) {
@@ -80,7 +80,7 @@ class Edit extends Component {
           <p>{this.props.all_ingredients[12].name}</p>
         )}
         {this.makeInput("Recipe name", this.props.current_recipe.name)}
-        {this.makeIngred(12, 12, 12)}
+        {this.props.makeIngred(12, 12, 12)}
         <ul>
           <IngredList />
         </ul>
