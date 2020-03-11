@@ -13,6 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      _isMounted: false,
       current_user: null
     };
   }
@@ -24,9 +25,34 @@ class App extends Component {
     // console.log(this.state);
   };
 
+  mountDetails = () => {
+    if (this.state._isMounted === true) {
+      return (
+        <Route
+          exact
+          path="/recipes/:recipe_id"
+          component={props => {
+            return (
+              <Detail
+                // {...props}
+                match={props.match.params.recipe_id}
+                all_ingredients={this.state.all_ingredients}
+                all_units={this.state.all_units}
+              />
+            );
+          }}
+        />
+      );
+    }
+  };
+
   componentDidMount() {
+    this.setState({ _isMounted: true });
     this.setReferenceData();
     // console.log("update", this.state);
+  }
+  componentWillUnmount() {
+    this.setState({ _isMounted: false });
   }
 
   /* ---------- LOG OUT ---------- */
@@ -43,6 +69,7 @@ class App extends Component {
     return (
       <div className="App">
         <p>app</p>
+        {/* <Switch> */}
         <Main
           // handleLogin={this.handleLogin}
           // handleUserChange={this.handleLoginInput}
@@ -66,7 +93,8 @@ class App extends Component {
             );
           }}
         />
-        <Route
+        {this.mountDetails()}
+        {/* <Route
           exact
           path="/recipes/:recipe_id"
           component={props => {
@@ -74,12 +102,14 @@ class App extends Component {
               <Detail
                 // {...props}
                 match={props.match.params.recipe_id}
-                state={this.state}
+                all_ingredients={this.state.all_ingredients}
+                all_units={this.state.all_units}
               />
             );
           }}
-        />
+        /> */}
         <Route exact path="/login" component={LoginFailed} />
+        {/* </Switch> */}
       </div>
     );
   }

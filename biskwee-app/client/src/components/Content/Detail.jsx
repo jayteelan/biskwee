@@ -9,7 +9,8 @@ class Detail extends Component {
     super(props);
     this.state = {
       // recipe: undefined,
-      // recipeIsLoaded: false,
+      _isMounted: false,
+      recipeIsLoaded: false
       // ingredIdsLoaded: false,
       // unitIdsLoaded: false
     };
@@ -78,29 +79,41 @@ class Detail extends Component {
   // };
 
   /* ---------- MAYBE THIS???? ---------- */
-  translateObj = () => {
-    const { all_units, all_ingredients } = this.props.state;
+  translateObj = async () => {
+    // await this.getRecipe(this.props.match);
+
+    // const { all_units, all_ingredients } = this.props.state;
     const ingredParsed = [];
     const objs = this.state.recipe.ingredients;
     // console.log(objs);
+    // if (this.state.recipeIsLoaded === true) {
     objs.map(obj => {
       ingredParsed.push(
-        `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-          all_ingredients[obj.line.ingredient_id - 1].name
+        `${obj.line.qty}${this.props.all_units[obj.line.unit_id - 1].abbrev} ${
+          this.props.all_ingredients[obj.line.ingredient_id - 1].name
         }`
       );
       // console.log(ingredParsed);
       // this.props.state.all_ingredients[obj.line.ingredient_id - 1].name
     });
 
-    this.setState({ parsedIngreds: ingredParsed });
+    if (this.state._isMounted === true) {
+      this.setState({ parsedIngreds: ingredParsed });
+    }
     console.log(this.state.parsedIngreds);
     // );
+    // }
   };
 
   componentDidMount = async () => {
+    this.state._isMounted = true;
+    // this.state.recipeIsLoaded = true;
     await this.getRecipe(this.props.match);
-    setTimeout(() => this.translateObj(), 3000);
+    // while (this.state.recipeIsLoaded === false) {
+    //   // do nothing
+    // }
+    this.state.recipeIsLoaded && this.translateObj();
+    // setTimeout(() => this.translateObj(), 3000);
     //   this.state.recipe && this.getIngredientIds();
     //   this.state.recipe && this.getUnitIds();
     //   this.state.recipe && this.getQty();
@@ -110,6 +123,10 @@ class Detail extends Component {
     //   // this.forceUpdate();
     // }, 2000);
   };
+
+  componentWillUnmount() {
+    this.setState({ _isMounted: false });
+  }
 
   render() {
     return (
