@@ -51,6 +51,7 @@ At an absolute minimum, **Biskwee** will:
 |    devise     | _Simplifies user auth_                           |
 |  activeadmin  | _Simplifies API administration_                  |
 | nested-hstore | _Adds multi-level data access to ActiveRecord_   |
+|   jbuilder    | _Parses strings returned by API into JSON_       |
 
 <br>
 
@@ -128,7 +129,7 @@ At an absolute minimum, **Biskwee** will:
 | Set up auth backend      |    H     |    1.5 hrs     |    1 hr     |
 | Scaffold frontend/routes |    H     |     8 hrs      |   1.5 hrs   |
 | Build out auth frontend  |    M     |     3 hrs      |    9 hrs    |
-| Build out RecipeDetail   |    H     |     12 hrs     |             |
+| Build out RecipeDetail   |    H     |     12 hrs     |    9 hrs    |
 | Build out AddEditRecipes |    H     |     8 hrs      |             |
 | Build out MyRecipes      |    M     |     5 hrs      |             |
 | Styling                  |    M     |     8 hrs      |             |
@@ -173,7 +174,10 @@ At an absolute minimum, **Biskwee** will:
 
 ## Project Change Log
 
-> This section should be expanded and revised as you work on your project.
+# 10. Mar
+
+- Initially planned to make an API call to get a recipe, then further API calls to get information on each of its ingredients (stored in the recipe as a hash of quantity and foreign keys for unit of measurement and ingredient IDs). After writing and compiling a nested iterative API call, realized this was exceptionally slow and inefficient; restructured the frontend to fetch all data from the units, categories, and ingredients tables when the App first mounts, then store it in state to be referred upon later. Consider adding a loading screen as post-MVP.
+- Further restructuring on the `Detail` component: originally wrote 100+ lines of code with several helper methods to create arrays of each ingredient's quantity, unit of measurement, and name (with consistent indices for each ingredient); set the arrays to state; and retrieve data from all three arrays to compose an ingredient line (e.g., "150 grams flour"). Again, realized this was an idiotic approach and replaced it with a five-line method that just grabs all the relevant information from the original recipe data and mutate inside of a template literal.
 
 ## Code Showcase
 
@@ -181,6 +185,12 @@ At an absolute minimum, **Biskwee** will:
 
 ## Code Issues & Resolutions
 
-> Use this section to list of all major issues encountered and their resolution.
+# 10. Mar
+
+- API returns hashes within arrays as strings since the array needs to be defined as `text` in the model; because of this, none of the data within was immediately accessible. Finding no straightfoward way to convert a string into a Ruby hash into JSON, I tried instead to run the the string through chained methods with regexps to turn, e.g., `{:key=>value}` into `{key:value}`, and then `JSON.parse`ing the result; however, I had difficulty with this too. I consulted our TA, who then suggested an alternate approach that ultimately proved successful: install the `jbuilder` gem, then use it parse the strings into JSON directly on the API backend.
+
+# 6. Mar
+
+- Rails could not return nested data (e.g., recipes model -> ingredients array -> ingredient hash -> ingredient ID); suspecting this had to have been a problem for someone else, searched for and found a gem, `nested_hstore`, to enable this
 
 ---
