@@ -45,6 +45,14 @@ class Detail extends Component {
     });
   }
 
+  // waitForProp = prop => {
+  //   if (!this.state.recipe) {
+  //     console.log(this.props);
+  //     return <p>...</p>;
+  //   }
+  //   return <h1>{`${prop}`}</h1>;
+  // };
+
   componentDidMount = () => {
     // setTimeout(async () => await this.getRecipe(this.props.match), 1000);
     if (!this.state.recipeIsLoaded) {
@@ -59,9 +67,15 @@ class Detail extends Component {
   }
 
   render() {
+    if (!this.state.recipe) {
+      console.log(this.props);
+      return <p>...</p>;
+    }
     return (
       <div>
-        <h1>Recipe</h1>
+        {/* <img src={require(`${this.state.recipe.img_url}`)} /> */}
+        <h1>{this.state.recipe.name}</h1>
+        {/* {this.waitForProp("this.state.recipe.name")} */}
         <IngredList
           id={this.props.match}
           parsedIngreds={this.state.parsedIngreds}
