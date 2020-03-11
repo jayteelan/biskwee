@@ -9,69 +9,75 @@ class Edit extends Component {
     super(props);
     this.state = {
       _isMounted: false,
-      recipeIsLoaded: false
+      recipeIsLoaded: false,
+      newRecipe: {
+        name: "",
+        ingredients: [],
+        method: []
+      }
     };
   }
 
   componentDidMount() {
     console.log("edit state", this.state);
     console.log("edit props", this.props);
+    this.setState({ _isMounted: true });
   }
-  // /* ---------- RETRIEVE TARGET RECIPE ---------- */
-  // getRecipe = async id => {
-  //   const recipe = await getData("recipes", id);
-  //   this.setState(
-  //     {
-  //       recipe: recipe,
-  //       ingredArr: recipe.ingredients,
-  //       recipeIsLoaded: true
-  //     },
-  //     () => {
-  //       this.parseIngreds();
-  //     }
-  //   );
-  // };
 
-  // /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
-  // parseIngreds() {
-  //   const { all_units, all_ingredients } = this.props;
-  //   const ingredParsed = this.state.ingredArr.map(obj => {
-  //     if (!this.state.ingredArr) {
-  //       setTimeout(() => this.getRecipe, 2000);
-  //     }
-  //     return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-  //       all_ingredients[obj.line.ingredient_id - 1].name
-  //     }`;
-  //   });
-  //   this.setState({ parsedIngreds: ingredParsed }, () => {});
-  // }
+  makeInput = (key, val) => {
+    return !this.props.current_recipe ? (
+      <input placeholder={`${key}`} required />
+    ) : (
+      <input placeholder={`${key}`} value={val} required />
+    );
+  };
 
-  // componentDidMount = () => {
-  //   if (!this.state.recipeIsLoaded) {
-  //     console.log("loading");
-  //     this.getRecipe(this.props.match);
-  //   }
-  //   this.setState({ _isMounted: true });
-  // };
+  makeOptions = type => {};
 
-  // componentWillUnmount() {
-  //   this.setState({ _isMounted: false, recipeIsLoaded: false });
-  // }
+  makeIngred = (qty, unit_id, ingredient_id) => {
+    return (
+      <span>
+        <label for="qty">amount:</label>
+        <input id="qty" type="number" value={qty} />
+
+        <label for="unit">unit</label>
+        <select id="unit" className="unit_id">
+          <option selected="selected">
+            {this.props.all_units[unit_id].name}
+          </option>
+          {/* {this.props.all_units.map(unit => return(
+          <option value={`${unit.name}`}>{unit.abbrev}</option>
+        ))} */}
+        </select>
+
+        <label for="ingredient">unit</label>
+        <select id="ingredient" className="ingredient_id">
+          <option selected="selected">
+            {this.props.all_ingredients[ingredient_id].name}
+          </option>
+
+          {/* {this.props.all_ingredients.map(ingred => (
+          <option value={`${ingred.name}`}>{ingred.name}</option>
+        ))} */}
+        </select>
+      </span>
+    );
+  };
 
   render() {
-    if (!this.state.recipe) {
+    if (!this.props.current_recipe) {
       // console.log(this.props);
       return <p>...</p>;
     }
     return (
-      <div>
-        <h1>{this.state.recipe.name}</h1>
-        <IngredList
-          id={this.props.match}
-          parsedIngreds={this.state.parsedIngreds}
-        />
+      <form>
+        {this.makeInput("Recipe name", this.props.current_recipe.name)}
+        {this.makeIngred(12, 12, 12)}
+        <ul>
+          <IngredList />
+        </ul>
         <MethodList {...this.props} recipe={this.state.recipe} />
-      </div>
+      </form>
     );
   }
 }

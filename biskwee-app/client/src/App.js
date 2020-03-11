@@ -15,11 +15,12 @@ class App extends Component {
     super(props);
     this.state = {
       _isMounted: false,
-      current_user: null,
-      current_recipe: {},
       all_units: [],
       all_ingredients: [],
-      all_categories: []
+      all_categories: [],
+      current_user: null,
+      current_recipe: {},
+      parsedIngreds: []
     };
   }
 
@@ -29,13 +30,11 @@ class App extends Component {
       getAllData("units"),
       getAllData("categories")
     ]);
-    // console.log("set", res);
     this.setState({
       all_ingredients: res[0],
       all_units: res[1],
       all_categories: res[2]
     });
-    // console.log(this.state);
   };
 
   /* ---------- RETRIEVE TARGET RECIPE ---------- */
@@ -49,26 +48,14 @@ class App extends Component {
         recipeIsLoaded: true
       },
       () => {
-        // setTimeout(console.log("loading"), 4000);
         setTimeout(() => this.parseIngreds(), 1000);
-        // this.props.setState({ current_recipe: recipe })
-        // console.log(this.props)
       }
     );
   };
 
   /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
   parseIngreds = () => {
-    // const { all_units, all_ingredients } = this.state;
-
     const ingredParsed = this.state.ingredArr.map(obj => {
-      // if (!this.state.ingredArr) {
-      //   setTimeout(() => console.log("loading"), 2000);
-      // }
-      // // if (!this.state.all_units) {
-      // setTimeout(console.log("loading"), 2000);
-      // }
-      // console.log("PARSE", this.state.all_units[obj.line.unit_id - 1]);
       return `${obj.line.qty}${
         this.state.all_units[obj.line.unit_id - 1].abbrev
       } ${this.state.all_ingredients[obj.line.ingredient_id - 1].name}`;
@@ -81,7 +68,6 @@ class App extends Component {
   componentDidMount = async () => {
     this.setState({ _isMounted: true });
     await this.setReferenceData();
-    // console.log("App Mounted", this.state);
   };
   componentWillUnmount() {
     this.setState({ _isMounted: false });
@@ -118,7 +104,6 @@ class App extends Component {
             );
           }}
         />
-        {/* {this.mountDetails()} */}
         <Route
           exact
           path="/recipes/:recipe_id"
@@ -132,7 +117,6 @@ class App extends Component {
                 getRecipe={this.getRecipe}
                 parsedIngreds={this.state.parsedIngreds}
                 recipeIsLoaded={this.state.recipeIsLoaded}
-                // all_recipes={this.state.all_recipes}
               />
             );
           }}
@@ -147,7 +131,7 @@ class App extends Component {
                 all_ingredients={this.state.all_ingredients}
                 all_units={this.state.all_units}
                 current_recipe={this.state.current_recipe}
-                // all_recipes={this.state.all_recipes}
+                parsedIngreds={this.state.parsedIngreds}
               />
             );
           }}
