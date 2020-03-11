@@ -41,8 +41,12 @@ class Detail extends Component {
     });
   }
 
-  componentDidMount = async () => {
-    setTimeout(async () => await this.getRecipe(this.props.match), 1000);
+  componentDidMount = () => {
+    // setTimeout(async () => await this.getRecipe(this.props.match), 1000);
+    if (!this.state.recipeIsLoaded) {
+      console.log("loading");
+      this.getRecipe(this.props.match);
+    }
     this.setState({ _isMounted: true });
   };
 
@@ -53,11 +57,11 @@ class Detail extends Component {
   render() {
     return (
       <div>
-        <h1>RICETTA</h1>;
-        {/* <IngredList
+        <h1>Recipe</h1>
+        <IngredList
           id={this.props.match}
           parsedIngreds={this.state.parsedIngreds}
-        /> */}
+        />
         <MethodList {...this.props} />
       </div>
     );
