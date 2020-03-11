@@ -16,31 +16,34 @@ class Detail extends Component {
   /* ---------- RETRIEVE TARGET RECIPE ---------- */
   getRecipe = async id => {
     const recipe = await getData("recipes", id);
-    this.setState({ recipe: recipe, recipeIsLoaded: true });
+    this.setState(
+      {
+        recipe: recipe,
+        ingredArr: recipe.ingredients,
+        recipeIsLoaded: true
+      },
+      () => {
+        this.parseIngreds();
+      }
+    );
   };
 
-  /* ---------- MAYBE THIS???? ---------- */
-  translateObj = async () => {
-    const ingredParsed = [];
-    const objs = this.state.recipe.ingredients;
-    objs.map(obj => {
-      ingredParsed.push(
-        `${obj.line.qty}${this.props.all_units[obj.line.unit_id - 1].abbrev} ${
-          this.props.all_ingredients[obj.line.ingredient_id - 1].name
-        }`
-      );
+  /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
+  parseIngreds() {
+    const { all_units, all_ingredients } = this.props;
+    const ingredParsed = this.state.ingredArr.map(obj => {
+      return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
+        all_ingredients[obj.line.ingredient_id - 1].name
+      }`;
     });
-
-    if (this.state._isMounted === true) {
-      this.setState({ parsedIngreds: ingredParsed });
-    }
-    console.log(this.state.parsedIngreds);
-  };
+    this.setState({ parsedIngreds: ingredParsed }, () => {
+      // console.log("parsed!", this.state.parsedIngreds);
+    });
+  }
 
   componentDidMount = async () => {
-    this.state._isMounted = true;
-    await this.getRecipe(this.props.match);
-    this.state.recipeIsLoaded && this.translateObj();
+    setTimeout(async () => await this.getRecipe(this.props.match), 1000);
+    this.setState({ _isMounted: true });
   };
 
   componentWillUnmount() {
@@ -51,6 +54,10 @@ class Detail extends Component {
     return (
       <div>
         <h1>RICETTA</h1>;
+        {/* <IngredList
+          id={this.props.match}
+          parsedIngreds={this.state.parsedIngreds}
+        /> */}
         <MethodList {...this.props} />
       </div>
     );

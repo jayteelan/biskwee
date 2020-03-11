@@ -19,38 +19,25 @@ class App extends Component {
   }
 
   setReferenceData = async () => {
-    this.setState({ all_ingredients: await getAllData("ingredients") });
-    this.setState({ all_units: await getAllData("units") });
-    this.setState({ all_categories: await getAllData("categories") });
-    // console.log(this.state);
+    const res = await Promise.all([
+      getAllData("ingredients"),
+      getAllData("units"),
+      getAllData("categories")
+    ]);
+    console.log("set", res);
+    this.setState({
+      all_ingredients: res[0],
+      all_units: res[1],
+      all_categories: res[2]
+    });
+    console.log(this.state);
   };
 
-  mountDetails = () => {
-    if (this.state._isMounted === true) {
-      return (
-        <Route
-          exact
-          path="/recipes/:recipe_id"
-          component={props => {
-            return (
-              <Detail
-                // {...props}
-                match={props.match.params.recipe_id}
-                all_ingredients={this.state.all_ingredients}
-                all_units={this.state.all_units}
-              />
-            );
-          }}
-        />
-      );
-    }
-  };
-
-  componentDidMount() {
+  componentDidMount = async () => {
     this.setState({ _isMounted: true });
-    this.setReferenceData();
-    // console.log("update", this.state);
-  }
+    await this.setReferenceData();
+    console.log("App Mounted", this.state);
+  };
   componentWillUnmount() {
     this.setState({ _isMounted: false });
   }
@@ -93,8 +80,8 @@ class App extends Component {
             );
           }}
         />
-        {this.mountDetails()}
-        {/* <Route
+        {/* {this.mountDetails()} */}
+        <Route
           exact
           path="/recipes/:recipe_id"
           component={props => {
@@ -104,10 +91,11 @@ class App extends Component {
                 match={props.match.params.recipe_id}
                 all_ingredients={this.state.all_ingredients}
                 all_units={this.state.all_units}
+                all_recipes={this.state.all_recipes}
               />
             );
           }}
-        /> */}
+        />
         <Route exact path="/login" component={LoginFailed} />
         {/* </Switch> */}
       </div>

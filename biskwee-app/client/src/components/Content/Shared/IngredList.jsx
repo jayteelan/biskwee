@@ -3,30 +3,20 @@ import React, { Component } from "react";
 class IngredList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // recipe: undefined,
-      // // ingredient_ids: [],
-      // ingredients: []
-    };
+    this.state = {};
   }
-  getOneLine = i => {
-    const { qty, recipeIngreds, recipeUnits } = this.props.state;
-    console.log(qty);
-    console.log(`${qty[i]} ${recipeUnits[i]} ${recipeIngreds[i]}`);
+
+  mapLI = () => this.props.parsedIngreds.map(ingred => <li>{ingred}</li>);
+
+  componentDidMount = async () => {
+    setTimeout(() => console.log(this.props.parsedIngreds), 1500);
   };
 
-  getAll = () => {
-    this.props.state.map(i => this.getOneLine(i));
-  };
-
-  // componentDidMount() {
-  //   setTimeout(() => this.getOneLine(2), 4000);
-  // }
   render() {
     return (
       <ul>
-        <h3>LIST</h3>
-        {/* {this.props.state.map()} */}
+        {/* <h3>LIST</h3> */}
+        {this.mapLI()}
       </ul>
     );
   }
