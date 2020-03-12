@@ -9,6 +9,7 @@ import Register from "./components/Nav/Register";
 import LoginFailed from "./components/Content/LoginFailed";
 import Detail from "./components/Content/Detail";
 import Edit from "./components/Content/Edit";
+import Test from "./test";
 
 class App extends Component {
   constructor(props) {
@@ -19,12 +20,12 @@ class App extends Component {
       allIngredients: [],
       current_user: null,
       currentRecipe: {},
-      parsedIngreds: [],
-      newRecipe: {
-        name: "",
-        ingredients: [],
-        method: []
-      }
+      parsedIngreds: []
+      // newRecipe: {
+      //   name: "",
+      //   ingredients: [],
+      //   method: []
+      // }
     };
   }
 
@@ -183,6 +184,7 @@ class App extends Component {
           }}
         />
         <Route exact path="/login" component={LoginFailed} />
+        {/* <Route exact path="/test" component={Test} /> */}
         {/* </Switch> */}
       </div>
     );

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-
-import { getData } from "../../api-helper";
-import IngredList from "../Content/Shared/IngredList";
-import MethodList from "../Content/Shared/MethodList";
+import update from "immutability-helper";
 
 class Edit extends Component {
   constructor(props) {
@@ -13,36 +10,74 @@ class Edit extends Component {
       allUnits: this.props.allUnits,
       allIngredients: this.props.allIngredients,
       newRecipe: {
-        name: "",
-        ingredients: [],
-        method: []
+        id: this.props.match,
+        name: this.props.currentRecipe.name,
+        ingredients: this.props.currentRecipe.ingredients,
+        method: this.props.currentRecipe.method
       }
     };
   }
 
   componentDidMount() {
-    // console.log("edit state", this.state);
-    // console.log("edit props", this.props);
     this.setState({ _isMounted: true });
+    console.log("HOLD", this.state.newRecipe);
+    // this.test();
   }
 
-  handleChange = e => {
-    //set to state
+  componentDidUpdate() {
+    // console.log("HOLD", this.state.newRecipe);
+    console.log("UPDATE", this.state);
+  }
+
+  handleNameChange = e => {
+    this.setState({ newRecipe: { name: e.target.value } });
+    console.log(this.state.newRecipe.name);
   };
 
+  handleQtyChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const index = e.target.getAttribute("data-key");
+    console.log(index, e.target.value);
+    ingredients[index].line.qty = e.target.value;
+    console.log(ingredients[index]);
+    // this.setState({ ingredients[index] })
+  };
+  // test = () => {
+  //   const newArr = [
+  //     { qty: 3, unit_id: 12, ingredient_id: 5 },
+  //     { qty: 54, unit_id: 9, ingredient_id: 12 },
+  //     { qty: 99, unit_id: 1, ingredient_id: 27 }
+  //   ];
+  //   this.setState({ newRecipe: { ingredients: newArr } });
+  // };
+
+  // handleIngredChange = (e, i) => {
+  // 	this.setState({newRecipe:{ingredient[i]: []}})
+  // }
+
   /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
-  makeInput = (key, val) => {
-    return !this.props.currentRecipe ? (
-      <input placeholder={`${key}`} required />
-    ) : (
-      <input placeholder={`${key}`} defaultValue={val} required />
+  editName = val => {
+    return (
+      <input
+        placeholder="Recipe name"
+        defaultValue={val}
+        required
+        onChange={this.handleNameChange}
+      />
     );
   };
 
   editIngred = lines => {
     return lines.map((li, i) => (
       <li key={i}>
-        <input id="qty" type="number" defaultValue={li.line.qty} key={i} />
+        <input
+          id="qty"
+          type="number"
+          defaultValue={li.line.qty}
+          data-key={i}
+          key={i}
+          onChange={this.handleQtyChange}
+        />
 
         <select id="unit">
           <option disabled defaultValue={li.line.unit_id}>
@@ -90,7 +125,7 @@ class Edit extends Component {
     }
     return (
       <form>
-        {this.makeInput("Recipe name", currentRecipe.name)}
+        {this.editName(currentRecipe.name)}
         <ul>
           {this.editIngred(
             this.props.currentRecipe.ingredients.length > 1 &&
