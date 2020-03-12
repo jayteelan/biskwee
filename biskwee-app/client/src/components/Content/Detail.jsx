@@ -18,6 +18,7 @@ class Detail extends Component {
       this.props.getRecipe(this.props.match);
     }
     this.setState({ _isMounted: true });
+    console.log("DETAIL", this.props);
   };
 
   componentWillUnmount() {
@@ -36,7 +37,6 @@ class Detail extends Component {
           to={{
             pathname: `/recipes/${this.props.match}/edit`,
             state: this.state,
-
             props: this.props
           }}
         >

@@ -30,63 +30,13 @@ class App extends Component {
       getAllData("units"),
       getAllData("categories")
     ]);
+    console.log("set", res);
     this.setState({
       all_ingredients: res[0],
       all_units: res[1],
       all_categories: res[2]
     });
-  };
-
-  makeIngred = (qty, unit_id, ingredient_id) => {
-    return (
-      <span>
-        <label for="qty">amount:</label>
-        <input id="qty" type="number" value={qty} />
-
-        <label for="unit">unit</label>
-        <select id="unit" className="unit_id">
-          {/* this will work */}
-          {/* {this.state.all_units &&
-            console.log("UNITS", this.state.all_units[unit_id - 1])} */}
-
-          {/* but everything breaks if i just add ".name" */}
-          {/* {this.state.all_units &&
-            console.log("UNITS", this.state.all_units[unit_id - 1].name)} */}
-
-          {/* ...and yet, it still returns the expected data if I wrap it in a setTimeout() */}
-          {/* {this.state.all_units &&
-            setTimeout(
-              () =>
-                console.log("UNITS", this.state.all_units[unit_id - 1].name),
-              2000
-            )} */}
-
-          <option selected="selected">
-            {this.state.all_units &&
-              setTimeout(() => this.state.all_units[unit_id - 1].name, 2000)}
-          </option>
-
-          {this.state.all_units &&
-            setTimeout(() =>
-              this.state.all_units.map(
-                unit => <option value={`${unit.name}`}>{unit.abbrev}</option>,
-                2000
-              )
-            )}
-        </select>
-
-        <label for="ingredient">ingredient</label>
-        <select id="ingredient" className="ingredient_id">
-          (!this.props.all_ingredients)?<p>...</p>:
-          <option selected="selected">
-            {/* {this.props.all_ingredients[ingredient_id - 1].name} */}
-          </option>
-          {/* {this.props.all_ingredients.map(ingred => (
-          <option value={`${ingred.name}`}>{ingred.name}</option>
-        ))} */}
-        </select>
-      </span>
-    );
+    console.log(this.state);
   };
 
   /* ---------- RETRIEVE TARGET RECIPE ---------- */
