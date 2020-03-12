@@ -21,8 +21,8 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    console.log("edit state", this.state);
-    console.log("edit props", this.props);
+    // console.log("edit state", this.state);
+    // console.log("edit props", this.props);
     this.setState({ _isMounted: true });
   }
 
@@ -30,6 +30,7 @@ class Edit extends Component {
     //set to state
   };
 
+  /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
   makeInput = (key, val) => {
     return !this.props.current_recipe ? (
       <input placeholder={`${key}`} required />
@@ -40,11 +41,11 @@ class Edit extends Component {
 
   editIngred = lines => {
     return lines.map((li, i) => (
-      <div>
+      <li key={i}>
         <input id="qty" type="number" defaultValue={li.line.qty} key={i} />
 
         <select id="unit">
-          <option defaultValue={li.line.unit_id}>
+          <option disabled defaultValue={li.line.unit_id}>
             {this.state.all_units[li.line.unit_id - 1].name}
           </option>
           {this.state.all_units.map((unit, i) => (
@@ -55,7 +56,7 @@ class Edit extends Component {
         </select>
 
         <select id="ingredient">
-          <option defaultValue={li.line.ingredient_id}>
+          <option disabled defaultValue={li.line.ingredient_id}>
             {this.state.all_ingredients[li.line.ingredient_id - 1].name}
           </option>
           {this.state.all_ingredients.map((ingred, i) => (
@@ -65,17 +66,16 @@ class Edit extends Component {
           ))}
         </select>
 
-        {/* plus/minus */}
-      </div>
+        <i class="material-icons">close</i>
+      </li>
     ));
   };
 
   editMethod = steps => {
     return steps.map((step, i) => (
-      <li>
-        <textarea id="step" cols="75" rows="5">
-          {step.step}
-        </textarea>
+      <li key={i}>
+        <textarea id="step" cols="75" rows="5" defaultValue={step.step} />
+        <i class="material-icons">close</i>
       </li>
     ));
   };
@@ -91,11 +91,17 @@ class Edit extends Component {
     return (
       <form>
         {this.makeInput("Recipe name", current_recipe.name)}
-        {this.editIngred(
-          this.props.current_recipe.ingredients.length > 1 &&
-            this.props.current_recipe.ingredients
-        )}
-        <ol>{this.editMethod(this.props.current_recipe.method)}</ol>
+        <ul>
+          {this.editIngred(
+            this.props.current_recipe.ingredients.length > 1 &&
+              this.props.current_recipe.ingredients
+          )}
+          {this.props.addIngred()}
+        </ul>
+        <ol>
+          {this.editMethod(this.props.current_recipe.method)}
+          {this.props.addMethod()}
+        </ol>
       </form>
     );
   }

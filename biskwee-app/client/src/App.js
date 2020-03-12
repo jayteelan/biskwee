@@ -67,6 +67,45 @@ class App extends Component {
     });
   };
 
+  /* ---------- ADD NEW LINES ---------- */
+  addMethod = () => {
+    return (
+      <li>
+        <textarea id="step" cols="75" rows="5" placeholder="Add a new step" />
+        <i class="material-icons">add_circle_outline</i>
+      </li>
+    );
+  };
+
+  addIngred = () => {
+    return (
+      <li>
+        <input id="qty" type="number" placeholder="qty" />
+
+        <select id="unit">
+          <option disabled selected>
+            unit
+          </option>
+          {this.state.all_units.map((unit, i) => (
+            <option value={unit.id}>{unit.name}</option>
+          ))}
+        </select>
+
+        <select id="ingredient">
+          <option disabled selected>
+            ingredient
+          </option>
+          {this.state.all_ingredients.map((ingred, i) => (
+            <option value={ingred.id}>{ingred.name}</option>
+          ))}
+        </select>
+
+        <i class="material-icons">add_circle_outline</i>
+      </li>
+    );
+  };
+
+  /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     this.setState({ _isMounted: true });
     await this.setReferenceData();
@@ -134,7 +173,8 @@ class App extends Component {
                 all_units={this.state.all_units}
                 current_recipe={this.state.current_recipe}
                 parsedIngreds={this.state.parsedIngreds}
-                makeIngred={this.makeIngred}
+                addIngred={this.addIngred}
+                addMethod={this.addMethod}
               />
             );
           }}
