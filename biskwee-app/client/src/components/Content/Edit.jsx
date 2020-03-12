@@ -26,7 +26,7 @@ class Edit extends Component {
 
   componentDidUpdate() {
     // console.log("HOLD", this.state.newRecipe);
-    console.log("UPDATE", this.state);
+    // console.log("UPDATE", this.state);
   }
 
   handleNameChange = e => {
@@ -37,23 +37,25 @@ class Edit extends Component {
   handleQtyChange = e => {
     const { ingredients } = this.state.newRecipe;
     const index = e.target.getAttribute("data-key");
-    console.log(index, e.target.value);
     ingredients[index].line.qty = e.target.value;
-    console.log(ingredients[index]);
-    // this.setState({ ingredients[index] })
+    console.log("qty", ingredients[index].line.qty, e.target.value);
   };
-  // test = () => {
-  //   const newArr = [
-  //     { qty: 3, unit_id: 12, ingredient_id: 5 },
-  //     { qty: 54, unit_id: 9, ingredient_id: 12 },
-  //     { qty: 99, unit_id: 1, ingredient_id: 27 }
-  //   ];
-  //   this.setState({ newRecipe: { ingredients: newArr } });
-  // };
 
-  // handleIngredChange = (e, i) => {
-  // 	this.setState({newRecipe:{ingredient[i]: []}})
-  // }
+  handleUnitChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const index = e.target.getAttribute("data-key");
+    ingredients[index].line.unit_id = e.target.value;
+    console.log("unit", ingredients[index].line.unit_id, e.target.value);
+  };
+
+  handleIngredChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const selectedIngredIndex = e.target.selectedIndex - 1;
+    const recipeIngredListIndex = e.target.getAttribute("data-key");
+    ingredients[recipeIngredListIndex].line.ingredient_id = selectedIngredIndex;
+    console.log(ingredients[recipeIngredListIndex]);
+    console.log("selectIngredIndex", selectedIngredIndex);
+  };
 
   /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
   editName = val => {
@@ -80,22 +82,27 @@ class Edit extends Component {
         />
 
         <select id="unit">
-          <option disabled defaultValue={li.line.unit_id}>
+          <option disabled selected defaultValue={li.line.unit_id}>
             {this.state.allUnits[li.line.unit_id - 1].name}
           </option>
           {this.state.allUnits.map((unit, i) => (
-            <option value={unit.id} key={i}>
+            <option
+              value={unit.id}
+              data-key={i}
+              key={i}
+              onChange={this.handleUnitChange}
+            >
               {unit.name}
             </option>
           ))}
         </select>
 
-        <select id="ingredient">
-          <option disabled defaultValue={li.line.ingredient_id}>
+        <select id="ingredient" data-key={i} onChange={this.handleIngredChange}>
+          <option disabled selected defaultValue={li.line.ingredient_id}>
             {this.state.allIngredients[li.line.ingredient_id - 1].name}
           </option>
           {this.state.allIngredients.map((ingred, i) => (
-            <option value={ingred.id} key={i}>
+            <option value={ingred.id} data-key={i} key={i}>
               {ingred.name}
             </option>
           ))}
