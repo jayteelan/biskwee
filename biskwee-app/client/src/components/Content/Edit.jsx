@@ -37,15 +37,16 @@ class Edit extends Component {
   handleQtyChange = e => {
     const { ingredients } = this.state.newRecipe;
     const index = e.target.getAttribute("data-key");
-    ingredients[index].line.qty = e.target.value;
+    ingredients[index].line.qty = parseInt(e.target.value);
     console.log("qty", ingredients[index].line.qty, e.target.value);
   };
 
   handleUnitChange = e => {
     const { ingredients } = this.state.newRecipe;
-    const index = e.target.getAttribute("data-key");
-    ingredients[index].line.unit_id = e.target.value;
-    console.log("unit", ingredients[index].line.unit_id, e.target.value);
+    const recipeUnitListIndex = e.target.getAttribute("data-key");
+    const selectedUnitIndex = e.target.selectedIndex - 1;
+    ingredients[recipeUnitListIndex].line.unit_id = selectedUnitIndex;
+    console.log("unit", selectedUnitIndex);
   };
 
   handleIngredChange = e => {
@@ -81,7 +82,7 @@ class Edit extends Component {
           onChange={this.handleQtyChange}
         />
 
-        <select id="unit">
+        <select id="unit" data-key={i} onChange={this.handleUnitChange}>
           <option disabled selected defaultValue={li.line.unit_id}>
             {this.state.allUnits[li.line.unit_id - 1].name}
           </option>
