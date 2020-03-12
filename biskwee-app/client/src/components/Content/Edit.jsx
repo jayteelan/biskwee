@@ -139,6 +139,15 @@ class Edit extends Component {
     console.log(this.state.newRecipe);
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.addlMethods.map(step =>
+      this.state.newRecipe.method.push({ step: step })
+    );
+    console.log(this.props.addlMethods);
+    console.log(this.state.newRecipe);
+  };
+
   /*---------- RENDER ---------- */
   render() {
     const { allIngredients, currentRecipe } = this.props;
@@ -148,7 +157,7 @@ class Edit extends Component {
       return <p>...</p>;
     }
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         {this.editName()}
         <ul>
           {this.editIngred(
@@ -162,6 +171,7 @@ class Edit extends Component {
           {this.editMethod(this.props.currentRecipe.method)}
           {this.props.addMethod()}
         </ol>
+        <button>Submit</button>
       </form>
     );
   }

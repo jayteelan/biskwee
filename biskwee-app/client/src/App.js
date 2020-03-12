@@ -20,12 +20,12 @@ class App extends Component {
       allIngredients: [],
       current_user: null,
       currentRecipe: {},
-      parsedIngreds: []
-      // newRecipe: {
-      //   name: "",
-      //   ingredients: [],
-      //   method: []
-      // }
+      parsedIngreds: [],
+      newRecipe: {
+        name: "",
+        ingredients: [],
+        method: []
+      }
     };
   }
 
@@ -66,16 +66,36 @@ class App extends Component {
       } ${this.state.allIngredients[obj.line.ingredient_id - 1].name}`;
     });
     this.setState({ parsedIngreds: ingredParsed }, () => {
-      console.log("parsed!", this.state.parsedIngreds);
+      // console.log("parsed!", this.state.parsedIngreds);
     });
+  };
+
+  /* ---------- HANDLE NEW DATA ---------- */
+
+  handleNewMethod = e => {
+    console.log(e.target.value);
+    this.state.newRecipe.tempMethod = e.target.value;
+  };
+  handleMethodSubmit = e => {
+    this.state.newRecipe.method.push(this.state.newRecipe.tempMethod);
+    this.setState({ tempMethod: "" });
+    console.log(this.state.newRecipe.method);
   };
 
   /* ---------- ADD NEW LINES ---------- */
   addMethod = () => {
     return (
       <li>
-        <textarea id="step" cols="75" rows="5" placeholder="Add a new step" />
-        <i class="material-icons">add_circle_outline</i>
+        <textarea
+          id="step"
+          cols="75"
+          rows="5"
+          placeholder="Add a new step"
+          onChange={this.handleNewMethod}
+        />
+        <i className="material-icons" onClick={this.handleMethodSubmit}>
+          add_circle_outline
+        </i>
       </li>
     );
   };
@@ -179,6 +199,8 @@ class App extends Component {
                 newRecipe={this.state.newRecipe}
                 addIngred={this.addIngred}
                 addMethod={this.addMethod}
+                handleNewMethod={this.handleNewMethod}
+                addlMethods={this.state.newRecipe.method}
               />
             );
           }}
