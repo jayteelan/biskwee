@@ -10,8 +10,8 @@ class Edit extends Component {
     this.state = {
       _isMounted: false,
       recipeIsLoaded: false,
-      all_units: this.props.all_units,
-      all_ingredients: this.props.all_ingredients,
+      allUnits: this.props.allUnits,
+      allIngredients: this.props.allIngredients,
       newRecipe: {
         name: "",
         ingredients: [],
@@ -32,7 +32,7 @@ class Edit extends Component {
 
   /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
   makeInput = (key, val) => {
-    return !this.props.current_recipe ? (
+    return !this.props.currentRecipe ? (
       <input placeholder={`${key}`} required />
     ) : (
       <input placeholder={`${key}`} defaultValue={val} required />
@@ -46,9 +46,9 @@ class Edit extends Component {
 
         <select id="unit">
           <option disabled defaultValue={li.line.unit_id}>
-            {this.state.all_units[li.line.unit_id - 1].name}
+            {this.state.allUnits[li.line.unit_id - 1].name}
           </option>
-          {this.state.all_units.map((unit, i) => (
+          {this.state.allUnits.map((unit, i) => (
             <option value={unit.id} key={i}>
               {unit.name}
             </option>
@@ -57,16 +57,16 @@ class Edit extends Component {
 
         <select id="ingredient">
           <option disabled defaultValue={li.line.ingredient_id}>
-            {this.state.all_ingredients[li.line.ingredient_id - 1].name}
+            {this.state.allIngredients[li.line.ingredient_id - 1].name}
           </option>
-          {this.state.all_ingredients.map((ingred, i) => (
+          {this.state.allIngredients.map((ingred, i) => (
             <option value={ingred.id} key={i}>
               {ingred.name}
             </option>
           ))}
         </select>
 
-        <i class="material-icons">close</i>
+        <i className="material-icons">close</i>
       </li>
     ));
   };
@@ -75,31 +75,32 @@ class Edit extends Component {
     return steps.map((step, i) => (
       <li key={i}>
         <textarea id="step" cols="75" rows="5" defaultValue={step.step} />
-        <i class="material-icons">close</i>
+        <i className="material-icons">close</i>
       </li>
     ));
   };
 
   /*---------- RENDER ---------- */
   render() {
-    const { all_ingredients, current_recipe } = this.props;
+    const { allIngredients, currentRecipe } = this.props;
 
-    if (!this.props.current_recipe) {
+    if (!this.props.currentRecipe) {
       // console.log(this.props);
       return <p>...</p>;
     }
     return (
       <form>
-        {this.makeInput("Recipe name", current_recipe.name)}
+        {this.makeInput("Recipe name", currentRecipe.name)}
         <ul>
           {this.editIngred(
-            this.props.current_recipe.ingredients.length > 1 &&
-              this.props.current_recipe.ingredients
+            this.props.currentRecipe.ingredients.length > 1 &&
+              this.props.currentRecipe.ingredients
           )}
           {this.props.addIngred()}
         </ul>
+        <h3>Method</h3>
         <ol>
-          {this.editMethod(this.props.current_recipe.method)}
+          {this.editMethod(this.props.currentRecipe.method)}
           {this.props.addMethod()}
         </ol>
       </form>

@@ -15,26 +15,28 @@ class App extends Component {
     super(props);
     this.state = {
       _isMounted: false,
-      all_units: [],
-      all_ingredients: [],
-      all_categories: [],
+      allUnits: [],
+      allIngredients: [],
       current_user: null,
-      current_recipe: {},
-      parsedIngreds: []
+      currentRecipe: {},
+      parsedIngreds: [],
+      newRecipe: {
+        name: "",
+        ingredients: [],
+        method: []
+      }
     };
   }
 
   setReferenceData = async () => {
     const res = await Promise.all([
       getAllData("ingredients"),
-      getAllData("units"),
-      getAllData("categories")
+      getAllData("units")
     ]);
     console.log("set", res);
     this.setState({
-      all_ingredients: res[0],
-      all_units: res[1],
-      all_categories: res[2]
+      allIngredients: res[0],
+      allUnits: res[1]
     });
     console.log(this.state);
   };
@@ -44,7 +46,7 @@ class App extends Component {
     const recipe = await getData("recipes", id);
     this.setState(
       {
-        current_recipe: recipe,
+        currentRecipe: recipe,
         recipe: recipe,
         ingredArr: recipe.ingredients,
         recipeIsLoaded: true
@@ -59,8 +61,8 @@ class App extends Component {
   parseIngreds = () => {
     const ingredParsed = this.state.ingredArr.map(obj => {
       return `${obj.line.qty}${
-        this.state.all_units[obj.line.unit_id - 1].abbrev
-      } ${this.state.all_ingredients[obj.line.ingredient_id - 1].name}`;
+        this.state.allUnits[obj.line.unit_id - 1].abbrev
+      } ${this.state.allIngredients[obj.line.ingredient_id - 1].name}`;
     });
     this.setState({ parsedIngreds: ingredParsed }, () => {
       console.log("parsed!", this.state.parsedIngreds);
@@ -86,7 +88,7 @@ class App extends Component {
           <option disabled selected>
             unit
           </option>
-          {this.state.all_units.map((unit, i) => (
+          {this.state.allUnits.map((unit, i) => (
             <option value={unit.id}>{unit.name}</option>
           ))}
         </select>
@@ -95,7 +97,7 @@ class App extends Component {
           <option disabled selected>
             ingredient
           </option>
-          {this.state.all_ingredients.map((ingred, i) => (
+          {this.state.allIngredients.map((ingred, i) => (
             <option value={ingred.id}>{ingred.name}</option>
           ))}
         </select>
@@ -152,9 +154,9 @@ class App extends Component {
             return (
               <Detail
                 match={props.match.params.recipe_id}
-                all_ingredients={this.state.all_ingredients}
-                all_units={this.state.all_units}
-                current_recipe={this.state.current_recipe}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
+                currentRecipe={this.state.currentRecipe}
                 getRecipe={this.getRecipe}
                 parsedIngreds={this.state.parsedIngreds}
                 recipeIsLoaded={this.state.recipeIsLoaded}
@@ -169,10 +171,11 @@ class App extends Component {
             return (
               <Edit
                 match={props.match.params.recipe_id}
-                all_ingredients={this.state.all_ingredients}
-                all_units={this.state.all_units}
-                current_recipe={this.state.current_recipe}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
+                currentRecipe={this.state.currentRecipe}
                 parsedIngreds={this.state.parsedIngreds}
+                newRecipe={this.state.newRecipe}
                 addIngred={this.addIngred}
                 addMethod={this.addMethod}
               />

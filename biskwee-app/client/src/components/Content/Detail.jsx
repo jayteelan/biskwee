@@ -13,6 +13,29 @@ class Detail extends Component {
     };
   }
 
+  /* ---------- LIST ITEM METHODS ---------- */
+  mapIngredLI = () => {
+    if (!this.props.parsedIngreds) {
+      return <p>loading ingredients...</p>;
+    }
+    return this.props.parsedIngreds.map((ingred, index) => (
+      <li key={index}>{ingred}</li>
+    ));
+  };
+
+  mapMethodLI = () => {
+    if (!this.props.currentRecipe) {
+      return <p>loading method...</p>;
+    }
+    if (this.props.currentRecipe.method) {
+      return this.props.currentRecipe.method.map((step, index) => (
+        <li key={index}>
+          <p>{step.step}</p>
+        </li>
+      ));
+    }
+  };
+
   componentDidMount = () => {
     if (!this.props.recipeIsLoaded) {
       this.props.getRecipe(this.props.match);
@@ -26,13 +49,13 @@ class Detail extends Component {
   }
 
   render() {
-    if (!this.props.current_recipe) {
+    if (!this.props.currentRecipe) {
       console.log(this.props);
       return <p>...</p>;
     }
     return (
       <div>
-        <h1>{this.props.current_recipe.name}</h1>
+        <h1>{this.props.currentRecipe.name}</h1>
         <Link
           to={{
             pathname: `/recipes/${this.props.match}/edit`,
@@ -45,9 +68,15 @@ class Detail extends Component {
         <IngredList
           id={this.props.match}
           parsedIngreds={this.props.parsedIngreds}
-          recipe={this.props.current_recipe}
+          recipe={this.props.currentRecipe}
+          mapIngredLI={this.mapIngredLI}
         />
-        <MethodList {...this.props} recipe={this.props.current_recipe} />
+        <h3>Method</h3>
+        <MethodList
+          {...this.props}
+          recipe={this.props.currentRecipe}
+          mapMethodLI={this.mapMethodLI}
+        />
       </div>
     );
   }
