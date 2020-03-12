@@ -39,11 +39,6 @@ class Edit extends Component {
   };
 
   editIngred = lines => {
-    const {
-      qty,
-      unit_id,
-      ingredient_id
-    } = this.props.current_recipe.ingredients;
     return lines.map((li, i) => (
       <div>
         <input id="qty" type="number" defaultValue={li.line.qty} key={i} />
@@ -69,45 +64,21 @@ class Edit extends Component {
             </option>
           ))}
         </select>
+
+        {/* plus/minus */}
       </div>
     ));
   };
 
-  // makeIngred = (qty, unit_id, ingredient_id) => {
-  //   return (
-  //     <div>
-  //       <label for="qty">amount:</label>
-  //       <input id="qty" type="number" value={qty} />
-
-  //       <label for="unit">unit</label>
-  //       <select id="unit" className="unit_id">
-  //         {this.props.all_units.length > 1 &&
-  //           console.log("UNITS", this.state.all_units[unit_id - 1])}
-  //         <option selected="selected">
-  //           {this.props.all_units.length > 1 &&
-  //             this.props.all_units[unit_id - 1].name}
-  //         </option>
-  //         {this.props.all_units.length > 1 &&
-  //           this.props.all_units.map(unit => (
-  //             <option value={`${unit.name}`}>{unit.abbrev}</option>
-  //           ))}
-  //       </select>
-
-  //       <label for="ingredient">ingredient</label>
-  //       <select id="ingredient" className="ingredient_id">
-  //         (!this.props.all_ingredients)?<p>...</p>:
-  //         <option selected="selected">
-  //           {this.props.all_ingredients.length > 1 &&
-  //             this.props.all_ingredients[ingredient_id - 1].name}
-  //         </option>
-  //         {this.props.all_ingredients.length > 1 &&
-  //           this.props.all_ingredients.map(ingred => (
-  //             <option value={`${ingred.name}`}>{ingred.name}</option>
-  //           ))}
-  //       </select>
-  //     </div>
-  //   );
-  // };
+  editMethod = steps => {
+    return steps.map((step, i) => (
+      <li>
+        <textarea id="step" cols="75" rows="5">
+          {step.step}
+        </textarea>
+      </li>
+    ));
+  };
 
   /*---------- RENDER ---------- */
   render() {
@@ -124,6 +95,7 @@ class Edit extends Component {
           this.props.current_recipe.ingredients.length > 1 &&
             this.props.current_recipe.ingredients
         )}
+        <ol>{this.editMethod(this.props.current_recipe.method)}</ol>
       </form>
     );
   }
