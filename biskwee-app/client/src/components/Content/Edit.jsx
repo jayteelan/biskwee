@@ -18,52 +18,23 @@ class Edit extends Component {
     };
   }
 
+  /* ---------- LIFECYCLE ---------- */
   componentDidMount() {
     this.setState({ _isMounted: true });
-    console.log("HOLD", this.state.newRecipe);
-    // this.test();
-  }
-
-  componentDidUpdate() {
     // console.log("HOLD", this.state.newRecipe);
-    // console.log("UPDATE", this.state);
   }
 
-  handleNameChange = e => {
-    this.setState({ newRecipe: { name: e.target.value } });
-    console.log(this.state.newRecipe.name);
-  };
-
-  handleQtyChange = e => {
-    const { ingredients } = this.state.newRecipe;
-    const index = e.target.getAttribute("data-key");
-    ingredients[index].line.qty = parseInt(e.target.value);
-    console.log("qty", ingredients[index].line.qty, e.target.value);
-  };
-
-  handleUnitChange = e => {
-    const { ingredients } = this.state.newRecipe;
-    const recipeUnitListIndex = e.target.getAttribute("data-key");
-    const selectedUnitIndex = e.target.selectedIndex - 1;
-    ingredients[recipeUnitListIndex].line.unit_id = selectedUnitIndex;
-    console.log("unit", selectedUnitIndex);
-  };
-
-  handleIngredChange = e => {
-    const { ingredients } = this.state.newRecipe;
-    const selectedIngredIndex = e.target.selectedIndex - 1;
-    const recipeIngredListIndex = e.target.getAttribute("data-key");
-    ingredients[recipeIngredListIndex].line.ingredient_id = selectedIngredIndex;
-    console.log(ingredients[recipeIngredListIndex]);
-    console.log("selectIngredIndex", selectedIngredIndex);
-  };
+  componentWillUnmount() {
+    this.setState({ _isMounted: false });
+  }
 
   /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
-  editName = val => {
+  editName = () => {
+    // let { name }=
     return (
       <input
         placeholder="Recipe name"
-        defaultValue={val}
+        defaultValue={this.state.newRecipe.name}
         required
         onChange={this.handleNameChange}
       />
@@ -117,10 +88,55 @@ class Edit extends Component {
   editMethod = steps => {
     return steps.map((step, i) => (
       <li key={i}>
-        <textarea id="step" cols="75" rows="5" defaultValue={step.step} />
+        <textarea
+          id="step"
+          cols="75"
+          rows="5"
+          data-key={i}
+          defaultValue={step.step}
+          onChange={this.handleMethodChange}
+        />
         <i className="material-icons">close</i>
       </li>
     ));
+  };
+
+  /* ---------- SET UPDATED RECIPE DETAILS IN STATE ---------- */
+  handleNameChange = e => {
+    this.state.newRecipe.name = e.target.value;
+    // this.setState({ newRecipe: { name: e.target.value } });
+    // console.log(this.state.newRecipe.name);
+  };
+
+  handleQtyChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const index = e.target.getAttribute("data-key");
+    ingredients[index].line.qty = parseInt(e.target.value);
+    // console.log("qty", ingredients[index].line.qty, e.target.value);
+  };
+
+  handleUnitChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const recipeUnitListIndex = e.target.getAttribute("data-key");
+    const selectedUnitIndex = e.target.selectedIndex - 1;
+    ingredients[recipeUnitListIndex].line.unit_id = selectedUnitIndex;
+    // console.log("unit", selectedUnitIndex);
+  };
+
+  handleIngredChange = e => {
+    const { ingredients } = this.state.newRecipe;
+    const selectedIngredIndex = e.target.selectedIndex - 1;
+    const recipeIngredListIndex = e.target.getAttribute("data-key");
+    ingredients[recipeIngredListIndex].line.ingredient_id = selectedIngredIndex;
+    // console.log(ingredients[recipeIngredListIndex]);
+    // console.log("selectIngredIndex", selectedIngredIndex);
+  };
+
+  handleMethodChange = e => {
+    const { method } = this.state.newRecipe;
+    const stepIndex = e.target.getAttribute("data-key");
+    method[stepIndex].step = e.target.value;
+    console.log(this.state.newRecipe);
   };
 
   /*---------- RENDER ---------- */
@@ -133,7 +149,7 @@ class Edit extends Component {
     }
     return (
       <form>
-        {this.editName(currentRecipe.name)}
+        {this.editName()}
         <ul>
           {this.editIngred(
             this.props.currentRecipe.ingredients.length > 1 &&
