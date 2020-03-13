@@ -42,4 +42,10 @@ const getAllData = async endpoint => {
   return res.data;
 };
 
-export { loginUser, createNewUser, getData, getAllData };
+const updateRecord = async (id, newData) => {
+  const res = await api.put(`/api/recipes/${id}`, { recipe: newData });
+  console.log(res.data);
+  return res.data;
+};
+
+export { loginUser, createNewUser, getData, getAllData, updateRecord };

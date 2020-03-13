@@ -80,6 +80,14 @@ class App extends Component {
     this.state.newRecipe.method.push(this.state.newRecipe.tempMethod);
     this.setState({ tempMethod: "" });
     console.log(this.state.newRecipe.method);
+    this.addMethod();
+    this.forceUpdate();
+  };
+
+  handleIngredSubmit = e => {
+    this.state.newRecipe.ingredients.push(this.state.newRecipe.tempIngred);
+    this.setState({ tempIngred: "" });
+    console.log(this.state.newRecipe.ingredients);
   };
 
   /* ---------- ADD NEW LINES ---------- */
@@ -123,7 +131,9 @@ class App extends Component {
           ))}
         </select>
 
-        <i class="material-icons">add_circle_outline</i>
+        <i class="material-icons" onClick={this.handleIngredSubmit}>
+          add_circle_outline
+        </i>
       </li>
     );
   };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import update from "immutability-helper";
+import { updateRecord } from "../../api-helper";
 
 class Edit extends Component {
   constructor(props) {
@@ -139,13 +139,42 @@ class Edit extends Component {
     console.log(this.state.newRecipe);
   };
 
-  handleSubmit = e => {
+  rehashArr = arr => {
+    const string = JSON.stringify(arr);
+    return string
+      .replace(/\"/g, "")
+      .replace(/:/g, "=>")
+      .replace(/{/g, "{:")
+      .replace(/,/g, ",:")
+      .replace(/},:/g, "},")
+      .replace(/\[{/, "{")
+      .replace(/}]/, "}");
+  };
+  prepareData = () => {
+    const { ingredients, method } = this.state.newRecipe;
+    const { line } = ingredients;
+    const { step } = method;
+    const destrucIngreds = ingredients.map(ingred => ingred.line);
+    const destrucMethod = method.map(method => method.step);
+    // console.log(this.rehashArr(destrucIngreds));
+
+    this.state.newRecipe.id = parseInt(this.state.newRecipe.id);
+    this.state.newRecipe.ingredients = this.rehashArr(destrucIngreds);
+    this.state.newRecipe.method = this.rehashArr(destrucMethod);
+    console.log(this.state.newRecipe);
+  };
+
+  handleSubmit = async e => {
     e.preventDefault();
     this.props.addlMethods.map(step =>
       this.state.newRecipe.method.push({ step: step })
     );
-    console.log(this.props.addlMethods);
-    console.log(this.state.newRecipe);
+    this.prepareData();
+    // console.log(this.props.addlMethods);
+    // console.log(this.state.newRecipe);
+    // const jsonData = JSON.stringify(this.state.newRecipe);
+    const id = this.props.match;
+    await updateRecord(id, this.state.newRecipe);
   };
 
   /*---------- RENDER ---------- */
