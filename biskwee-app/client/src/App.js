@@ -9,6 +9,7 @@ import Register from "./components/Nav/Register";
 import LoginFailed from "./components/Content/LoginFailed";
 import Detail from "./components/Content/Detail";
 import Edit from "./components/Content/Edit";
+import New from "./components/Content/New";
 import Test from "./test";
 
 class App extends Component {
@@ -206,6 +207,24 @@ class App extends Component {
                 allUnits={this.state.allUnits}
                 currentRecipe={this.state.currentRecipe}
                 parsedIngreds={this.state.parsedIngreds}
+                newRecipe={this.state.newRecipe}
+                addIngred={this.addIngred}
+                addMethod={this.addMethod}
+                handleNewMethod={this.handleNewMethod}
+                addlMethods={this.state.newRecipe.method}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/recipes/new"
+          component={props => {
+            return (
+              <New
+                {...props}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
                 newRecipe={this.state.newRecipe}
                 addIngred={this.addIngred}
                 addMethod={this.addMethod}

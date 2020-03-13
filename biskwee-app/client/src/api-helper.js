@@ -47,8 +47,14 @@ const updateRecord = async (id, newData) => {
   console.log(res.data);
   return res.data;
 };
+
 const deleteRecord = async id => {
   const res = await api.delete(`/api/recipes/${id}`);
+  return res.data;
+};
+
+const newRecipe = async data => {
+  const res = await api.post("/api/recipes", { recipe: data });
   return res.data;
 };
 
@@ -58,5 +64,6 @@ export {
   getData,
   getAllData,
   updateRecord,
-  deleteRecord
+  deleteRecord,
+  newRecipe
 };
