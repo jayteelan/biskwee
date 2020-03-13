@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { updateRecord } from "../../api-helper";
+import { updateRecord, deleteRecord } from "../../api-helper";
 
 class Edit extends Component {
   constructor(props) {
@@ -187,6 +187,9 @@ class Edit extends Component {
     }
     return (
       <form onSubmit={this.handleSubmit}>
+        <button onClick={() => deleteRecord(this.props.match)}>
+          DELETE RECIPE
+        </button>
         {this.editName()}
         <ul>
           {this.editIngred(

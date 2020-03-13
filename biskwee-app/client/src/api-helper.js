@@ -47,5 +47,16 @@ const updateRecord = async (id, newData) => {
   console.log(res.data);
   return res.data;
 };
+const deleteRecord = async id => {
+  const res = await api.delete(`/api/recipes/${id}`);
+  return res.data;
+};
 
-export { loginUser, createNewUser, getData, getAllData, updateRecord };
+export {
+  loginUser,
+  createNewUser,
+  getData,
+  getAllData,
+  updateRecord,
+  deleteRecord
+};
