@@ -41,17 +41,18 @@ At an absolute minimum, **Biskwee** will:
 
 ### MVP Libraries
 
-|    Library    | Description                                      |
-| :-----------: | :----------------------------------------------- |
-|     React     | _Create front-end user interface_                |
-| React Router  | _Route between front-end component paths_        |
-|     axios     | _Handle data flow between client and API server_ |
-|    Formik     | _Assist with creation of recipe input form_      |
-|     Rails     | _Initialize and run back-end server_             |
-|    devise     | _Simplifies user auth_                           |
-|  activeadmin  | _Simplifies API administration_                  |
-| nested-hstore | _Adds multi-level data access to ActiveRecord_   |
-|   jbuilder    | _Parses strings returned by API into JSON_       |
+|       Library       | Description                                      |
+| :-----------------: | :----------------------------------------------- |
+|        React        | _Create front-end user interface_                |
+|    React Router     | _Route between front-end component paths_        |
+|        axios        | _Handle data flow between client and API server_ |
+| immutability-helper | _Syntactic sugar for updating nested data_       |
+|        <!--         | Formik                                           | _Assist with creation of recipe input form_ | --> |
+|        Rails        | _Initialize and run back-end server_             |
+|       devise        | _Simplifies user auth_                           |
+|     activeadmin     | _Simplifies API administration_                  |
+|    nested-hstore    | _Adds multi-level data access to ActiveRecord_   |
+|      jbuilder       | _Parses strings returned by API into JSON_       |
 
 <br>
 
@@ -129,8 +130,8 @@ At an absolute minimum, **Biskwee** will:
 | Set up auth backend      |    H     |    1.5 hrs     |    1 hr     |
 | Scaffold frontend/routes |    H     |     8 hrs      |   1.5 hrs   |
 | Build out auth frontend  |    M     |     3 hrs      |    9 hrs    |
-| Build out RecipeDetail   |    H     |     12 hrs     |    9 hrs    |
-| Build out AddEditRecipes |    H     |     8 hrs      |             |
+| Build out RecipeDetail   |    H     |     12 hrs     |  14.5 hrs   |
+| Build out AddEditRecipes |    H     |     8 hrs      |   5.5hrs    |
 | Build out MyRecipes      |    M     |     5 hrs      |             |
 | Styling                  |    M     |     8 hrs      |             |
 | Additional seed data     |    L     |      n/a       |             |
@@ -184,6 +185,11 @@ At an absolute minimum, **Biskwee** will:
 > Use this section to include a brief code snippet of functionality that you are proud of and a brief description.
 
 ## Code Issues & Resolutions
+
+# 11.Mar
+
+- Although unit, ingredient, etc data is loaded into state when the App mounts, React is unhappy any time there's an attempt to access that data, e.g., in `this.props.all_ingredients[1].name`; it seems methods try to retrieve data before the component has fully mounted.
+  The only solution found so far has been to wrap every single call in guard operators and 2-second timeout delays.
 
 # 10. Mar
 

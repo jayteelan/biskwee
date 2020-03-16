@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link, Route } from "react-router-dom";
 import { getData } from "../../api-helper";
 import IngredList from "../Content/Shared/IngredList";
 import MethodList from "../Content/Shared/MethodList";
@@ -13,53 +13,35 @@ class Detail extends Component {
     };
   }
 
-  /* ---------- RETRIEVE TARGET RECIPE ---------- */
-  getRecipe = async id => {
-    const recipe = await getData("recipes", id);
-    this.setState(
-      {
-        recipe: recipe,
-        ingredArr: recipe.ingredients,
-        recipeIsLoaded: true
-      },
-      () => {
-        this.parseIngreds();
-        // console.log(this.state.recipe);
-      }
-    );
+  /* ---------- LIST ITEM METHODS ---------- */
+  mapIngredLI = () => {
+    if (!this.props.parsedIngreds) {
+      return <p>loading ingredients...</p>;
+    }
+    return this.props.parsedIngreds.map((ingred, index) => (
+      <li key={index}>{ingred}</li>
+    ));
   };
 
-  /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
-  parseIngreds() {
-    const { all_units, all_ingredients } = this.props;
-    const ingredParsed = this.state.ingredArr.map(obj => {
-      if (!this.state.ingredArr) {
-        setTimeout(() => this.getRecipe, 2000);
-      }
-      return `${obj.line.qty}${all_units[obj.line.unit_id - 1].abbrev} ${
-        all_ingredients[obj.line.ingredient_id - 1].name
-      }`;
-    });
-    this.setState({ parsedIngreds: ingredParsed }, () => {
-      // console.log("parsed!", this.state.parsedIngreds);
-    });
-  }
-
-  // waitForProp = prop => {
-  //   if (!this.state.recipe) {
-  //     console.log(this.props);
-  //     return <p>...</p>;
-  //   }
-  //   return <h1>{`${prop}`}</h1>;
-  // };
+  mapMethodLI = () => {
+    if (!this.props.currentRecipe) {
+      return <p>loading method...</p>;
+    }
+    if (this.props.currentRecipe.method) {
+      return this.props.currentRecipe.method.map((step, index) => (
+        <li key={index}>
+          <p>{step.step}</p>
+        </li>
+      ));
+    }
+  };
 
   componentDidMount = () => {
-    // setTimeout(async () => await this.getRecipe(this.props.match), 1000);
-    if (!this.state.recipeIsLoaded) {
-      console.log("loading");
-      this.getRecipe(this.props.match);
+    if (!this.props.recipeIsLoaded) {
+      this.props.getRecipe(this.props.match);
     }
     this.setState({ _isMounted: true });
+    console.log("DETAIL", this.props);
   };
 
   componentWillUnmount() {
@@ -67,21 +49,34 @@ class Detail extends Component {
   }
 
   render() {
-    if (!this.state.recipe) {
+    if (!this.props.currentRecipe) {
       console.log(this.props);
       return <p>...</p>;
     }
     return (
       <div>
-        {/* <img src={require(`${this.state.recipe.img_url}`)} /> */}
-        <h1>{this.state.recipe.name}</h1>
-        {/* {this.waitForProp("this.state.recipe.name")} */}
+        <h1>{this.props.currentRecipe.name}</h1>
+        <Link
+          to={{
+            pathname: `/recipes/${this.props.match}/edit`,
+            state: this.state,
+            props: this.props
+          }}
+        >
+          Edit
+        </Link>
         <IngredList
           id={this.props.match}
-          parsedIngreds={this.state.parsedIngreds}
-          // recipe={this.state.recipe}
+          parsedIngreds={this.props.parsedIngreds}
+          recipe={this.props.currentRecipe}
+          mapIngredLI={this.mapIngredLI}
         />
-        <MethodList {...this.props} recipe={this.state.recipe} />
+        <h3>Method</h3>
+        <MethodList
+          {...this.props}
+          recipe={this.props.currentRecipe}
+          mapMethodLI={this.mapMethodLI}
+        />
       </div>
     );
   }

@@ -2,41 +2,147 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import { getAllData } from "./api-helper";
+import { getData, getAllData } from "./api-helper";
 import Main from "./components/Main";
-// import NavBar from "./components/Nav/NavBar";
+import NavBar from "./components/Nav/NavBar";
 import Register from "./components/Nav/Register";
 import LoginFailed from "./components/Content/LoginFailed";
 import Detail from "./components/Content/Detail";
+import Edit from "./components/Content/Edit";
+import New from "./components/Content/New";
+import Test from "./test";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       _isMounted: false,
-      current_user: null
+      allUnits: [],
+      allIngredients: [],
+      current_user: null,
+      currentRecipe: {},
+      parsedIngreds: [],
+      newRecipe: {
+        name: "",
+        ingredients: [],
+        method: []
+      }
     };
   }
 
   setReferenceData = async () => {
     const res = await Promise.all([
       getAllData("ingredients"),
-      getAllData("units"),
-      getAllData("categories")
+      getAllData("units")
     ]);
     console.log("set", res);
     this.setState({
-      all_ingredients: res[0],
-      all_units: res[1],
-      all_categories: res[2]
+      allIngredients: res[0],
+      allUnits: res[1]
     });
     console.log(this.state);
   };
 
+  /* ---------- RETRIEVE TARGET RECIPE ---------- */
+  getRecipe = async id => {
+    const recipe = await getData("recipes", id);
+    this.setState(
+      {
+        currentRecipe: recipe,
+        recipe: recipe,
+        ingredArr: recipe.ingredients,
+        recipeIsLoaded: true
+      },
+      () => {
+        setTimeout(() => this.parseIngreds(), 1000);
+      }
+    );
+  };
+
+  /* ---------- PARSE INGREDIENT JSON TO HUMAN-READABLE INGREDIENT LIST ---------- */
+  parseIngreds = () => {
+    const ingredParsed = this.state.ingredArr.map(obj => {
+      return `${obj.line.qty}${
+        this.state.allUnits[obj.line.unit_id - 1].abbrev
+      } ${this.state.allIngredients[obj.line.ingredient_id - 1].name}`;
+    });
+    this.setState({ parsedIngreds: ingredParsed }, () => {
+      // console.log("parsed!", this.state.parsedIngreds);
+    });
+  };
+
+  /* ---------- HANDLE NEW DATA ---------- */
+
+  handleNewMethod = e => {
+    console.log(e.target.value);
+    this.state.newRecipe.tempMethod = e.target.value;
+  };
+  handleMethodSubmit = e => {
+    this.state.newRecipe.method.push(this.state.newRecipe.tempMethod);
+    this.setState({ tempMethod: "" });
+    console.log(this.state.newRecipe.method);
+    this.addMethod();
+    this.forceUpdate();
+  };
+
+  handleIngredSubmit = e => {
+    this.state.newRecipe.ingredients.push(this.state.newRecipe.tempIngred);
+    this.setState({ tempIngred: "" });
+    console.log(this.state.newRecipe.ingredients);
+  };
+
+  /* ---------- ADD NEW LINES ---------- */
+  addMethod = () => {
+    return (
+      <li>
+        <textarea
+          id="step"
+          cols="75"
+          rows="5"
+          placeholder="Add a new step"
+          onChange={this.handleNewMethod}
+        />
+        <i className="material-icons" onClick={this.handleMethodSubmit}>
+          add_circle_outline
+        </i>
+      </li>
+    );
+  };
+
+  addIngred = () => {
+    return (
+      <li>
+        <input id="qty" type="number" placeholder="qty" />
+
+        <select id="unit">
+          <option disabled selected>
+            unit
+          </option>
+          {this.state.allUnits.map((unit, i) => (
+            <option value={unit.id}>{unit.name}</option>
+          ))}
+        </select>
+
+        <select id="ingredient">
+          <option disabled selected>
+            ingredient
+          </option>
+          {this.state.allIngredients.map((ingred, i) => (
+            <option value={ingred.id}>{ingred.name}</option>
+          ))}
+        </select>
+
+        <i class="material-icons" onClick={this.handleIngredSubmit}>
+          add_circle_outline
+        </i>
+      </li>
+    );
+  };
+
+  /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     this.setState({ _isMounted: true });
     await this.setReferenceData();
-    console.log("App Mounted", this.state);
   };
   componentWillUnmount() {
     this.setState({ _isMounted: false });
@@ -56,14 +162,7 @@ class App extends Component {
     return (
       <div className="App">
         <p>app</p>
-        {/* <Switch> */}
         <Main
-          // handleLogin={this.handleLogin}
-          // handleUserChange={this.handleLoginInput}
-          // user_form={this.state.user_form}
-          // handleRegister={this.handleRegister}
-          // handleRegisterInput={this.handleRegisterInput}
-          // signup={this.state.signup}
           current_user={this.state.current_user}
           handleLogout={this.handleLogout}
         />
@@ -80,23 +179,63 @@ class App extends Component {
             );
           }}
         />
-        {/* {this.mountDetails()} */}
         <Route
           exact
           path="/recipes/:recipe_id"
           component={props => {
             return (
               <Detail
-                // {...props}
                 match={props.match.params.recipe_id}
-                all_ingredients={this.state.all_ingredients}
-                all_units={this.state.all_units}
-                all_recipes={this.state.all_recipes}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
+                currentRecipe={this.state.currentRecipe}
+                getRecipe={this.getRecipe}
+                parsedIngreds={this.state.parsedIngreds}
+                recipeIsLoaded={this.state.recipeIsLoaded}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/recipes/:recipe_id/edit"
+          component={props => {
+            return (
+              <Edit
+                match={props.match.params.recipe_id}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
+                currentRecipe={this.state.currentRecipe}
+                parsedIngreds={this.state.parsedIngreds}
+                newRecipe={this.state.newRecipe}
+                addIngred={this.addIngred}
+                addMethod={this.addMethod}
+                handleNewMethod={this.handleNewMethod}
+                addlMethods={this.state.newRecipe.method}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/recipes/new"
+          component={props => {
+            return (
+              <New
+                {...props}
+                allIngredients={this.state.allIngredients}
+                allUnits={this.state.allUnits}
+                newRecipe={this.state.newRecipe}
+                addIngred={this.addIngred}
+                addMethod={this.addMethod}
+                handleNewMethod={this.handleNewMethod}
+                addlMethods={this.state.newRecipe.method}
               />
             );
           }}
         />
         <Route exact path="/login" component={LoginFailed} />
+        {/* <Route exact path="/test" component={Test} /> */}
         {/* </Switch> */}
       </div>
     );
