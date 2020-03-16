@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 	devise_for :admin_users, ActiveAdmin::Devise.config
 	ActiveAdmin.routes(self)
 	scope '/api' do
+		resources :categories
+		resources :ingred_lines
+		resources :ingredients
+		resources :recipes
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

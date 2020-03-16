@@ -1,38 +1,7 @@
 require 'test_helper'
 
 class IngredientsControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @ingredient = ingredients(:one)
-  end
-
-  test "should get index" do
-    get ingredients_url, as: :json
-    assert_response :success
-  end
-
-  test "should create ingredient" do
-    assert_difference('Ingredient.count') do
-      post ingredients_url, params: { ingredient: { category_id: @ingredient.category_id, name: @ingredient.name, notes: @ingredient.notes, unit_cost: @ingredient.unit_cost, unit_id: @ingredient.unit_id, unit_volume: @ingredient.unit_volume, unit_weight: @ingredient.unit_weight } }, as: :json
-    end
-
-    assert_response 201
-  end
-
-  test "should show ingredient" do
-    get ingredient_url(@ingredient), as: :json
-    assert_response :success
-  end
-
-  test "should update ingredient" do
-    patch ingredient_url(@ingredient), params: { ingredient: { category_id: @ingredient.category_id, name: @ingredient.name, notes: @ingredient.notes, unit_cost: @ingredient.unit_cost, unit_id: @ingredient.unit_id, unit_volume: @ingredient.unit_volume, unit_weight: @ingredient.unit_weight } }, as: :json
-    assert_response 200
-  end
-
-  test "should destroy ingredient" do
-    assert_difference('Ingredient.count', -1) do
-      delete ingredient_url(@ingredient), as: :json
-    end
-
-    assert_response 204
-  end
+  # test "the truth" do
+  #   assert true
+  # end
 end
