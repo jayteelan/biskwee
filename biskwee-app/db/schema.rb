@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_203841) do
+ActiveRecord::Schema.define(version: 2020_03_16_220657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,41 +47,27 @@ ActiveRecord::Schema.define(version: 2020_03_08_203841) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ingredients", force: :cascade do |t|
-    t.string "name"
-    t.bigint "category_id", null: false
-    t.bigint "unit_id", null: false
-    t.float "unit_cost"
-    t.float "unit_weight"
-    t.float "unit_volume"
-    t.text "notes"
+  create_table "ingred_lines", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_ingredients_on_category_id"
-    t.index ["unit_id"], name: "index_ingredients_on_unit_id"
+    t.integer "recipe_id"
+    t.integer "ingredient_id"
+    t.string "qty"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "ingredient"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.float "yield_qty"
-    t.bigint "unit_id", null: false
-    t.text "ingredients", default: [], array: true
+    t.bigint "category_id", null: false
     t.text "method", default: [], array: true
-    t.string "image_url"
-    t.text "notes"
-    t.text "parent_recipes", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["unit_id"], name: "index_recipes_on_unit_id"
-  end
-
-  create_table "units", force: :cascade do |t|
-    t.string "name"
-    t.string "abbrev"
-    t.float "in_grams"
-    t.float "in_liters"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_recipes_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,7 +82,5 @@ ActiveRecord::Schema.define(version: 2020_03_08_203841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "ingredients", "categories"
-  add_foreign_key "ingredients", "units"
-  add_foreign_key "recipes", "units"
+  add_foreign_key "recipes", "categories"
 end

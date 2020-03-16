@@ -2,20 +2,10 @@
 
 one:
   name: MyString
-  yield_qty: 1.5
-  unit: one
-  ingredients: 
+  category: one
   method: 
-  image_url: MyString
-  notes: MyText
-  parent_recipes: 
 
 two:
   name: MyString
-  yield_qty: 1.5
-  unit: two
-  ingredients: 
+  category: two
   method: 
-  image_url: MyString
-  notes: MyText
-  parent_recipes: 
