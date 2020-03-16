@@ -11,6 +11,7 @@ class Edit extends Component {
       allIngredients: this.props.allIngredients,
       newRecipe: {
         id: this.props.match,
+        unit_id: 1,
         name: this.props.currentRecipe.name,
         ingredients: this.props.currentRecipe.ingredients,
         method: this.props.currentRecipe.method
@@ -139,29 +140,27 @@ class Edit extends Component {
     console.log(this.state.newRecipe);
   };
 
-  rehashArr = arr => {
-    const string = JSON.stringify(arr);
-    return string
-      .replace(/\"/g, "")
-      .replace(/:/g, "=>")
-      .replace(/{/g, "{:")
-      .replace(/,/g, ",:")
-      .replace(/},:/g, "},")
-      .replace(/\[{/, "{")
-      .replace(/}]/, "}");
-  };
+  // rehashArr = arr => {
+  //   const string = JSON.stringify(arr);
+  //   return string
+  //     .replace(/\"/g, "")
+  //     .replace(/:/g, "=>")
+  //     .replace(/{/g, "{:")
+  //     .replace(/,/g, ",:")
+  //     .replace(/},:/g, "},")
+  //     .replace(/\[{/, "{")
+  //     .replace(/}]/, "}");
+  // };
   prepareData = () => {
     const { ingredients, method } = this.state.newRecipe;
-    const { line } = ingredients;
-    const { step } = method;
-    const destrucIngreds = ingredients.map(ingred => ingred.line);
-    const destrucMethod = method.map(method => method.step);
-    // console.log(this.rehashArr(destrucIngreds));
-
-    this.state.newRecipe.id = parseInt(this.state.newRecipe.id);
-    this.state.newRecipe.ingredients = this.rehashArr(destrucIngreds);
-    this.state.newRecipe.method = this.rehashArr(destrucMethod);
-    console.log(this.state.newRecipe);
+    // const { line } = ingredients;
+    // const { step } = method;
+    ingredients.map(
+      ingred =>
+        `line\: \{
+      \:qty\=>${ingred.line.qty}, \:unit_id\=>${ingred.line.unit_id}, \:ingredient_id\=>${ingred.line.ingredient_id}\}`
+    );
+    console.log(ingredients);
   };
 
   handleSubmit = async e => {
@@ -170,9 +169,9 @@ class Edit extends Component {
       this.state.newRecipe.method.push({ step: step })
     );
     this.prepareData();
-    // console.log(this.props.addlMethods);
-    // console.log(this.state.newRecipe);
-    // const jsonData = JSON.stringify(this.state.newRecipe);
+    // // console.log(this.props.addlMethods);
+    console.log(this.state.newRecipe);
+    // // const jsonData = JSON.stringify(this.state.newRecipe);
     const id = this.props.match;
     await updateRecord(id, this.state.newRecipe);
   };

@@ -1,19 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 class New extends Component {
-	constructor(props) {
-		super(props)
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			
-		}
-	}
+    this.state = {};
+  }
 
-	render() {
-		return (
-			
-		)
-	}
+  render() {
+    return <div></div>;
+  }
 }
 
-export default New
+export default New;
