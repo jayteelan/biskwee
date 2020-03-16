@@ -54,3 +54,32 @@ build-iPhoneSimulator/
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
+
+
+#############
+# server v2 #
+#############
+# Ignore bundler config.
+/biskwee-app-v2/.bundle
+
+# Ignore the default SQLite database.
+/biskwee-app-v2/db/*.sqlite3
+/biskwee-app-v2/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/biskwee-app-v2/log/*
+/biskwee-app-v2/tmp/*
+!/biskwee-app-v2/log/.keep
+!/biskwee-app-v2/tmp/.keep
+
+# Ignore uploaded files in development
+/biskwee-app-v2/storage/*
+
+/biskwee-app-v2/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+/biskwee-app-v2/config/master.key
+
+# Ignore public, as it is built on deploy
+# Place files for /public in /client/public
+/biskwee-app-v2/public
