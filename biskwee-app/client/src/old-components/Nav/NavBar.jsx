@@ -23,9 +23,6 @@ class NavBar extends Component {
         <Link
           to={{
             pathname: "/register"
-            // handleRegister: this.props.handleRegister,
-            // handleRegisterInput: this.props.handleRegisterInput,
-            // signup: this.props.signup
           }}
         >
           Sign Up!
