@@ -1,4 +1,4 @@
-class IngredLinesController < ApplicationController
+class IngredLinesController < ApiController
   before_action :set_ingred_line, only: [:show, :update, :destroy]
 
 
