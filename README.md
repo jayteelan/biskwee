@@ -131,7 +131,7 @@ At an absolute minimum, **Biskwee** will:
 | Scaffold frontend/routes |    H     |     8 hrs      |   1.5 hrs   |
 | Build out auth frontend  |    M     |     3 hrs      |    9 hrs    |
 | Build out RecipeDetail   |    H     |     12 hrs     |  14.5 hrs   |
-| Build out AddEditRecipes |    H     |     8 hrs      |   5.5hrs    |
+| Build out AddEditRecipes |    H     |     8 hrs      |   16.5hrs   |
 | Build out MyRecipes      |    M     |     5 hrs      |             |
 | Styling                  |    M     |     8 hrs      |             |
 | Additional seed data     |    L     |      n/a       |             |
@@ -174,6 +174,10 @@ At an absolute minimum, **Biskwee** will:
 ---
 
 ## Project Change Log
+
+# 16. Mar
+
+- Ingredient data for each recipe proved even more difficult to access and manipulate than anticipated; it would not update on edit form submittal even when other fields did. After several failed attempts to fix this based on using regexs and template literals to reformat data between strings, JSON, and Ruby hashes, this approach was abandoned. Instead, a new join table and associated endpoint was added to the backend data structure, then all ingredient lists were moved over from the original recipe data. Much of the existing front-end code will have to be refactored to accommodate the modified architecture, but it is expected that this will ultimately simplify things overall.
 
 # 10. Mar
 
