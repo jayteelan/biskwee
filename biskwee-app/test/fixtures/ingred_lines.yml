@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recipe_id: one
+  qty: 1.5
+  unit_id: one
+  ingredient_id: one
+
+two:
+  recipe_id: two
+  qty: 1.5
+  unit_id: two
+  ingredient_id: two
