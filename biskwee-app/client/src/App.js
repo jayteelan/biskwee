@@ -1,20 +1,23 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "./App.css";
 
 import NavBar from "./components/NavBar/NavBar";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Main/Login/Login";
+import LoginFailed from "./components/Main/Login/LoginFailed";
 import Signup from "./components/Main/Signup/Signup";
+import AllRecipes from "./components/Main/AllRecipes/AllRecipes";
+import Detail from "./components/Main/Detail/Detail";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       _isMounted: false,
-      _isUserLoggedIn: false,
-      current_user: ""
+      currentUser: "",
+      redirect: false
     };
   }
 
@@ -26,6 +29,22 @@ class App extends Component {
     this.setState({ _isMounted: false });
   }
 
+  /* ---------- LOG OUT ---------- */
+  handleLogout = () => {
+    localStorage.removeItem("authToken");
+    this.setState({
+      currentUser: null,
+      redirect: true
+    });
+    console.log("logged out", localStorage.authToken);
+  };
+
+  // handleLogoutButton = () => {
+  //   return localStorage.authToken && localStorage.authToken.length > 9 ?
+  // 		<button onClick={this.handleLogout}>Log Out</button> :
+  // 		null
+  // };
+
   /* ---------- RENDER ---------- */
   render() {
     return (
@@ -33,11 +52,7 @@ class App extends Component {
         <Route
           path="/"
           component={props => {
-            return (
-              <NavBar
-              // _isUserLoggedIn={this.state._isUserLoggedIn}
-              />
-            );
+            return <NavBar handleLogout={this.handleLogout} />;
           }}
         />
         <Switch>
@@ -45,22 +60,21 @@ class App extends Component {
             exact
             path="/"
             component={props => {
-              return (
-                <Main
-                // _isUserLoggedIn={this.state._isUserLoggedIn}
-                />
-              );
+              return <Main />;
             }}
           />
           <Route
             exact
             path="/login"
             component={props => {
-              return (
-                <Login
-                // _isUserLoggedIn={this.state._isUserLoggedIn}
-                />
-              );
+              return <Login />;
+            }}
+          />
+          <Route
+            exact
+            path="/loginfailed"
+            component={props => {
+              return <LoginFailed />;
             }}
           />
           <Route
@@ -68,6 +82,20 @@ class App extends Component {
             path="/signup"
             component={props => {
               return <Signup />;
+            }}
+          />
+          <Route
+            exact
+            path="/recipes"
+            component={props => {
+              return <AllRecipes />;
+            }}
+          />
+          <Route
+            exact
+            path="/recipes/:recipe_id"
+            component={props => {
+              return <Detail match={props.match.params.recipe_id} />;
             }}
           />
         </Switch>

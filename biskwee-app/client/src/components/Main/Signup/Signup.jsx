@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { createNewUser } from "../../../api-helper";
 
 class Signup extends Component {
@@ -10,7 +11,8 @@ class Signup extends Component {
         email: "",
         password: "",
         password_confirmation: ""
-      }
+      },
+      redirect: false
     };
   }
 
@@ -29,11 +31,15 @@ class Signup extends Component {
     console.log("form", formInput);
     const user = await createNewUser(JSON.stringify(formInput));
     // console.log("current", currentUser);
-    // this.setState({ current_user: user });
+    this.setState({ redirect: true, current_user: user });
     console.log("reg", this.state);
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/recipes" />;
+    }
+
     return (
       <form onSubmit={this.handleSignup}>
         <h1>Signup</h1>

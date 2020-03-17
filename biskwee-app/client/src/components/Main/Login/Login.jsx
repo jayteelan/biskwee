@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { loginUser } from "../../../api-helper";
 
 class Login extends Component {
@@ -9,7 +10,8 @@ class Login extends Component {
       user_form: {
         email: "",
         password: ""
-      }
+      },
+      redirect: false
     };
   }
 
@@ -25,7 +27,8 @@ class Login extends Component {
     e.preventDefault();
     const formInput = this.state.user_form;
     const user = await loginUser(formInput);
-    // this.setState({ current_user: user });
+    this.setState({ redirect: true });
+    return user ? <Redirect to="/loginfailed" /> : <Redirect to="/recipes" />;
   };
 
   render() {

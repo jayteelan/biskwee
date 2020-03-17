@@ -10,8 +10,11 @@ class Greeting extends Component {
     console.log(this.props);
   }
   handleGreeting = () => {
-    return this.props._isUserLoggedIn === true ? (
-      <h3>Welcome back!</h3>
+    return localStorage.authToken ? (
+      <span>
+        <h3>Welcome back!</h3>
+        <button onClick={this.props.handleLogout}>Log Out</button>
+      </span>
     ) : (
       <h3>Welcome to Biskwee!</h3>
     );
