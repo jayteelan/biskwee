@@ -8,7 +8,10 @@ class AllRecipes extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      allIngredients: [],
+      allUnits: []
+    };
   }
 
   render() {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { getAllData } from "./api-helper";
 import "./App.css";
 
 import NavBar from "./components/NavBar/NavBar";
@@ -10,6 +11,7 @@ import LoginFailed from "./components/Main/Login/LoginFailed";
 import Signup from "./components/Main/Signup/Signup";
 import AllRecipes from "./components/Main/AllRecipes/AllRecipes";
 import Detail from "./components/Main/Detail/Detail";
+import AddEdit from "./components/Main/AddEdit/AddEdit";
 
 class App extends Component {
   constructor() {
@@ -23,11 +25,26 @@ class App extends Component {
 
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
+    this.setReferenceData();
     this.setState({ _isMounted: true });
   };
   componentWillUnmount() {
     this.setState({ _isMounted: false });
   }
+
+  /* ---------- GET INGREDIENT AND UNIT DATA ---------- */
+  setReferenceData = async () => {
+    const res = await Promise.all([
+      getAllData("ingredients"),
+      getAllData("units")
+    ]);
+    console.log("set", res);
+    this.setState({
+      allIngredients: res[0],
+      allUnits: res[1]
+    });
+    console.log(this.state);
+  };
 
   /* ---------- LOG OUT ---------- */
   handleLogout = () => {
@@ -95,7 +112,27 @@ class App extends Component {
             exact
             path="/recipes/:recipe_id"
             component={props => {
-              return <Detail match={props.match.params.recipe_id} />;
+              return (
+                <Detail
+                  match={props.match.params.recipe_id}
+                  allIngredients={this.state.allIngredients}
+                  allUnits={this.state.allUnits}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/recipes/:recipe_id/edit"
+            component={props => {
+              return <AddEdit match={props.match.params.recipe_id} />;
+            }}
+          />
+          <Route
+            exact
+            path="/recipes/new"
+            component={props => {
+              return <AddEdit />;
             }}
           />
         </Switch>

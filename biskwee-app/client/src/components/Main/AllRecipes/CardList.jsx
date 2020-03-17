@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllData } from "../../../api-helper";
 
 import Card from "../AllRecipes/Card";
+import Detail from "../Detail/Detail";
 
 class CardList extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class CardList extends Component {
         {!this.state.allRecipes.length < 1 &&
           this.state.allRecipes.map(rec => (
             <li key={rec.id}>
-              <Link to={`/recipes/${rec.id}`} key={rec.id}>
+              <Link to={{ pathname: `/recipes/${rec.id}`, props: this.props }}>
                 <Card
                   id={rec.id}
                   name={rec.name}
@@ -35,6 +36,7 @@ class CardList extends Component {
                       ? rec.image_url
                       : "http://placekitten.com/700/700"
                   }
+                  props={this.props}
                 />
               </Link>
             </li>
