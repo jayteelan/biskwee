@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_203841) do
+ActiveRecord::Schema.define(version: 2020_03_16_232518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 2020_03_08_203841) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "ingred_lines", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.float "qty"
+    t.bigint "unit_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ingredient_id"], name: "index_ingred_lines_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_ingred_lines_on_recipe_id"
+    t.index ["unit_id"], name: "index_ingred_lines_on_unit_id"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.bigint "category_id", null: false
@@ -65,7 +77,6 @@ ActiveRecord::Schema.define(version: 2020_03_08_203841) do
     t.string "name"
     t.float "yield_qty"
     t.bigint "unit_id", null: false
-    t.text "ingredients", default: [], array: true
     t.text "method", default: [], array: true
     t.string "image_url"
     t.text "notes"
@@ -96,6 +107,9 @@ ActiveRecord::Schema.define(version: 2020_03_08_203841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ingred_lines", "ingredients"
+  add_foreign_key "ingred_lines", "recipes"
+  add_foreign_key "ingred_lines", "units"
   add_foreign_key "ingredients", "categories"
   add_foreign_key "ingredients", "units"
   add_foreign_key "recipes", "units"

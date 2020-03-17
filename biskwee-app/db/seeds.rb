@@ -88,14 +88,7 @@ Ingredient.create!(name:"salt",category_id:8, unit_id:1)
 Ingredient.create!(name:"pastry cream", category_id:8,unit_id:1)
 
 # Sample [Recipes]
-Recipe.create!(name: "Pâte à Choux ",yield_qty: 800,unit_id: 1,ingredients: [
-	{qty: 180, unit_id:1, ingredient_id: 31},
-	{qty: 120, unit_id:1, ingredient_id: 2},
-	{qty: 120, unit_id:1, ingredient_id: 11, notes:"cut into pieces"},
-	{qty: 30, unit_id:1, ingredient_id: 13},
-	{qty: 2, unit_id:1, ingredient_id: 38},
-	{qty: 150, unit_id:1, ingredient_id: 14},
-	{qty: 4, unit_id:15, ingredient_id: 6}],
+Recipe.create!(name: "Pâte à Choux",yield_qty: 800,unit_id: 1,
 method: ["Place water, milk, butter, condensed milk, and salt into saucepan and bring to a full rolling boil.",
 "Add the flour all at once to the boiling mixture. Stir with wooden spoon or heatproof spatula until a
 smooth mass forms.",
@@ -107,17 +100,9 @@ cool a bit for one minute.",
 The dough should look smooth and glossy, stiff but not dry.",
 "Transfer dough to a pastry bag with a plain tip and pipe out as desired."
 ],image_url: "https://assets.marthastewart.com/styles/wmax-1500/d22/mb_1008_pate_a_choux_2/mb_1008_pate_a_choux_2_horiz.jpg", notes: "yield is approximate", parent_recipes: [3])
-Recipe.create!(name: "Green Tea Biscuit",yield_qty: 1,unit_id: 15,ingredients: [
-	{qty: 60,unit_id: 1,ingredient_id: 15},
-	{qty: 15,unit_id: 1,ingredient_id: 29},
-	{qty: 150,unit_id: 1,ingredient_id: 24, notes: "melted"},
-	{qty: 120,unit_id: 1,ingredient_id: 11, notes: "softened"},
-	{qty: 75,unit_id: 1,ingredient_id: 8},
-	{qty: 25,unit_id: 1,ingredient_id: 3},
-	{qty: 1,unit_id: 15,ingredient_id: 21, notes: "finely grated"},
-	{qty: 125,unit_id: 1,ingredient_id: 7},
-	{qty: 65,unit_id: 1,ingredient_id: 1},
-],
+
+
+Recipe.create!(name: "Green Tea Biscuit",yield_qty: 1,unit_id: 15,
 method: [
 	"Sift cake flour with matcha and reserve. Thoroughly incorporate butter into melted chocolate. Stir in egg
 yolks, trimoline, and lemon zest.",
@@ -125,8 +110,30 @@ yolks, trimoline, and lemon zest.",
 "Fold in sifted cake flour, followed by white chocolate base. Transfer into a prepared half sheet pan.",
 "Bake at 325ºF for 10 to 13 minutes. Allow to cool, store wrapped under refrigeration."
 ],image_url: "https://3.bp.blogspot.com/-HUG2O_5yoW4/TdjlJ8Oju5I/AAAAAAAACOI/7YnrLzIWoJ4/s1600/biscocho.jpg", notes: "", parent_recipes: [])
-Recipe.create!(name: "Praline Cream",yield_qty: 450,unit_id: 1,ingredients: [
-	{qty: 120, unit_id: 1,ingredient_id: 11},
-	{qty: 90, unit_id: 1,ingredient_id: 17},
-	{qty: 240, unit_id: 1,ingredient_id: 39}],method: ["Combine butter and praline paste in a mixer bowl and whip until thoroughly combined. Slowly add
+Recipe.create!(name: "Praline Cream",yield_qty: 450,unit_id: 1,method: ["Combine butter and praline paste in a mixer bowl and whip until thoroughly combined. Slowly add
 pastry cream.","Chill for use later, or store at room temperature until assembly of dessert."],image_url: "", notes: "", parent_recipes: [3])
+
+# Recipe 1 IngredLines
+IngredLine.create!(recipe_id: 1, qty: 180, unit_id:1, ingredient_id: 31)
+IngredLine.create!(recipe_id: 1, qty: 120, unit_id:1, ingredient_id: 2)
+IngredLine.create!(recipe_id: 1, qty: 120, unit_id:1, ingredient_id: 11)
+IngredLine.create!(recipe_id: 1, qty: 30, unit_id:1, ingredient_id: 13)
+IngredLine.create!(recipe_id: 1, qty: 2, unit_id:1, ingredient_id: 38)
+IngredLine.create!(recipe_id: 1, qty: 150, unit_id:1, ingredient_id: 14)
+IngredLine.create!(recipe_id: 1, qty: 4, unit_id:15, ingredient_id: 6)
+
+# Recipe 2 IngredLines
+IngredLine.create!(recipe_id: 2, qty: 60,unit_id: 1,ingredient_id: 15)
+IngredLine.create!(recipe_id: 2, qty: 15,unit_id: 1,ingredient_id: 29)
+IngredLine.create!(recipe_id: 2, qty: 150,unit_id: 1,ingredient_id: 24)
+IngredLine.create!(recipe_id: 2, qty: 120,unit_id: 1,ingredient_id: 11)
+IngredLine.create!(recipe_id: 2, qty: 75,unit_id: 1,ingredient_id: 8)
+IngredLine.create!(recipe_id: 2, qty: 25,unit_id: 1,ingredient_id: 3)
+IngredLine.create!(recipe_id: 2, qty: 1,unit_id: 15,ingredient_id: 21)
+IngredLine.create!(recipe_id: 2, qty: 125,unit_id: 1,ingredient_id: 7)
+IngredLine.create!(recipe_id: 2, qty: 65,unit_id: 1,ingredient_id: 1)
+
+# Recipe 3 IngredLines
+IngredLine.create!(recipe_id: 3, qty: 120, unit_id: 1,ingredient_id: 11)
+IngredLine.create!(recipe_id: 3, qty: 90, unit_id: 1,ingredient_id: 17)
+IngredLine.create!(recipe_id: 3, qty: 240, unit_id: 1,ingredient_id: 39)
