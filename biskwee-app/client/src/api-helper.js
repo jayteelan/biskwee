@@ -9,6 +9,7 @@ const api = axios.create({
   baseURL: baseUrl
 });
 
+/* ---------- LOGIN/SIGNUP ---------- */
 const loginUser = async formData => {
   const res = await api.post(`/api/v1/auth`, formData);
   console.log("login", res);
@@ -32,29 +33,38 @@ const createNewUser = async formData => {
   }
 };
 
+/* ---------- CREATE ---------- */
+const newRecipe = async data => {
+  const res = await api.post("/api/recipes", { recipe: data });
+  return res.data;
+};
+
+/* ---------- READ ---------- */
 const getData = async (endpoint, id) => {
   const res = await api.get(`/api/${endpoint}/${id}`);
   return res.data;
 };
+
 const getAllData = async endpoint => {
   const res = await api.get(`/api/${endpoint}/`);
   // console.log(res.data);
   return res.data;
 };
 
+const getRecipeIngreds = async recipeId => {
+  const res = await api.get(`/api/ingred_lines`);
+};
+
+/* ---------- UPDATE ---------- */
 const updateRecord = async (id, newData) => {
   const res = await api.put(`/api/recipes/${id}`, { recipe: newData });
   console.log(res.data);
   return res.data;
 };
 
+/* ---------- DESTROY ---------- */
 const deleteRecord = async id => {
   const res = await api.delete(`/api/recipes/${id}`);
-  return res.data;
-};
-
-const newRecipe = async data => {
-  const res = await api.post("/api/recipes", { recipe: data });
   return res.data;
 };
 

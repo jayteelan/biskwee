@@ -10,6 +10,7 @@ class RecipesController < ApiController
 
   # GET /recipes/1
 	def show
+
   end
 
   # POST /recipes
@@ -47,6 +48,6 @@ class RecipesController < ApiController
 
     # Only allow a trusted parameter "white list" through.
     def recipe_params
-      params.require(:recipe).permit(:name, :yield_qty, :unit_id, {:ingredients=>[]}, {:method=>[]}, :image_url, :notes, {:parent_recipes=>[]})
+      params.require(:recipe).permit(:name, :yield_qty, :unit_id, {:method=>[]}, :image_url, :notes, {:parent_recipes=>[]})
     end
 end
