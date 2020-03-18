@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { getData } from "../../../api-helper";
+import { getData, getAllIngredLines } from "../../../api-helper";
 
 import NameField from "./NameField";
 import IngredEditList from "./IngredEditList";
@@ -14,13 +14,14 @@ class AddEdit extends Component {
       _isMounted: false,
       _isNewRecipe: false,
       currentRecipe: null,
-      tempRecipe: {
-        name: "",
-        ingredients: []
-      }
+      // tempRecipe: {
+      tempName: "",
+      tempIngredLines: []
+      // }
     };
   }
 
+  /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     await this.handleDataGet();
     console.log(this.state);
@@ -42,9 +43,45 @@ class AddEdit extends Component {
         });
   };
 
+  handleIngredLinesGet = async data => {
+    this.setState({ tempIngredLines: await data });
+  };
+
+  /* ---------- HANDLE VALUE CHANGES ---------- */
   handleNameChange = e => {
-    this.setState({ tempRecipe: { name: e.target.value } });
-    console.log(this.state.tempRecipe.name);
+    this.setState({ tempName: e.target.value });
+    console.log(this.state.tempName);
+  };
+
+  handleQtyChange = e => {
+    let index = e.target.getAttribute("data-key");
+    console.log("index", index);
+    console.log(this.state.tempIngredLines[index]);
+    this.setState(prevState => ({
+      tempIngredLines: prevState.tempIngredLines.map(obj =>
+        obj === this.state.tempIngredLines[index]
+          ? { ...obj, qty: parseInt(e.target.value) }
+          : obj
+      )
+    }));
+    console.log("qty", this.state);
+  };
+
+  handleUnitChange = e => {
+    const { ingredLines } = this.state;
+    const recipeUnitListIndex = e.target.getAttribute("data-key");
+    const selectedUnitIndex = e.target.selectedIndex - 1;
+    ingredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
+    console.log("unit", selectedUnitIndex);
+  };
+
+  handleIngredChange = e => {
+    const { ingredLines } = this.state;
+    const selectedIngredIndex = e.target.selectedIndex - 1;
+    const recipeIngredListIndex = e.target.getAttribute("data-key");
+    ingredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
+    // console.log(ingredients[recipeIngredListIndex]);
+    console.log("selectIngredIndex", selectedIngredIndex);
   };
 
   render() {
@@ -66,6 +103,8 @@ class AddEdit extends Component {
             {...this.props}
             _isNewRecipe={this.state._isNewRecipe}
             match={this.props.match}
+            onIngredLinesGet={this.handleIngredLinesGet()}
+            onQtyChange={e => this.handleQtyChange(e)}
           />
           {/* <MethodEditList {...this.props} _isNewRecipe={this.state._isNewRecipe} /> */}
         </form>

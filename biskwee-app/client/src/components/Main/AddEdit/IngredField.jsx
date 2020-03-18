@@ -10,39 +10,15 @@ class IngredField extends Component {
 
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
-    const ingredLines = await getAllIngredLines(this.props.match);
-    this.setState({ ingredLines: ingredLines });
+    const data = await getAllIngredLines(this.props.match);
+    console.log(data);
+    this.props.onIngredLinesGet(data);
     // console.log("INGREDLIST", this.state);
-    // console.log("INGRProps", this.props);
+    console.log("INGRProps", this.props);
   };
 
   componentWillUnmount = () => {
     this.setState({ ingredLines: [] });
-  };
-
-  /* ---------- HANDLE VALUE CHANGES ---------- */
-  handleQtyChange = e => {
-    const { ingredLines } = this.state;
-    const index = e.target.getAttribute("data-key");
-    ingredLines[index].qty = parseInt(e.target.value);
-    console.log("qty", ingredLines[index].qty);
-  };
-
-  handleUnitChange = e => {
-    const { ingredLines } = this.state;
-    const recipeUnitListIndex = e.target.getAttribute("data-key");
-    const selectedUnitIndex = e.target.selectedIndex - 1;
-    ingredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
-    console.log("unit", selectedUnitIndex);
-  };
-
-  handleIngredChange = e => {
-    const { ingredLines } = this.state;
-    const selectedIngredIndex = e.target.selectedIndex - 1;
-    const recipeIngredListIndex = e.target.getAttribute("data-key");
-    ingredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
-    // console.log(ingredients[recipeIngredListIndex]);
-    console.log("selectIngredIndex", selectedIngredIndex);
   };
 
   /* ---------- RENDER ---------- */
@@ -58,7 +34,7 @@ class IngredField extends Component {
             defaultValue={line.qty}
             data-key={i}
             key={i}
-            onChange={this.handleQtyChange}
+            onChange={e => this.props.onQtyChange(e)}
           />
 
           <select id="unit" data-key={i} onChange={this.handleUnitChange}>

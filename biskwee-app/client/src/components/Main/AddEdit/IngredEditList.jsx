@@ -4,24 +4,25 @@ import { getAllIngredLines } from "../../../api-helper";
 import IngredField from "./IngredField";
 import NewIngred from "./NewIngred";
 
-class IngredEditList extends Component {
-  constructor(props) {
-    super(props);
+const IngredEditList = props => {
+  // class IngredEditList extends Component {
+  //   constructor(props) {
+  //     super(props);
 
-    this.state = {};
-  }
+  //     this.state = {};
+  //   }
   // componentDidMount() {
   //   console.log("IngrList", this.props);
   // }
 
-  render() {
-    return (
-      <React.Fragment>
-        <IngredField {...this.props} />
-        {/* <NewIngred /> */}
-      </React.Fragment>
-    );
-  }
-}
+  // render() {
+  return (
+    <React.Fragment>
+      <IngredField {...props} />
+      {/* <NewIngred /> */}
+    </React.Fragment>
+  );
+};
+// }
 
 export default IngredEditList;
