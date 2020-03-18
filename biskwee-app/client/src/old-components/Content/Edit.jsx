@@ -30,17 +30,17 @@ class Edit extends Component {
   }
 
   /* ---------- EDIT EXISTING ATTRIBUTES ---------- */
-  editName = () => {
-    // let { name }=
-    return (
-      <input
-        placeholder="Recipe name"
-        defaultValue={this.state.newRecipe.name}
-        required
-        onChange={this.handleNameChange}
-      />
-    );
-  };
+  // editName = () => {
+  //   // let { name }=
+  //   return (
+  //     <input
+  //       placeholder="Recipe name"
+  //       defaultValue={this.state.newRecipe.name}
+  //       required
+  //       onChange={this.handleNameChange}
+  //     />
+  //   );
+  // };
 
   editIngred = lines => {
     return lines.map((li, i) => (
