@@ -13,7 +13,11 @@ class AddEdit extends Component {
     this.state = {
       _isMounted: false,
       _isNewRecipe: false,
-      currentRecipe: null
+      currentRecipe: null,
+      tempRecipe: {
+        name: "",
+        ingredients: []
+      }
     };
   }
 
@@ -38,6 +42,11 @@ class AddEdit extends Component {
         });
   };
 
+  handleNameChange = e => {
+    this.setState({ tempRecipe: { name: e.target.value } });
+    console.log(this.state.tempRecipe.name);
+  };
+
   render() {
     return (
       this.state._isMounted === true && (
@@ -50,9 +59,15 @@ class AddEdit extends Component {
                 ? undefined
                 : this.state.currentRecipe.name
             }
+            // tempName={this.state.tempRecipe.name}
+            onNameChange={e => this.handleNameChange(e)}
           />
-          {/* <IngredEditList {...props} />
-      <MethodEditList {...props} /> */}
+          <IngredEditList
+            {...this.props}
+            _isNewRecipe={this.state._isNewRecipe}
+            match={this.props.match}
+          />
+          {/* <MethodEditList {...this.props} _isNewRecipe={this.state._isNewRecipe} /> */}
         </form>
       )
     );

@@ -138,7 +138,12 @@ class App extends Component {
             exact
             path="/newrecipe"
             component={props => {
-              return <AddEdit />;
+              return (
+                <AddEdit
+                  allIngredients={this.state.allIngredients}
+                  allUnits={this.state.allUnits}
+                />
+              );
             }}
           />
         </Switch>

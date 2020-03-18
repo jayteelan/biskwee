@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getAllIngredLines } from "../../../api-helper";
 
 import IngredField from "./IngredField";
 import NewIngred from "./NewIngred";
@@ -9,9 +10,17 @@ class IngredEditList extends Component {
 
     this.state = {};
   }
+  // componentDidMount() {
+  //   console.log("IngrList", this.props);
+  // }
 
   render() {
-    return <h1>ingreds</h1>;
+    return (
+      <React.Fragment>
+        <IngredField {...this.props} />
+        {/* <NewIngred /> */}
+      </React.Fragment>
+    );
   }
 }
 
