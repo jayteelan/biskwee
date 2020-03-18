@@ -1,0 +1,18 @@
+.recipe-card {
+  display: inline-flex;
+  flex-direction: row;
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+}
+.recipe-card img {
+  height: 100%;
+  width: auto;
+  z-index: 0;
+}
+.recipe-card p {
+  display: inline;
+  align-self: flex-start;
+  z-index: 5;
+  color: red;
+}

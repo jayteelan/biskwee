@@ -47,7 +47,7 @@ At an absolute minimum, **Biskwee** will:
 |    React Router     | _Route between front-end component paths_        |
 |        axios        | _Handle data flow between client and API server_ |
 | immutability-helper | _Syntactic sugar for updating nested data_       |
-|        <!--         | Formik                                           | _Assist with creation of recipe input form_ | --> |
+|       Formik        | _Assist with creation of recipe input form_      |
 |        Rails        | _Initialize and run back-end server_             |
 |       devise        | _Simplifies user auth_                           |
 |     activeadmin     | _Simplifies API administration_                  |

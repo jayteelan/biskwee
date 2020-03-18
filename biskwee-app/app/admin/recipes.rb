@@ -1,5 +1,5 @@
 ActiveAdmin.register Recipe do
-		permit_params :name, :yield_qty, :unit_id, {:ingredients=>[]}, {:method=>[]}, :notes, {:parent_recipes=>[]}
+		permit_params :name, :yield_qty, :unit_id, {:method=>[]}, :notes, {:parent_recipes=>[]}
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
