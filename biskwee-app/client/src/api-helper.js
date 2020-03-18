@@ -9,6 +9,7 @@ const api = axios.create({
   baseURL: baseUrl
 });
 
+/* ---------- LOGIN/SIGNUP ---------- */
 const loginUser = async formData => {
   const res = await api.post(`/api/v1/auth`, formData);
   console.log("login", res);
@@ -32,38 +33,82 @@ const createNewUser = async formData => {
   }
 };
 
+/* ---------- CREATE ---------- */
+const newRecipe = async data => {
+  const res = await api.post("/api/recipes", { recipe: data });
+  return res.data;
+};
+
+const newIngredLine = async (recipeId, data) => {
+  const res = await api.post(`/api/recipes/${recipeId}/ingred_lines/`, {
+    recipe: data
+  });
+  return res.data;
+};
+
+/* ---------- READ ---------- */
 const getData = async (endpoint, id) => {
   const res = await api.get(`/api/${endpoint}/${id}`);
   return res.data;
 };
+
 const getAllData = async endpoint => {
   const res = await api.get(`/api/${endpoint}/`);
   // console.log(res.data);
   return res.data;
 };
 
-const updateRecord = async (id, newData) => {
+const getIngredLine = async (recipeId, ingredLineId) => {
+  const res = await api.get(
+    `/api/recipes/${recipeId}/ingred_lines/${ingredLineId}`
+  );
+  return res.data;
+};
+
+const getAllIngredLines = async recipeId => {
+  const res = await api.get(`/api/recipes/${recipeId}/ingred_lines`);
+  return res.data;
+};
+
+/* ---------- UPDATE ---------- */
+const updateRecipe = async (id, newData) => {
   const res = await api.put(`/api/recipes/${id}`, { recipe: newData });
   console.log(res.data);
   return res.data;
 };
 
-const deleteRecord = async id => {
-  const res = await api.delete(`/api/recipes/${id}`);
+const updateIngredLine = async (recipeId, ingredLineId, newData) => {
+  const res = await api.put(
+    `/api/recipes/${recipeId}/ingred_lines/${ingredLineId}`,
+    { recipe: newData }
+  );
+  console.log(res.data);
   return res.data;
 };
 
-const newRecipe = async data => {
-  const res = await api.post("/api/recipes", { recipe: data });
+/* ---------- DESTROY ---------- */
+const deleteRecipe = async id => {
+  const res = await api.delete(`/api/recipes/${id}`);
+  return res.data;
+};
+const deleteIngredLine = async (recipeId, ingredLineId) => {
+  const res = await api.delete(
+    `/api/recipes/${recipeId}/ingred_lines/${ingredLineId}`
+  );
   return res.data;
 };
 
 export {
   loginUser,
   createNewUser,
+  newRecipe,
+  newIngredLine,
   getData,
   getAllData,
-  updateRecord,
-  deleteRecord,
-  newRecipe
+  getIngredLine,
+  getAllIngredLines,
+  updateRecipe,
+  updateIngredLine,
+  deleteRecipe,
+  deleteIngredLine
 };
