@@ -8,6 +8,14 @@ class IngredList extends Component {
     this.state = { ingredLines: [] };
   }
 
+  componentDidMount = async () => {
+    // console.log("INGRED", this.props);
+    const ingredLines = await getAllIngredLines(this.props.match);
+    this.setState({ ingredLines: ingredLines });
+    console.log("INGREDLIST", this.state);
+    this.state.ingredLines.length > 0 && this.parseIngreds();
+  };
+
   parseIngreds = () => {
     const ingredParsed = this.state.ingredLines.map(obj => {
       return `${obj.qty}${this.props.allUnits[obj.unit_id - 1].abbrev} ${
@@ -19,17 +27,9 @@ class IngredList extends Component {
     });
   };
 
-  componentDidMount = async () => {
-    // console.log("INGRED", this.props);
-    const ingredLines = await getAllIngredLines(this.props.match);
-    this.setState({ ingredLines: ingredLines });
-    console.log("INGREDLIST", this.state);
-    this.state.ingredLines.length > 0 && this.parseIngreds();
-  };
-
   render() {
     return !this.state.parsedIngreds ? (
-      <p>...</p>
+      <p>loading ingredients...</p>
     ) : (
       <React.Fragment>
         <h1>Ingredients</h1>

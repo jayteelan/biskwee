@@ -20,7 +20,7 @@ class Detail extends Component {
       <div>
         <Link to={`/recipes/${this.props.match}/edit`}>Edit this recipe</Link>
         <IngredList {...this.props} />
-        <MethodList />
+        <MethodList match={this.props.match} />
       </div>
     );
   }
