@@ -3,16 +3,13 @@ import React, { Component } from "react";
 import MethodField from "./MethodField";
 import NewMethod from "./NewMethod";
 
-class MethodEditList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    return <h1>methods</h1>;
-  }
-}
+const MethodEditList = props => {
+  return (
+    <React.Fragment>
+      <MethodField {...props} />
+      <NewMethod />
+    </React.Fragment>
+  );
+};
 
 export default MethodEditList;

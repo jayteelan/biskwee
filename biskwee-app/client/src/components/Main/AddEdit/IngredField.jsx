@@ -5,17 +5,18 @@ class IngredField extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ingredLines: [] };
+    this.state = {};
   }
 
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
-    const data = await getAllIngredLines(this.props.match);
-    console.log(data);
-    this.props.onIngredLinesGet(data);
+    await this.props.onIngredLinesGet(this.props.match);
+    // this.props.onIngredLinesGet(data);
     // console.log("INGREDLIST", this.state);
     console.log("INGRProps", this.props);
   };
+
+  // componentDidUpdate?
 
   componentWillUnmount = () => {
     this.setState({ ingredLines: [] });
@@ -23,10 +24,10 @@ class IngredField extends Component {
 
   /* ---------- RENDER ---------- */
   render() {
-    return this.state.ingredLines.length === 0 ? (
+    return this.props.tempIngredLines.length === 0 ? (
       <p>waiting for ingredients...</p>
     ) : (
-      this.state.ingredLines.map((line, i) => (
+      this.props.tempIngredLines.map((line, i) => (
         <li key={i}>
           <input
             id="qty"
