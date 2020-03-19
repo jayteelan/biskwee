@@ -3,7 +3,8 @@ import React, { Component } from "react";
 import {
   getData,
   getAllIngredLines,
-  deleteIngredLine
+  deleteIngredLine,
+  newRecipe
 } from "../../../api-helper";
 
 import NameField from "./NameField";
@@ -23,10 +24,10 @@ class AddEdit extends Component {
       newIngreds: [],
       putIngreds: [],
       delIngreds: [],
-      tempMethods: [],
-      newMethods: [],
-      putMethods: [],
-      delMethods: []
+      tempMethods: []
+      // newMethods: [],
+      // putMethods: [],
+      // delMethods: []
     };
   }
 
@@ -69,6 +70,14 @@ class AddEdit extends Component {
     // retrieve data for current recipe from ingredient-recipe join table and set to state
     const data = await getAllIngredLines(id);
     this.setState({ tempIngredLines: data });
+    console.log(this.state);
+  };
+
+  getNewRecipeId = async e => {
+    // e.preventDefault;
+    const newName = { name: this.state.tempName, unit_id: 1 };
+    const res = await newRecipe(newName);
+    this.setState({ currentRecipe: res });
     console.log(this.state);
   };
 
@@ -126,10 +135,17 @@ class AddEdit extends Component {
     console.log("ingred deleted");
   };
 
+  setIngredNew = e => {
+    const recipeId = !this.state._isNewRecipe
+      ? this.state.match
+      : this.state.currentRecipe.id;
+    this.state.newIngreds.push({ recipe_id: recipeId });
+  };
+
+  // setIngredPut
+
   setMethodDelete = e => {
-    // console.log("id", e.target.getAttribute("stepId"));
-    // console.log("index", e.target.getAttribute("stepIndex"));
-    this.state.delMethods.push(e.target.getAttribute("stepIndex"));
+    // this.state.delMethods.push(e.target.getAttribute("stepIndex"));
     this.state.tempMethods[e.target.getAttribute("stepIndex")] = undefined;
     this.setState(this.state);
     console.log(this.state);
@@ -189,6 +205,7 @@ class AddEdit extends Component {
             }
             // tempName={this.state.tempRecipe.name}
             onNameChange={e => this.handleNameChange(e)}
+            onNewRecipe={e => this.getNewRecipeId(e)}
           />
 
           <h1>Ingredients</h1>

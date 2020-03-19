@@ -10,6 +10,7 @@ const NameField = props => {
         defaultValue={props._isNewRecipe ? undefined : props.name}
         required
         onChange={e => props.onNameChange(e)}
+        onBlur={e => (props._isNewRecipe ? props.onNewRecipe(e) : null)}
       />
     </React.Fragment>
   );
