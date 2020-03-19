@@ -4,26 +4,27 @@ import { Link } from "react-router-dom";
 import IngredList from "./IngredList";
 import MethodList from "./MethodList";
 
-class Detail extends Component {
-  constructor(props) {
-    super(props);
+const Detail = props => {
+  // class Detail extends Component {
+  //   constructor(props) {
+  //     super(props);
 
-    this.state = {};
-  }
+  //     this.state = {};
+  //   }
 
-  componentDidMount() {
-    console.log("DETAIL", this.props);
-  }
+  //   componentDidMount() {
+  //     console.log("DETAIL", this.props);
+  //   }
 
-  render() {
-    return (
-      <div>
-        <Link to={`/recipes/${this.props.match}/edit`}>Edit this recipe</Link>
-        <IngredList {...this.props} />
-        <MethodList match={this.props.match} />
-      </div>
-    );
-  }
-}
+  // render() {
+  return (
+    <div>
+      <Link to={`/recipes/${props.match}/edit`}>Edit this recipe</Link>
+      <IngredList {...props} />
+      <MethodList match={props.match} />
+    </div>
+  );
+  // }
+};
 
 export default Detail;

@@ -7,7 +7,7 @@ const MethodEditList = props => {
   return (
     <React.Fragment>
       <MethodField {...props} />
-      <NewMethod />
+      <NewMethod {...props} />
     </React.Fragment>
   );
 };

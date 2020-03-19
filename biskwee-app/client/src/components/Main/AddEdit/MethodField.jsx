@@ -6,24 +6,29 @@ class MethodField extends Component {
 
     this.state = {};
   }
-  // editMethod = steps => {
-  //   return steps.map((step, i) => (
-  //     <li key={i}>
-  //       <textarea
-  //         id="step"
-  //         cols="75"
-  //         rows="5"
-  //         data-key={i}
-  //         defaultValue={step.step}
-  //         onChange={this.handleMethodChange}
-  //       />
-  //       <i className="material-icons">close</i>
-  //     </li>
-  //   ));
-  // };
+  componentDidMount = e => {
+    console.log("METHOD", this.props);
+  };
 
   render() {
-    return <h1>method map</h1>;
+    return this.props.tempMethods.length === 0 ? (
+      <p>waiting for methods...</p>
+    ) : (
+      this.props.tempMethods.length > 0 &&
+        this.props.tempMethods.map((step, i) => (
+          <li key={i}>
+            <textarea
+              id="step"
+              cols="75"
+              rows="5"
+              data-key={i}
+              defaultValue={step.step}
+              onChange={e => this.props.handleMethodChange(e)}
+            />
+            <i className="material-icons">close</i>
+          </li>
+        ))
+    );
   }
 }
 

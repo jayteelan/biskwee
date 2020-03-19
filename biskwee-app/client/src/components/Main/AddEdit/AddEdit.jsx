@@ -42,9 +42,17 @@ class AddEdit extends Component {
     // set component to "edit mode" if there's a recipe id passed down thru props, else render a blank form for a new recipe
     this.props.match === undefined
       ? this.setState({ _isNewRecipe: true })
-      : this.setState({
-          currentRecipe: await getData("recipes", this.props.match)
-        });
+      : await this.getDataSetState();
+  };
+
+  getDataSetState = async () => {
+    // retrieve current recipe data and set to state
+    const res = await getData("recipes", this.props.match);
+    this.setState({
+      currentRecipe: res,
+      tempName: res.name,
+      tempMethods: res.method
+    });
   };
 
   handleIngredLinesGet = async id => {
@@ -63,34 +71,41 @@ class AddEdit extends Component {
 
   handleQtyChange = e => {
     // update ingredient qty in state with num input change
-    let index = e.target.getAttribute("data-key");
-    // console.log("TARGET", e.target.value);
-    // console.log("KEY", this.state.tempIngredLines[index]);
-    // console.log("qty", this.state);
-    this.setState(prevState => ({
-      tempIngredLines: prevState.tempIngredLines.map(el => console.log(el))
-    }));
-    0;
-    console.log("state", this.state);
+    const { tempIngredLines } = this.state;
+    const index = e.target.getAttribute("data-key");
+    tempIngredLines[index].qty = parseInt(e.target.value);
+    console.log("qty", tempIngredLines[index].qty, e.target.value);
   };
 
   handleUnitChange = e => {
     // update ingredient unit in state with unit select change
-    const { ingredLines } = this.state;
+    const { tempIngredLines } = this.state;
     const recipeUnitListIndex = e.target.getAttribute("data-key");
     const selectedUnitIndex = e.target.selectedIndex - 1;
-    ingredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
+    tempIngredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
     console.log("unit", selectedUnitIndex);
   };
 
   handleIngredChange = e => {
     // update ingredient id in state with ingredient select change
-    const { ingredLines } = this.state;
+    const { tempIngredLines } = this.state;
     const selectedIngredIndex = e.target.selectedIndex - 1;
     const recipeIngredListIndex = e.target.getAttribute("data-key");
-    ingredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
+    tempIngredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
     // console.log(ingredients[recipeIngredListIndex]);
-    console.log("selectIngredIndex", selectedIngredIndex);
+    console.log(
+      "selectIngredIndex",
+      selectedIngredIndex,
+      "state",
+      this.state.tempIngredLines
+    );
+  };
+
+  handleMethodChange = e => {
+    // update method step in state with method textarea change
+    const stepIndex = e.target.getAttribute("data-key");
+    this.state.tempMethods[stepIndex].step = e.target.value;
+    console.log("state", this.state.tempMethods);
   };
 
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
@@ -121,7 +136,7 @@ class AddEdit extends Component {
       this.state._isMounted === true && (
         <form
           className="add-edit"
-          onSubmit={/* JSON.stringify temp data in state and send to API */}
+          // onSubmit={/* JSON.stringify temp data in state and send to API */}
         >
           <NameField
             {...this.props}
@@ -135,6 +150,7 @@ class AddEdit extends Component {
             onNameChange={e => this.handleNameChange(e)}
           />
 
+          <h1>Ingredients</h1>
           <IngredEditList
             {...this.props}
             _isNewRecipe={this.state._isNewRecipe}
@@ -142,9 +158,17 @@ class AddEdit extends Component {
             tempIngredLines={this.state.tempIngredLines}
             onIngredLinesGet={e => this.handleIngredLinesGet(e)}
             onQtyChange={e => this.handleQtyChange(e)}
+            onUnitChange={e => this.handleUnitChange(e)}
+            onIngredChange={e => this.handleIngredChange(e)}
           />
 
-          {/* <MethodEditList {...this.props} _isNewRecipe={this.state._isNewRecipe} /> */}
+          <h1>Method</h1>
+          <MethodEditList
+            {...this.props}
+            _isNewRecipe={this.state._isNewRecipe}
+            tempMethods={this.state.tempMethods}
+            handleMethodChange={e => this.handleMethodChange(e)}
+          />
 
           <button>Submit</button>
 
