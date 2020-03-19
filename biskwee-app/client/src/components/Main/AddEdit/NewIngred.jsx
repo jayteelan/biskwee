@@ -3,9 +3,14 @@ import React from "react";
 const NewIngred = props => {
   return (
     <li>
-      <input id="qty" type="number" placeholder="qty" />
+      <input
+        id="qty"
+        type="number"
+        placeholder="qty"
+        onChange={e => props.onNewIngredQty(e)}
+      />
 
-      <select id="unit">
+      <select id="unit" onChange={e => props.onNewIngredUnit(e)}>
         <option disabled selected>
           unit
         </option>
@@ -17,7 +22,7 @@ const NewIngred = props => {
           ))}
       </select>
 
-      <select id="ingredient">
+      <select id="ingredient" onChange={e => props.onNewIngredIngred(e)}>
         <option disabled selected>
           ingredient
         </option>
@@ -29,10 +34,7 @@ const NewIngred = props => {
           ))}
       </select>
 
-      <i
-        class="material-icons"
-        // onClick={props.handleIngredSubmit}
-      >
+      <i className="material-icons" onClick={e => props.setIngredNew(e)}>
         add_circle_outline
       </i>
     </li>

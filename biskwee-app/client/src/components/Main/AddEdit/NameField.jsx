@@ -3,7 +3,7 @@ import React, { Component } from "react";
 const NameField = props => {
   return (
     <React.Fragment>
-      <label for="recipeName">Recipe Name:</label>
+      <label htmlFor="recipeName">Recipe Name:</label>
       <input
         placeholder="Recipe name"
         name="recipeName"

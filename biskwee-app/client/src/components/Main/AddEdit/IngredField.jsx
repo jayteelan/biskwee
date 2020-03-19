@@ -68,8 +68,8 @@ class IngredField extends Component {
             </select>
 
             <i
-              lineId={line.id}
-              lineIndex={i}
+              data-line-id={line.id}
+              data-line-index={i}
               className="material-icons"
               onClick={e => this.props.setIngredDelete(e)}
             >

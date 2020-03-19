@@ -4,7 +4,8 @@ import {
   getData,
   getAllIngredLines,
   deleteIngredLine,
-  newRecipe
+  newRecipe,
+  newIngredLine
 } from "../../../api-helper";
 
 import NameField from "./NameField";
@@ -21,7 +22,12 @@ class AddEdit extends Component {
       currentRecipe: null,
       tempName: "",
       tempIngredLines: [],
-      newIngreds: [],
+      newIngred: {
+        recipe_id: null,
+        qty: null,
+        unit_id: null,
+        ingredient_id: null
+      },
       putIngreds: [],
       delIngreds: [],
       tempMethods: []
@@ -75,7 +81,7 @@ class AddEdit extends Component {
 
   getNewRecipeId = async e => {
     // e.preventDefault;
-    const newName = { name: this.state.tempName, unit_id: 1 };
+    const newName = { name: this.state.tempName, unit_id: 1, image_url: "" };
     const res = await newRecipe(newName);
     this.setState({ currentRecipe: res });
     console.log(this.state);
@@ -120,6 +126,20 @@ class AddEdit extends Component {
     );
   };
 
+  handleNewIngredQty = e => {
+    this.state.newIngred.qty = parseInt(e.target.value);
+    console.log(this.state.newIngred);
+  };
+  handleNewIngredUnit = e => {
+    this.state.newIngred.unit_id = parseInt(e.target.value);
+
+    console.log(this.state.newIngred);
+  };
+  handleNewIngredIngred = e => {
+    this.state.newIngred.ingredient_id = parseInt(e.target.value);
+    console.log(this.state.newIngred);
+  };
+
   handleMethodChange = e => {
     // update method step in state with method textarea change
     const stepIndex = e.target.getAttribute("data-key");
@@ -129,24 +149,41 @@ class AddEdit extends Component {
 
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
   setIngredDelete = e => {
-    this.state.delIngreds.push(e.target.getAttribute("lineId"));
-    this.state.tempIngredLines.splice(e.target.getAttribute("lineIndex"), 1);
+    this.state.delIngreds.push(e.target.getAttribute("data-line-id"));
+    this.state.tempIngredLines.splice(
+      e.target.getAttribute("data-line-index"),
+      1
+    );
     this.setState(this.state);
     console.log("ingred deleted");
   };
 
-  setIngredNew = e => {
+  setIngredNew = async e => {
     const recipeId = !this.state._isNewRecipe
-      ? this.state.match
+      ? this.props.match
       : this.state.currentRecipe.id;
-    this.state.newIngreds.push({ recipe_id: recipeId });
+    this.state.newIngred.recipe_id = recipeId;
+    const data = JSON.stringify(this.state.newIngred);
+
+    console.log(data);
+    const res = await newIngredLine(recipeId, data);
+    console.log(res);
+    this.state.tempIngredLines.push(this.state.newIngred);
+    // this.state.newIngred.qty = null;
+    // recipe_id: null,
+    // qty: null,
+    // unit_id: null,
+    // ingredient_id: null
+    this.setState(this.state);
   };
 
   // setIngredPut
 
   setMethodDelete = e => {
     // this.state.delMethods.push(e.target.getAttribute("stepIndex"));
-    this.state.tempMethods[e.target.getAttribute("stepIndex")] = undefined;
+    this.state.tempMethods[
+      e.target.getAttribute("data-step-index")
+    ] = undefined;
     this.setState(this.state);
     console.log(this.state);
   };
@@ -220,6 +257,10 @@ class AddEdit extends Component {
             onIngredChange={e => this.handleIngredChange(e)}
             setIngredDelete={e => this.setIngredDelete(e)}
             onIngredLineDelete={e => this.handleIngredLineDelete(e)}
+            setIngredNew={e => this.setIngredNew(e)}
+            onNewIngredQty={e => this.handleNewIngredQty(e)}
+            onNewIngredUnit={e => this.handleNewIngredUnit(e)}
+            onNewIngredIngred={e => this.handleNewIngredIngred(e)}
           />
 
           <h1>Method</h1>

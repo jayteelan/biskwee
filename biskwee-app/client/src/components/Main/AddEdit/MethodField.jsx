@@ -28,8 +28,8 @@ class MethodField extends Component {
                 onChange={e => this.props.handleMethodChange(e)}
               />
               <i
-                stepID={step.id}
-                stepIndex={i}
+                // stepID={step.id}
+                data-step-index={i}
                 className="material-icons"
                 onClick={e => this.props.setMethodDelete(e)}
               >

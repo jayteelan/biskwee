@@ -40,9 +40,7 @@ const newRecipe = async data => {
 };
 
 const newIngredLine = async (recipeId, data) => {
-  const res = await api.post(`/api/recipes/${recipeId}/ingred_lines/`, {
-    recipe: data
-  });
+  const res = await api.post(`/api/recipes/${recipeId}/ingred_lines/`, data);
   return res.data;
 };
 
