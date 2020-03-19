@@ -120,12 +120,22 @@ class AddEdit extends Component {
   };
 
   /* ---------- FORM SUBMISSION ---------- */
+  prepareRecipeData = e => {
+    // compile & JSON.stringify tempData for Recipe endpoint
+    return JSON.stringify({
+      name: this.state.tempName,
+      method: this.state.tempMethods
+    });
+  };
+
+  prepareIngredData = e => {
+    const data = JSON.stringify(this.state.tempIngredLines);
+  };
   handleSubmit = () => {
     // POST if _isNewRecipe:true
     // else PUT
   };
 
-  // compile & JSON.stringify tempData
   // POST api-helper
   // PUT api-helper
   // DELETE api-helper
@@ -134,10 +144,7 @@ class AddEdit extends Component {
   render() {
     return (
       this.state._isMounted === true && (
-        <form
-          className="add-edit"
-          // onSubmit={/* JSON.stringify temp data in state and send to API */}
-        >
+        <form className="add-edit" onSubmit={this.prepareRecipeData}>
           <NameField
             {...this.props}
             _isNewRecipe={this.state._isNewRecipe}
