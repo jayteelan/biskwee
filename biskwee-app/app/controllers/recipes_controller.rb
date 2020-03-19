@@ -1,5 +1,5 @@
 class RecipesController < ApiController
-  before_action :set_recipe, only: [:show, :update, :destroy]
+  before_action :set_recipe, only: [:show, :update, :destroy, :add_ingredient]
 
   # GET /recipes
   def index
@@ -22,7 +22,18 @@ class RecipesController < ApiController
     else
       render json: @recipe.errors, status: :unprocessable_entity
     end
-  end
+	end
+	
+	def add_ingredient
+		# puts params
+		# @ingredient=Ingredient.find(params[:ingredient_id])
+		# @recipe.ingredients << @ingredient
+		# render json: @recipe.ingredients
+		@r=Recipe.find(2)
+	end
+
+	def remove_ingredient
+	end
 
   # PATCH/PUT /recipes/1
 	def update

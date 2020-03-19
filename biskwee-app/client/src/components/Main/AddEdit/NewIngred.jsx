@@ -9,22 +9,24 @@ const NewIngred = props => {
         <option disabled selected>
           unit
         </option>
-        {props.allUnits.map((unit, i) => (
-          <option value={unit.id} key={i}>
-            {unit.name}
-          </option>
-        ))}
+        {props.allUnits &&
+          props.allUnits.map((unit, i) => (
+            <option value={unit.id} key={i}>
+              {unit.name}
+            </option>
+          ))}
       </select>
 
       <select id="ingredient">
         <option disabled selected>
           ingredient
         </option>
-        {props.allIngredients.map((ingred, i) => (
-          <option value={ingred.id} key={i}>
-            {ingred.name}
-          </option>
-        ))}
+        {props.allIngredients &&
+          props.allIngredients.map((ingred, i) => (
+            <option value={ingred.id} key={i}>
+              {ingred.name}
+            </option>
+          ))}
       </select>
 
       <i

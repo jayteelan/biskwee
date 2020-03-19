@@ -16,8 +16,6 @@ class IngredField extends Component {
     console.log("INGRProps", this.props);
   };
 
-  // componentDidUpdate?
-
   componentWillUnmount = () => {
     this.setState({ ingredLines: [] });
   };
@@ -69,7 +67,14 @@ class IngredField extends Component {
               ))}
             </select>
 
-            <i className="material-icons">close</i>
+            <i
+              lineId={line.id}
+              lineIndex={i}
+              className="material-icons"
+              onClick={e => this.props.setIngredDelete(e)}
+            >
+              close
+            </i>
           </li>
         ))
     );

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
-import { getData, getAllIngredLines } from "../../../api-helper";
+import {
+  getData,
+  getAllIngredLines,
+  deleteIngredLine
+} from "../../../api-helper";
 
 import NameField from "./NameField";
 import IngredEditList from "./IngredEditList";
@@ -16,7 +20,13 @@ class AddEdit extends Component {
       currentRecipe: null,
       tempName: "",
       tempIngredLines: [],
-      tempMethods: []
+      newIngreds: [],
+      putIngreds: [],
+      delIngreds: [],
+      tempMethods: [],
+      newMethods: [],
+      putMethods: [],
+      delMethods: []
     };
   }
 
@@ -109,8 +119,32 @@ class AddEdit extends Component {
   };
 
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
-  handleRecordDelete = e => {
+  setIngredDelete = e => {
+    this.state.delIngreds.push(e.target.getAttribute("lineId"));
+    this.state.tempIngredLines.splice(e.target.getAttribute("lineIndex"), 1);
+    this.setState(this.state);
+    console.log("ingred deleted");
+  };
+
+  setMethodDelete = e => {
+    // console.log("id", e.target.getAttribute("stepId"));
+    // console.log("index", e.target.getAttribute("stepIndex"));
+    this.state.delMethods.push(e.target.getAttribute("stepIndex"));
+    this.state.tempMethods[e.target.getAttribute("stepIndex")] = undefined;
+    this.setState(this.state);
+    console.log(this.state);
+  };
+
+  handleIngredLineDelete = async e => {
     // remove IngredLine or Method object from temp array in state when user clicks on (X) button
+    // deleteIngredLine(this.props.match, e.target.getAttribute("lineId"));
+    // this.forceUpdate();
+    // console.log(
+    //   "recipe",
+    //   this.props.match,
+    //   "ingred_line",
+    //   e.target.getAttribute("line")
+    // );
     //(update IngredField/MethodField to remove deleted lines from IngredField map)
   };
 
@@ -167,6 +201,8 @@ class AddEdit extends Component {
             onQtyChange={e => this.handleQtyChange(e)}
             onUnitChange={e => this.handleUnitChange(e)}
             onIngredChange={e => this.handleIngredChange(e)}
+            setIngredDelete={e => this.setIngredDelete(e)}
+            onIngredLineDelete={e => this.handleIngredLineDelete(e)}
           />
 
           <h1>Method</h1>
@@ -175,6 +211,7 @@ class AddEdit extends Component {
             _isNewRecipe={this.state._isNewRecipe}
             tempMethods={this.state.tempMethods}
             handleMethodChange={e => this.handleMethodChange(e)}
+            setMethodDelete={e => this.setMethodDelete(e)}
           />
 
           <button>Submit</button>
