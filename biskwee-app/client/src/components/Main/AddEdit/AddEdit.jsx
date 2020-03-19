@@ -51,7 +51,7 @@ class AddEdit extends Component {
     this.setState({
       currentRecipe: res,
       tempName: res.name,
-      tempMethods: res.method
+      tempMethods: res.method.map(method => method.step)
     });
   };
 
@@ -104,7 +104,7 @@ class AddEdit extends Component {
   handleMethodChange = e => {
     // update method step in state with method textarea change
     const stepIndex = e.target.getAttribute("data-key");
-    this.state.tempMethods[stepIndex].step = e.target.value;
+    this.state.tempMethods[stepIndex] = e.target.value;
     console.log("state", this.state.tempMethods);
   };
 

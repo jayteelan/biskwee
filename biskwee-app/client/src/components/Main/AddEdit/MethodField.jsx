@@ -22,7 +22,7 @@ class MethodField extends Component {
               cols="75"
               rows="5"
               data-key={i}
-              defaultValue={step.step}
+              defaultValue={step}
               onChange={e => this.props.handleMethodChange(e)}
             />
             <i className="material-icons">close</i>
