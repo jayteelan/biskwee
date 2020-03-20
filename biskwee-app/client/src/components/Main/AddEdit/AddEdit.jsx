@@ -250,11 +250,14 @@ class AddEdit extends Component {
   	await updateRecipe(recipeId,newData)
     };
 
+	updateAll = async () =>
+	await Promise.all([this.putChangedIngreds(),
+		this.putChangedRecipeData()])
+	
   handleSubmit = e => {
-    e.preventDefault();
-    // console.log(this.state);
-		this.putChangedIngreds();
-		this.putChangedRecipeData()
+		e.preventDefault();
+		return !this.state._isNewRecipe ? this.updateAll() : this.putChangedRecipeData()
+
     // POST if _isNewRecipe:true
     // else PUT
   };
