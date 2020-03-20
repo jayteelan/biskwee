@@ -1,7 +1,7 @@
 import React from "react";
 
 function Footer() {
-  return <h3>footer</h3>;
+  return <p>&copy;2020 Jeffrey Lan</p>;
 }
 
 export default Footer;

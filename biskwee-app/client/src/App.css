@@ -1,3 +1,91 @@
 body {
-  background-color: hotpink;
+  display: flex;
+  flex-direction: column;
+  background-color: #ddd;
+  color: #41403e;
+  text-align: center;
+}
+a {
+  color: #d63d5497;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+a:hover,
+i:hover {
+  color: #d63d55;
+  cursor: pointer;
+}
+nav a {
+  margin: 0.4rem;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.align-left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 2rem;
+}
+button {
+  box-sizing: border-box;
+  border: 2px solid #d63d5497;
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+  font-size: 1em;
+  margin: 1em;
+}
+button:hover {
+  border: 2px solid #d63d54;
+}
+input,
+select,
+textarea {
+  font-size: 1em;
+  margin: 0.2rem;
+}
+input {
+  width: 5rem;
+}
+textarea {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.recipe {
+  font-weight: 600;
+  color: #d63d54;
+  font-size: 1.5em;
+}
+.recipe input {
+  font-weight: 600;
+  color: #d63d54;
+  font-size: 1.5em;
+  width: 20rem;
+  padding: 0 1rem;
+  margin: 0 1rem;
+}
+.login {
+  font-size: 0.75em;
+  width: 15rem;
+  text-align: center;
+}
+
+/* ----- SMALL -----*/
+@media only screen and (max-width: 601px) {
+  body {
+    padding: 1rem;
+    font-size: 1.3em;
+  }
+  nav {
+    justify-content: space-between;
+  }
+  textarea {
+    width: 75%;
+  }
 }

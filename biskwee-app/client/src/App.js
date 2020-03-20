@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import { getAllData } from "./api-helper";
 import "./App.css";
 
@@ -84,7 +84,7 @@ class App extends Component {
             exact
             path="/login"
             component={props => {
-              return <Login />;
+              return <Login history={this.props.history} />;
             }}
           />
           <Route

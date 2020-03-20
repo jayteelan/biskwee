@@ -33,7 +33,7 @@ class MethodList extends Component {
     ) : (
       <React.Fragment>
         <h1>Method</h1>
-        <ol>
+        <ol className="align-left">
           {this.state.method.map((step, index) => (
             <li key={index}>
               <p>{step.step}</p>

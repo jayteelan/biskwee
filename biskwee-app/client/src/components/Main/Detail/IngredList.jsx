@@ -33,7 +33,7 @@ class IngredList extends Component {
     ) : (
       <React.Fragment>
         <h1>Ingredients</h1>
-        <ul>
+        <ul className="align-left">
           {this.state.parsedIngreds.map(el => (
             <li>{el}</li>
           ))}

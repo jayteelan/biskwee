@@ -1,7 +1,5 @@
 import React from "react";
 
-import "../../../css/Card.css";
-
 const Card = props => {
   return (
     <div className="recipe-card">

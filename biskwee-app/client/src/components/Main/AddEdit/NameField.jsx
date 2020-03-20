@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 const NameField = props => {
   return (
-    <React.Fragment>
+    <div className="recipe">
       <label htmlFor="recipeName">Recipe Name:</label>
       <input
         placeholder="Recipe name"
@@ -12,7 +12,7 @@ const NameField = props => {
         onChange={e => props.onNameChange(e)}
         onBlur={e => (props._isNewRecipe ? props.onNewRecipe(e) : null)}
       />
-    </React.Fragment>
+    </div>
   );
   // }
 };

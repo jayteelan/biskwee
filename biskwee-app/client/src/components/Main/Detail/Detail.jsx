@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { getData, deleteRecipe } from "../../../api-helper";
 
 import IngredList from "./IngredList";
@@ -10,7 +10,7 @@ class Detail extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = { redirect: false };
   }
 
   componentDidMount = async () => {
@@ -19,10 +19,13 @@ class Detail extends Component {
 
   handleDelete = async () => {
     await deleteRecipe(this.props.match);
+    this.setState({ redirect: true });
   };
 
   render() {
-    return (
+    return this.state.redirect ? (
+      <Redirect to="/recipes" />
+    ) : (
       <div>
         <h1>{this.state.name}</h1>
         <Link to={`/recipes/${this.props.match}/edit`}>Edit this recipe</Link>
