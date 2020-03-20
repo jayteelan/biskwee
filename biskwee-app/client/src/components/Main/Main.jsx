@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import Login from "../Main/Login/Login";
+import Signup from "../Main/Signup/Signup";
 
 class Main extends Component {
   constructor(props) {
@@ -15,9 +19,16 @@ class Main extends Component {
   componentWillUnmount() {
     this.setState({ _isMounted: false });
   }
+  handleLogin = () => {
+    return !localStorage.authToken ? (
+      <span>
+        <Login /> or <Link to="/signup">Sign up for a new account</Link>
+      </span>
+    ) : null;
+  };
 
   render() {
-    return <h1>MAIN</h1>;
+    return <h1>{this.handleLogin()}</h1>;
   }
 }
 

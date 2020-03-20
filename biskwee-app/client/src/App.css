@@ -1,3 +1,10 @@
 body {
   background-color: hotpink;
 }
+
+/* ----- SMALL -----*/
+@media only screen and (max-width: 601px) {
+  body {
+    background-color: aquamarine;
+  }
+}

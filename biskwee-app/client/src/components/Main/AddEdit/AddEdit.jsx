@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
 import {
   getData,
@@ -39,7 +40,8 @@ class AddEdit extends Component {
       putIngreds: [],
       delIngred: null,
       tempMethods: [],
-      newMethod: ""
+      newMethod: "",
+      redirect: false
       // putMethods: [],
       // delMethods: []
     };
@@ -234,32 +236,32 @@ class AddEdit extends Component {
     const recipeId = !this.state._isNewRecipe
       ? this.props.match
       : this.state.currentRecipe.id;
-		const toUpdate = this.removeDuplicatePuts(this.state.putIngreds);
-    const updateArr=toUpdate.map(
-   async ingred => await updateIngredLine(recipeId, ingred.id, ingred)
-		);
-		await Promise.all(updateArr)
+    const toUpdate = this.removeDuplicatePuts(this.state.putIngreds);
+    const updateArr = toUpdate.map(
+      async ingred => await updateIngredLine(recipeId, ingred.id, ingred)
+    );
+    await Promise.all(updateArr);
   };
 
-  putChangedRecipeData = async() => {
-		// compile tempData for Recipe endpoint
-		    const recipeId = !this.state._isNewRecipe
-          ? this.props.match
-					: this.state.currentRecipe.id;
-		const newData={name:this.state.tempName,method:this.state.tempMethods}
-  	await updateRecipe(recipeId,newData)
+  putChangedRecipeData = async () => {
+    // compile tempData for Recipe endpoint
+    const recipeId = !this.state._isNewRecipe
+      ? this.props.match
+      : this.state.currentRecipe.id;
+    const newData = {
+      name: this.state.tempName,
+      method: this.state.tempMethods
     };
+    await updateRecipe(recipeId, newData);
+  };
 
-	updateAll = async () =>
-	await Promise.all([this.putChangedIngreds(),
-		this.putChangedRecipeData()])
-	
+  updateAll = async () =>
+    await Promise.all([this.putChangedIngreds(), this.putChangedRecipeData()]);
+
   handleSubmit = e => {
-		e.preventDefault();
-		return !this.state._isNewRecipe ? this.updateAll() : this.putChangedRecipeData()
-
-    // POST if _isNewRecipe:true
-    // else PUT
+    e.preventDefault();
+    !this.state._isNewRecipe ? this.updateAll() : this.putChangedRecipeData();
+    this.setState({ redirect: true });
   };
 
   // POST api-helper
@@ -268,7 +270,9 @@ class AddEdit extends Component {
 
   /* ---------- RENDER ---------- */
   render() {
-    return (
+    return this.state.redirect ? (
+      <Redirect to="/recipes" />
+    ) : (
       this.state._isMounted === true && (
         <form className="add-edit" onSubmit={e => this.handleSubmit(e)}>
           <NameField
@@ -279,7 +283,6 @@ class AddEdit extends Component {
                 ? undefined
                 : this.state.currentRecipe.name
             }
-            // tempName={this.state.tempRecipe.name}
             onNameChange={e => this.handleNameChange(e)}
             onNewRecipe={e => this.getNewRecipeId(e)}
           />
@@ -316,8 +319,6 @@ class AddEdit extends Component {
           />
 
           <button>Submit</button>
-
-          {/* Delete Button? */}
         </form>
       )
     );
