@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { getAllData } from "../../../api-helper";
 
 import Card from "../AllRecipes/Card";
-import Detail from "../Detail/Detail";
 
 class CardList extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class CardList extends Component {
 
   makeCards = async () => {
     const recipeArr = await getAllData("recipes");
-    // console.log("recipe", recipeArr);
     this.setState({ allRecipes: recipeArr });
   };
 

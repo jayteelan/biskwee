@@ -31,19 +31,12 @@ class AddEdit extends Component {
         unit_id: null,
         ingredient_id: null
       },
-      updateIngred: {
-        // id: null,
-        // qty: null,
-        // unit_id: null,
-        // ingredient_id: null
-      },
+      updateIngred: {},
       putIngreds: [],
       delIngred: null,
       tempMethods: [],
       newMethod: "",
       redirect: false
-      // putMethods: [],
-      // delMethods: []
     };
   }
 
@@ -90,7 +83,6 @@ class AddEdit extends Component {
   };
 
   getNewRecipeId = async e => {
-    // e.preventDefault;
     const newName = { name: this.state.tempName, unit_id: 1, image_url: "" };
     const res = await newRecipe(newName);
     this.setState({ currentRecipe: res });
@@ -110,7 +102,6 @@ class AddEdit extends Component {
     const index = e.target.getAttribute("data-key");
     const newVal = parseInt(e.target.value);
     tempIngredLines[index].qty = newVal;
-    // this.state.updateIngred.qty=newVal
     console.log("qty", tempIngredLines[index].qty, e.target.value);
   };
 
@@ -120,7 +111,6 @@ class AddEdit extends Component {
     const recipeUnitListIndex = e.target.getAttribute("data-key");
     const selectedUnitIndex = e.target.selectedIndex;
     tempIngredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
-    // this.state.updateIngred.unit_id=selectedUnitIndex
     console.log("unit", selectedUnitIndex);
   };
 
@@ -130,14 +120,6 @@ class AddEdit extends Component {
     const selectedIngredIndex = e.target.selectedIndex;
     const recipeIngredListIndex = e.target.getAttribute("data-key");
     tempIngredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
-    // this.state.updateIngred.ingredient_id=selectedIngredIndex
-    // console.log(ingredients[recipeIngredListIndex]);
-    console.log(
-      "selectIngredIndex",
-      selectedIngredIndex,
-      "state",
-      this.state.tempIngredLines
-    );
   };
 
   handleNewIngredQty = e => {
@@ -161,7 +143,6 @@ class AddEdit extends Component {
   };
   handleUpdateIngredBlur = e => {
     this.state.putIngreds.push(this.state.updateIngred);
-    // console.log("putIngreds", this.state.putIngreds);
   };
 
   handleMethodChange = e => {
@@ -199,9 +180,7 @@ class AddEdit extends Component {
       : this.state.currentRecipe.id;
     this.state.newIngred.recipe_id = recipeId;
     const data = JSON.stringify(this.state.newIngred);
-    // console.log(data);
     const res = await newIngredLine(recipeId, data);
-    // console.log(res);
     this.state.tempIngredLines.push(this.state.newIngred);
     this.setState(this.state);
   };
@@ -224,7 +203,7 @@ class AddEdit extends Component {
   };
 
   /* ---------- FORM SUBMISSION ---------- */
-  removeDuplicatePuts = (arr /*this.state.putIngreds*/) => {
+  removeDuplicatePuts = arr => {
     // from (https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript)
     const deDuped = Array.from(new Set(arr.map(JSON.stringify))).map(
       JSON.parse
@@ -263,10 +242,6 @@ class AddEdit extends Component {
     !this.state._isNewRecipe ? this.updateAll() : this.putChangedRecipeData();
     this.setState({ redirect: true });
   };
-
-  // POST api-helper
-  // PUT api-helper
-  // DELETE api-helper
 
   /* ---------- RENDER ---------- */
   render() {

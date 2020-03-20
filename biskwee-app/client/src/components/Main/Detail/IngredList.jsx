@@ -9,7 +9,6 @@ class IngredList extends Component {
   }
 
   componentDidMount = async () => {
-    // console.log("INGRED", this.props);
     const ingredLines = await getAllIngredLines(this.props.match);
     this.setState({ ingredLines: ingredLines });
     console.log("INGREDLIST", this.state);

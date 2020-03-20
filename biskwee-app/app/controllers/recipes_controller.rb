@@ -25,10 +25,6 @@ class RecipesController < ApiController
 	end
 	
 	def add_ingredient
-		# puts params
-		# @ingredient=Ingredient.find(params[:ingredient_id])
-		# @recipe.ingredients << @ingredient
-		# render json: @recipe.ingredients
 		@r=Recipe.find(2)
 	end
 

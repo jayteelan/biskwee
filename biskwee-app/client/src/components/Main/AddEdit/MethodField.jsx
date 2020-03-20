@@ -1,16 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class MethodField extends Component {
-  constructor(props) {
-    super(props);
+const MethodField=props=>{
 
-    this.state = {};
-  }
-  componentDidMount = e => {
-    console.log("METHOD", this.props);
-  };
-
-  /* ---------- RENDER ---------- */
   render() {
     return this.props.tempMethods.length === 0 ? (
       <p>waiting for methods...</p>
@@ -28,7 +19,6 @@ class MethodField extends Component {
                 onChange={e => this.props.handleMethodChange(e)}
               />
               <i
-                // stepID={step.id}
                 data-step-index={i}
                 className="material-icons"
                 onClick={e => this.props.setMethodDelete(e)}

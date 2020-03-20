@@ -30,7 +30,6 @@ class Signup extends Component {
     const formInput = this.state.signup;
     console.log("form", formInput);
     const user = await createNewUser(JSON.stringify(formInput));
-    // console.log("current", currentUser);
     this.setState({ redirect: true, current_user: user });
     console.log("reg", this.state);
   };

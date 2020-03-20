@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { getAllIngredLines, deleteIngredLine } from "../../../api-helper";
 
 class IngredField extends Component {
   constructor(props) {
@@ -11,8 +10,6 @@ class IngredField extends Component {
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     await this.props.onIngredLinesGet(this.props.match);
-    // this.props.onIngredLinesGet(data);
-    // console.log("INGREDLIST", this.state);
     console.log("INGRProps", this.props);
   };
 

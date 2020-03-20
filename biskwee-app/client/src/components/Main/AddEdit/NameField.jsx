@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 const NameField = props => {
   return (
@@ -14,7 +14,6 @@ const NameField = props => {
       />
     </div>
   );
-  // }
 };
 
 export default NameField;

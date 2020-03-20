@@ -52,7 +52,6 @@ const getData = async (endpoint, id) => {
 
 const getAllData = async endpoint => {
   const res = await api.get(`/api/${endpoint}/`);
-  // console.log(res.data);
   return res.data;
 };
 

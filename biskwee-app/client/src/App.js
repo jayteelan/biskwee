@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { getAllData } from "./api-helper";
 import "./App.css";
 
@@ -55,12 +55,6 @@ class App extends Component {
     });
     console.log("logged out", localStorage.authToken);
   };
-
-  // handleLogoutButton = () => {
-  //   return localStorage.authToken && localStorage.authToken.length > 9 ?
-  // 		<button onClick={this.handleLogout}>Log Out</button> :
-  // 		null
-  // };
 
   /* ---------- RENDER ---------- */
   render() {
