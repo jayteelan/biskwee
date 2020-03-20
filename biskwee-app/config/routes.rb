@@ -12,14 +12,11 @@ Rails.application.routes.draw do
 			end
 			resources :ingredients
 			resources :units
-			resources :categories
+			# resources :categories
 			# resources :ingred_lines
 		end
-
-		namespace :v2 do
-      # Things yet to come
-		end
 	end
+
 		
 	devise_for :admin_users, ActiveAdmin::Devise.config
 	ActiveAdmin.routes(self)

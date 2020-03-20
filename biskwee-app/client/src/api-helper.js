@@ -35,14 +35,12 @@ const createNewUser = async formData => {
 
 /* ---------- CREATE ---------- */
 const newRecipe = async data => {
-  const res = await api.post("/api/recipes", { recipe: data });
+  const res = await api.post("/api/recipes", data);
   return res.data;
 };
 
 const newIngredLine = async (recipeId, data) => {
-  const res = await api.post(`/api/recipes/${recipeId}/ingred_lines/`, {
-    recipe: data
-  });
+  const res = await api.post(`/api/recipes/${recipeId}/ingred_lines/`, data);
   return res.data;
 };
 
@@ -72,7 +70,7 @@ const getAllIngredLines = async recipeId => {
 
 /* ---------- UPDATE ---------- */
 const updateRecipe = async (id, newData) => {
-  const res = await api.put(`/api/recipes/${id}`, { recipe: newData });
+  const res = await api.put(`/api/recipes/${id}`, newData);
   console.log(res.data);
   return res.data;
 };
@@ -80,7 +78,7 @@ const updateRecipe = async (id, newData) => {
 const updateIngredLine = async (recipeId, ingredLineId, newData) => {
   const res = await api.put(
     `/api/recipes/${recipeId}/ingred_lines/${ingredLineId}`,
-    { recipe: newData }
+    newData
   );
   console.log(res.data);
   return res.data;

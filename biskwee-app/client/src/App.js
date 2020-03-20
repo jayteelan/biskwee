@@ -125,14 +125,25 @@ class App extends Component {
             exact
             path="/recipes/:recipe_id/edit"
             component={props => {
-              return <AddEdit match={props.match.params.recipe_id} />;
+              return (
+                <AddEdit
+                  match={props.match.params.recipe_id}
+                  allIngredients={this.state.allIngredients}
+                  allUnits={this.state.allUnits}
+                />
+              );
             }}
           />
           <Route
             exact
-            path="/recipes/new"
+            path="/newrecipe"
             component={props => {
-              return <AddEdit />;
+              return (
+                <AddEdit
+                  allIngredients={this.state.allIngredients}
+                  allUnits={this.state.allUnits}
+                />
+              );
             }}
           />
         </Switch>
