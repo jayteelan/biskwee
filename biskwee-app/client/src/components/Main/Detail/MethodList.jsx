@@ -10,7 +10,6 @@ class MethodList extends Component {
   componentDidMount = async () => {
     const res = await getData("recipes", this.props.match);
     this.setState({ method: res.method });
-    console.log(this.state);
   };
 
   render() {

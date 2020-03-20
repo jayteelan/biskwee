@@ -22,16 +22,13 @@ class Signup extends Component {
     this.setState(prevState => ({
       signup: { ...prevState.signup, [name]: value }
     }));
-    console.log(this.state);
   };
 
   handleSignup = async e => {
     e.preventDefault();
     const formInput = this.state.signup;
-    console.log("form", formInput);
     const user = await createNewUser(JSON.stringify(formInput));
     this.setState({ redirect: true, current_user: user });
-    console.log("reg", this.state);
   };
 
   render() {

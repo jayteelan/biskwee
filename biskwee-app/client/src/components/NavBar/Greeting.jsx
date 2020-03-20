@@ -6,9 +6,7 @@ class Greeting extends Component {
 
     this.state = {};
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
+
   handleGreeting = () => {
     return localStorage.authToken ? (
       <span>

@@ -10,7 +10,6 @@ class IngredField extends Component {
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     await this.props.onIngredLinesGet(this.props.match);
-    console.log("INGRProps", this.props);
   };
 
   componentWillUnmount = () => {

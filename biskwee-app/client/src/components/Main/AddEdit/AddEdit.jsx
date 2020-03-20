@@ -43,7 +43,6 @@ class AddEdit extends Component {
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     await this.handleDataGet();
-    console.log(this.state);
     this.setState({ _isMounted: true });
   };
   componentWillUnmount() {
@@ -79,21 +78,18 @@ class AddEdit extends Component {
     // retrieve data for current recipe from ingredient-recipe join table and set to state
     const data = await getAllIngredLines(id);
     this.setState({ tempIngredLines: data });
-    console.log(this.state);
   };
 
   getNewRecipeId = async e => {
     const newName = { name: this.state.tempName, unit_id: 1, image_url: "" };
     const res = await newRecipe(newName);
     this.setState({ currentRecipe: res });
-    console.log(this.state);
   };
 
   /* ---------- HANDLE VALUE CHANGES ---------- */
   handleNameChange = e => {
     // update recipe name in state with text input change
     this.setState({ tempName: e.target.value });
-    console.log(this.state.tempName);
   };
 
   handleQtyChange = e => {
@@ -102,7 +98,6 @@ class AddEdit extends Component {
     const index = e.target.getAttribute("data-key");
     const newVal = parseInt(e.target.value);
     tempIngredLines[index].qty = newVal;
-    console.log("qty", tempIngredLines[index].qty, e.target.value);
   };
 
   handleUnitChange = e => {
@@ -111,7 +106,6 @@ class AddEdit extends Component {
     const recipeUnitListIndex = e.target.getAttribute("data-key");
     const selectedUnitIndex = e.target.selectedIndex;
     tempIngredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
-    console.log("unit", selectedUnitIndex);
   };
 
   handleIngredChange = e => {
@@ -124,22 +118,17 @@ class AddEdit extends Component {
 
   handleNewIngredQty = e => {
     this.state.newIngred.qty = parseInt(e.target.value);
-    console.log(this.state.newIngred);
   };
   handleNewIngredUnit = e => {
     this.state.newIngred.unit_id = parseInt(e.target.value);
-
-    console.log(this.state.newIngred);
   };
   handleNewIngredIngred = e => {
     this.state.newIngred.ingredient_id = parseInt(e.target.value);
-    console.log(this.state.newIngred);
   };
 
   handleUpdateIngredFocus = e => {
     const index = e.target.getAttribute("data-key");
     this.setState({ updateIngred: this.state.tempIngredLines[index] });
-    console.log(this.state.updateIngred);
   };
   handleUpdateIngredBlur = e => {
     this.state.putIngreds.push(this.state.updateIngred);
@@ -149,13 +138,11 @@ class AddEdit extends Component {
     // update method step in state with method textarea change
     const stepIndex = e.target.getAttribute("data-key");
     this.state.tempMethods[stepIndex] = e.target.value;
-    console.log("state", this.state.tempMethods);
   };
 
   handleNewMethodVal = e => {
     const methodVal = e.target.value;
     this.setState({ newMethod: methodVal });
-    console.log(this.state.newMethod);
   };
 
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
@@ -171,7 +158,6 @@ class AddEdit extends Component {
     );
     await deleteIngredLine(recipeId, targetId);
     this.setState(this.state);
-    console.log("ingred deleted");
   };
 
   setIngredNew = async e => {
@@ -185,21 +171,17 @@ class AddEdit extends Component {
     this.setState(this.state);
   };
 
-  // setIngredPut
-
   setMethodDelete = e => {
     this.state.tempMethods[
       e.target.getAttribute("data-step-index")
     ] = undefined;
     this.setState(this.state);
-    console.log(this.state);
   };
 
   setMethodNew = e => {
     const newMethod = this.state.newMethod;
     this.state.tempMethods.push(newMethod);
     this.setState(this.state);
-    console.log(this.state.tempMethods);
   };
 
   /* ---------- FORM SUBMISSION ---------- */
@@ -263,7 +245,7 @@ class AddEdit extends Component {
           />
 
           <h1>Ingredients</h1>
-          <ul>
+          <ul className="col">
             <IngredEditList
               {...this.props}
               _isNewRecipe={this.state._isNewRecipe}
@@ -284,7 +266,7 @@ class AddEdit extends Component {
             />
           </ul>
           <h1>Method</h1>
-          <ul>
+          <ul className="col">
             <MethodEditList
               {...this.props}
               _isNewRecipe={this.state._isNewRecipe}

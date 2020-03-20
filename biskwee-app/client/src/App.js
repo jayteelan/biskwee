@@ -38,12 +38,10 @@ class App extends Component {
       getAllData("ingredients"),
       getAllData("units")
     ]);
-    console.log("set", res);
     this.setState({
       allIngredients: res[0],
       allUnits: res[1]
     });
-    console.log(this.state);
   };
 
   /* ---------- LOG OUT ---------- */
@@ -53,7 +51,6 @@ class App extends Component {
       currentUser: null,
       redirect: true
     });
-    console.log("logged out", localStorage.authToken);
   };
 
   /* ---------- RENDER ---------- */

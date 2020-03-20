@@ -29,7 +29,6 @@ class Login extends Component {
     const user = await loginUser(formInput);
 
     this.setState(this.state);
-    console.log(user);
     return user ? <Redirect to="/loginfailed" /> : <Redirect to="/recipes" />;
   };
 
