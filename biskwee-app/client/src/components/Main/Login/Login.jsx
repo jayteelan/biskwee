@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-// import { createBrowserHistory } from "history";
 import { loginUser } from "../../../api-helper";
 
 class Login extends Component {
@@ -28,10 +27,8 @@ class Login extends Component {
     e.preventDefault();
     const formInput = this.state.user_form;
     const user = await loginUser(formInput);
-    // this.setState({ redirect: true });
 
     this.setState(this.state);
-    console.log(user);
     return user ? <Redirect to="/loginfailed" /> : <Redirect to="/recipes" />;
   };
 

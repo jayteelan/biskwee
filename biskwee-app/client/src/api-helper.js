@@ -12,11 +12,9 @@ const api = axios.create({
 /* ---------- LOGIN/SIGNUP ---------- */
 const loginUser = async formData => {
   const res = await api.post(`/api/v1/auth`, formData);
-  console.log("login", res);
   localStorage.setItem("authToken", res.data.token);
   api.defaults.headers.common.authorization = `Bearer ${res.data.token}`;
 
-  console.log("auth", localStorage.authToken);
   return res.data.token;
 };
 
@@ -24,7 +22,6 @@ const createNewUser = async formData => {
   try {
     // create new user
     const res = await api.post(`/users`, formData);
-    console.log("api-newUser", res.data);
     // log in new user
     loginUser(formData);
     return res.data;
@@ -52,7 +49,6 @@ const getData = async (endpoint, id) => {
 
 const getAllData = async endpoint => {
   const res = await api.get(`/api/${endpoint}/`);
-  // console.log(res.data);
   return res.data;
 };
 
@@ -71,7 +67,6 @@ const getAllIngredLines = async recipeId => {
 /* ---------- UPDATE ---------- */
 const updateRecipe = async (id, newData) => {
   const res = await api.put(`/api/recipes/${id}`, newData);
-  console.log(res.data);
   return res.data;
 };
 
@@ -80,7 +75,6 @@ const updateIngredLine = async (recipeId, ingredLineId, newData) => {
     `/api/recipes/${recipeId}/ingred_lines/${ingredLineId}`,
     newData
   );
-  console.log(res.data);
   return res.data;
 };
 

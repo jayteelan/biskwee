@@ -31,26 +31,18 @@ class AddEdit extends Component {
         unit_id: null,
         ingredient_id: null
       },
-      updateIngred: {
-        // id: null,
-        // qty: null,
-        // unit_id: null,
-        // ingredient_id: null
-      },
+      updateIngred: {},
       putIngreds: [],
       delIngred: null,
       tempMethods: [],
       newMethod: "",
       redirect: false
-      // putMethods: [],
-      // delMethods: []
     };
   }
 
   /* ---------- LIFECYCLE ---------- */
   componentDidMount = async () => {
     await this.handleDataGet();
-    console.log(this.state);
     this.setState({ _isMounted: true });
   };
   componentWillUnmount() {
@@ -86,22 +78,18 @@ class AddEdit extends Component {
     // retrieve data for current recipe from ingredient-recipe join table and set to state
     const data = await getAllIngredLines(id);
     this.setState({ tempIngredLines: data });
-    console.log(this.state);
   };
 
   getNewRecipeId = async e => {
-    // e.preventDefault;
     const newName = { name: this.state.tempName, unit_id: 1, image_url: "" };
     const res = await newRecipe(newName);
     this.setState({ currentRecipe: res });
-    console.log(this.state);
   };
 
   /* ---------- HANDLE VALUE CHANGES ---------- */
   handleNameChange = e => {
     // update recipe name in state with text input change
     this.setState({ tempName: e.target.value });
-    console.log(this.state.tempName);
   };
 
   handleQtyChange = e => {
@@ -110,8 +98,6 @@ class AddEdit extends Component {
     const index = e.target.getAttribute("data-key");
     const newVal = parseInt(e.target.value);
     tempIngredLines[index].qty = newVal;
-    // this.state.updateIngred.qty=newVal
-    console.log("qty", tempIngredLines[index].qty, e.target.value);
   };
 
   handleUnitChange = e => {
@@ -120,8 +106,6 @@ class AddEdit extends Component {
     const recipeUnitListIndex = e.target.getAttribute("data-key");
     const selectedUnitIndex = e.target.selectedIndex;
     tempIngredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
-    // this.state.updateIngred.unit_id=selectedUnitIndex
-    console.log("unit", selectedUnitIndex);
   };
 
   handleIngredChange = e => {
@@ -130,51 +114,35 @@ class AddEdit extends Component {
     const selectedIngredIndex = e.target.selectedIndex;
     const recipeIngredListIndex = e.target.getAttribute("data-key");
     tempIngredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
-    // this.state.updateIngred.ingredient_id=selectedIngredIndex
-    // console.log(ingredients[recipeIngredListIndex]);
-    console.log(
-      "selectIngredIndex",
-      selectedIngredIndex,
-      "state",
-      this.state.tempIngredLines
-    );
   };
 
   handleNewIngredQty = e => {
     this.state.newIngred.qty = parseInt(e.target.value);
-    console.log(this.state.newIngred);
   };
   handleNewIngredUnit = e => {
     this.state.newIngred.unit_id = parseInt(e.target.value);
-
-    console.log(this.state.newIngred);
   };
   handleNewIngredIngred = e => {
     this.state.newIngred.ingredient_id = parseInt(e.target.value);
-    console.log(this.state.newIngred);
   };
 
   handleUpdateIngredFocus = e => {
     const index = e.target.getAttribute("data-key");
     this.setState({ updateIngred: this.state.tempIngredLines[index] });
-    console.log(this.state.updateIngred);
   };
   handleUpdateIngredBlur = e => {
     this.state.putIngreds.push(this.state.updateIngred);
-    // console.log("putIngreds", this.state.putIngreds);
   };
 
   handleMethodChange = e => {
     // update method step in state with method textarea change
     const stepIndex = e.target.getAttribute("data-key");
     this.state.tempMethods[stepIndex] = e.target.value;
-    console.log("state", this.state.tempMethods);
   };
 
   handleNewMethodVal = e => {
     const methodVal = e.target.value;
     this.setState({ newMethod: methodVal });
-    console.log(this.state.newMethod);
   };
 
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
@@ -190,7 +158,6 @@ class AddEdit extends Component {
     );
     await deleteIngredLine(recipeId, targetId);
     this.setState(this.state);
-    console.log("ingred deleted");
   };
 
   setIngredNew = async e => {
@@ -199,32 +166,26 @@ class AddEdit extends Component {
       : this.state.currentRecipe.id;
     this.state.newIngred.recipe_id = recipeId;
     const data = JSON.stringify(this.state.newIngred);
-    // console.log(data);
     const res = await newIngredLine(recipeId, data);
-    // console.log(res);
     this.state.tempIngredLines.push(this.state.newIngred);
     this.setState(this.state);
   };
-
-  // setIngredPut
 
   setMethodDelete = e => {
     this.state.tempMethods[
       e.target.getAttribute("data-step-index")
     ] = undefined;
     this.setState(this.state);
-    console.log(this.state);
   };
 
   setMethodNew = e => {
     const newMethod = this.state.newMethod;
     this.state.tempMethods.push(newMethod);
     this.setState(this.state);
-    console.log(this.state.tempMethods);
   };
 
   /* ---------- FORM SUBMISSION ---------- */
-  removeDuplicatePuts = (arr /*this.state.putIngreds*/) => {
+  removeDuplicatePuts = arr => {
     // from (https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript)
     const deDuped = Array.from(new Set(arr.map(JSON.stringify))).map(
       JSON.parse
@@ -264,10 +225,6 @@ class AddEdit extends Component {
     this.setState({ redirect: true });
   };
 
-  // POST api-helper
-  // PUT api-helper
-  // DELETE api-helper
-
   /* ---------- RENDER ---------- */
   render() {
     return this.state.redirect ? (
@@ -288,7 +245,7 @@ class AddEdit extends Component {
           />
 
           <h1>Ingredients</h1>
-          <ul>
+          <ul className="col">
             <IngredEditList
               {...this.props}
               _isNewRecipe={this.state._isNewRecipe}
@@ -309,7 +266,7 @@ class AddEdit extends Component {
             />
           </ul>
           <h1>Method</h1>
-          <ul>
+          <ul className="col">
             <MethodEditList
               {...this.props}
               _isNewRecipe={this.state._isNewRecipe}

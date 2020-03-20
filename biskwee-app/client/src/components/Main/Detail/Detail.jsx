@@ -5,7 +5,6 @@ import { getData, deleteRecipe } from "../../../api-helper";
 import IngredList from "./IngredList";
 import MethodList from "./MethodList";
 
-// const Detail = props => {
 class Detail extends Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { getAllIngredLines } from "../../../api-helper";
+import React from "react";
 
 import IngredField from "./IngredField";
 import NewIngred from "./NewIngred";
@@ -12,6 +11,5 @@ const IngredEditList = props => {
     </React.Fragment>
   );
 };
-// }
 
 export default IngredEditList;

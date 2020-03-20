@@ -9,10 +9,8 @@ class IngredList extends Component {
   }
 
   componentDidMount = async () => {
-    // console.log("INGRED", this.props);
     const ingredLines = await getAllIngredLines(this.props.match);
     this.setState({ ingredLines: ingredLines });
-    console.log("INGREDLIST", this.state);
     this.state.ingredLines.length > 0 && this.parseIngreds();
   };
 
@@ -22,9 +20,7 @@ class IngredList extends Component {
         this.props.allIngredients[obj.ingredient_id - 1].name
       }`;
     });
-    this.setState({ parsedIngreds: ingredParsed }, () => {
-      console.log("parsed!", this.state);
-    });
+    this.setState({ parsedIngreds: ingredParsed }, () => {});
   };
 
   render() {
