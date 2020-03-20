@@ -288,35 +288,38 @@ class AddEdit extends Component {
           />
 
           <h1>Ingredients</h1>
-          <IngredEditList
-            {...this.props}
-            _isNewRecipe={this.state._isNewRecipe}
-            match={this.props.match}
-            tempIngredLines={this.state.tempIngredLines}
-            onIngredLinesGet={e => this.handleIngredLinesGet(e)}
-            onQtyChange={e => this.handleQtyChange(e)}
-            onUnitChange={e => this.handleUnitChange(e)}
-            onIngredChange={e => this.handleIngredChange(e)}
-            setIngredDelete={e => this.setIngredDelete(e)}
-            onIngredLineDelete={e => this.handleIngredLineDelete(e)}
-            setIngredNew={e => this.setIngredNew(e)}
-            onNewIngredQty={e => this.handleNewIngredQty(e)}
-            onNewIngredUnit={e => this.handleNewIngredUnit(e)}
-            onNewIngredIngred={e => this.handleNewIngredIngred(e)}
-            onUpdateIngredFocus={e => this.handleUpdateIngredFocus(e)}
-            onUpdateIngredBlur={e => this.handleUpdateIngredBlur(e)}
-          />
-
+          <ul>
+            <IngredEditList
+              {...this.props}
+              _isNewRecipe={this.state._isNewRecipe}
+              match={this.props.match}
+              tempIngredLines={this.state.tempIngredLines}
+              onIngredLinesGet={e => this.handleIngredLinesGet(e)}
+              onQtyChange={e => this.handleQtyChange(e)}
+              onUnitChange={e => this.handleUnitChange(e)}
+              onIngredChange={e => this.handleIngredChange(e)}
+              setIngredDelete={e => this.setIngredDelete(e)}
+              onIngredLineDelete={e => this.handleIngredLineDelete(e)}
+              setIngredNew={e => this.setIngredNew(e)}
+              onNewIngredQty={e => this.handleNewIngredQty(e)}
+              onNewIngredUnit={e => this.handleNewIngredUnit(e)}
+              onNewIngredIngred={e => this.handleNewIngredIngred(e)}
+              onUpdateIngredFocus={e => this.handleUpdateIngredFocus(e)}
+              onUpdateIngredBlur={e => this.handleUpdateIngredBlur(e)}
+            />
+          </ul>
           <h1>Method</h1>
-          <MethodEditList
-            {...this.props}
-            _isNewRecipe={this.state._isNewRecipe}
-            tempMethods={this.state.tempMethods}
-            handleMethodChange={e => this.handleMethodChange(e)}
-            setMethodDelete={e => this.setMethodDelete(e)}
-            onNewMethodVal={e => this.handleNewMethodVal(e)}
-            setMethodNew={e => this.setMethodNew(e)}
-          />
+          <ul>
+            <MethodEditList
+              {...this.props}
+              _isNewRecipe={this.state._isNewRecipe}
+              tempMethods={this.state.tempMethods}
+              handleMethodChange={e => this.handleMethodChange(e)}
+              setMethodDelete={e => this.setMethodDelete(e)}
+              onNewMethodVal={e => this.handleNewMethodVal(e)}
+              setMethodNew={e => this.setMethodNew(e)}
+            />
+          </ul>
 
           <button>Submit</button>
         </form>

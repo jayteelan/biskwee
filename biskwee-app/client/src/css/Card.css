@@ -1,8 +1,8 @@
 ul {
-  list-style: none;
   display: flex;
-  padding: 0;
+  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 .recipe-card {
   display: inline-flex;
@@ -19,18 +19,20 @@ ul {
   height: 100%;
   width: auto;
   z-index: 0;
-  filter: blur(8px);
-
+  filter: blur(8px) grayscale(60%);
   transition: all 0.5s ease;
 }
 .recipe-card img:hover {
   filter: none;
 }
+
 /* ----- EXTRA SMALL -----*/
 @media only screen and (max-width: 600px) {
   .recipe-card {
-    flex-direction: column-reverse;
     width: 150px;
     height: 200px;
+  }
+  .recipe-card img {
+    filter: none;
   }
 }

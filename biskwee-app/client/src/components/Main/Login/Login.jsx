@@ -30,28 +30,30 @@ class Login extends Component {
     const user = await loginUser(formInput);
     // this.setState({ redirect: true });
 
-    // this.setState(this.state);
+    this.setState(this.state);
     console.log(user);
     return user ? <Redirect to="/loginfailed" /> : <Redirect to="/recipes" />;
   };
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleLogin}>
         <h1>Login</h1>
         <input
           type="email"
           name="email"
           placeholder="email"
+          className="login"
           onChange={this.handleLoginInput}
         />
         <input
           type="password"
           name="password"
           placeholder="password"
+          className="login"
           onChange={this.handleLoginInput}
         />
-        <button>Log In</button>
+        <button className="login">Log In</button>
       </form>
     );
   }
