@@ -4,8 +4,10 @@ import {
   getData,
   getAllIngredLines,
   deleteIngredLine,
+  newIngredLine,
+  updateIngredLine,
   newRecipe,
-  newIngredLine
+  updateRecipe
 } from "../../../api-helper";
 
 import NameField from "./NameField";
@@ -28,10 +30,16 @@ class AddEdit extends Component {
         unit_id: null,
         ingredient_id: null
       },
+      updateIngred: {
+        // id: null,
+        // qty: null,
+        // unit_id: null,
+        // ingredient_id: null
+      },
       putIngreds: [],
-      delIngreds: [],
-      tempMethods: []
-      // newMethods: [],
+      delIngred: null,
+      tempMethods: [],
+      newMethod: ""
       // putMethods: [],
       // delMethods: []
     };
@@ -98,7 +106,9 @@ class AddEdit extends Component {
     // update ingredient qty in state with num input change
     const { tempIngredLines } = this.state;
     const index = e.target.getAttribute("data-key");
-    tempIngredLines[index].qty = parseInt(e.target.value);
+    const newVal = parseInt(e.target.value);
+    tempIngredLines[index].qty = newVal;
+    // this.state.updateIngred.qty=newVal
     console.log("qty", tempIngredLines[index].qty, e.target.value);
   };
 
@@ -106,17 +116,19 @@ class AddEdit extends Component {
     // update ingredient unit in state with unit select change
     const { tempIngredLines } = this.state;
     const recipeUnitListIndex = e.target.getAttribute("data-key");
-    const selectedUnitIndex = e.target.selectedIndex - 1;
+    const selectedUnitIndex = e.target.selectedIndex;
     tempIngredLines[recipeUnitListIndex].unit_id = selectedUnitIndex;
+    // this.state.updateIngred.unit_id=selectedUnitIndex
     console.log("unit", selectedUnitIndex);
   };
 
   handleIngredChange = e => {
     // update ingredient id in state with ingredient select change
     const { tempIngredLines } = this.state;
-    const selectedIngredIndex = e.target.selectedIndex - 1;
+    const selectedIngredIndex = e.target.selectedIndex;
     const recipeIngredListIndex = e.target.getAttribute("data-key");
     tempIngredLines[recipeIngredListIndex].ingredient_id = selectedIngredIndex;
+    // this.state.updateIngred.ingredient_id=selectedIngredIndex
     // console.log(ingredients[recipeIngredListIndex]);
     console.log(
       "selectIngredIndex",
@@ -140,6 +152,16 @@ class AddEdit extends Component {
     console.log(this.state.newIngred);
   };
 
+  handleUpdateIngredFocus = e => {
+    const index = e.target.getAttribute("data-key");
+    this.setState({ updateIngred: this.state.tempIngredLines[index] });
+    console.log(this.state.updateIngred);
+  };
+  handleUpdateIngredBlur = e => {
+    this.state.putIngreds.push(this.state.updateIngred);
+    // console.log("putIngreds", this.state.putIngreds);
+  };
+
   handleMethodChange = e => {
     // update method step in state with method textarea change
     const stepIndex = e.target.getAttribute("data-key");
@@ -147,13 +169,24 @@ class AddEdit extends Component {
     console.log("state", this.state.tempMethods);
   };
 
+  handleNewMethodVal = e => {
+    const methodVal = e.target.value;
+    this.setState({ newMethod: methodVal });
+    console.log(this.state.newMethod);
+  };
+
   /* ---------- HANDLE LINE DELETIONS/ADDITIONS ---------- */
-  setIngredDelete = e => {
-    this.state.delIngreds.push(e.target.getAttribute("data-line-id"));
+  setIngredDelete = async e => {
+    const recipeId = !this.state._isNewRecipe
+      ? this.props.match
+      : this.state.currentRecipe.id;
+
+    const targetId = e.target.getAttribute("data-line-id");
     this.state.tempIngredLines.splice(
       e.target.getAttribute("data-line-index"),
       1
     );
+    await deleteIngredLine(recipeId, targetId);
     this.setState(this.state);
     console.log("ingred deleted");
   };
@@ -164,23 +197,16 @@ class AddEdit extends Component {
       : this.state.currentRecipe.id;
     this.state.newIngred.recipe_id = recipeId;
     const data = JSON.stringify(this.state.newIngred);
-
-    console.log(data);
+    // console.log(data);
     const res = await newIngredLine(recipeId, data);
-    console.log(res);
+    // console.log(res);
     this.state.tempIngredLines.push(this.state.newIngred);
-    // this.state.newIngred.qty = null;
-    // recipe_id: null,
-    // qty: null,
-    // unit_id: null,
-    // ingredient_id: null
     this.setState(this.state);
   };
 
   // setIngredPut
 
   setMethodDelete = e => {
-    // this.state.delMethods.push(e.target.getAttribute("stepIndex"));
     this.state.tempMethods[
       e.target.getAttribute("data-step-index")
     ] = undefined;
@@ -188,37 +214,47 @@ class AddEdit extends Component {
     console.log(this.state);
   };
 
-  handleIngredLineDelete = async e => {
-    // remove IngredLine or Method object from temp array in state when user clicks on (X) button
-    // deleteIngredLine(this.props.match, e.target.getAttribute("lineId"));
-    // this.forceUpdate();
-    // console.log(
-    //   "recipe",
-    //   this.props.match,
-    //   "ingred_line",
-    //   e.target.getAttribute("line")
-    // );
-    //(update IngredField/MethodField to remove deleted lines from IngredField map)
-  };
-
-  handleRecordAdd = e => {
-    // push new IngredLine or Method object into temp array in state when user clicks (+) button
-    //(update IngredField/MethodField to add new lines to IngredField map)
+  setMethodNew = e => {
+    const newMethod = this.state.newMethod;
+    this.state.tempMethods.push(newMethod);
+    this.setState(this.state);
+    console.log(this.state.tempMethods);
   };
 
   /* ---------- FORM SUBMISSION ---------- */
-  prepareRecipeData = e => {
-    // compile & JSON.stringify tempData for Recipe endpoint
-    return JSON.stringify({
-      name: this.state.tempName,
-      method: this.state.tempMethods
-    });
+  removeDuplicatePuts = (arr /*this.state.putIngreds*/) => {
+    // from (https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript)
+    const deDuped = Array.from(new Set(arr.map(JSON.stringify))).map(
+      JSON.parse
+    );
+    return deDuped;
   };
 
-  prepareIngredData = e => {
-    const data = JSON.stringify(this.state.tempIngredLines);
+  putChangedIngreds = async () => {
+    const recipeId = !this.state._isNewRecipe
+      ? this.props.match
+      : this.state.currentRecipe.id;
+		const toUpdate = this.removeDuplicatePuts(this.state.putIngreds);
+    const updateArr=toUpdate.map(
+   async ingred => await updateIngredLine(recipeId, ingred.id, ingred)
+		);
+		await Promise.all(updateArr)
   };
-  handleSubmit = () => {
+
+  putChangedRecipeData = async() => {
+		// compile tempData for Recipe endpoint
+		    const recipeId = !this.state._isNewRecipe
+          ? this.props.match
+					: this.state.currentRecipe.id;
+		const newData={name:this.state.tempName,method:this.state.tempMethods}
+  	await updateRecipe(recipeId,newData)
+    };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    // console.log(this.state);
+		this.putChangedIngreds();
+		this.putChangedRecipeData()
     // POST if _isNewRecipe:true
     // else PUT
   };
@@ -231,7 +267,7 @@ class AddEdit extends Component {
   render() {
     return (
       this.state._isMounted === true && (
-        <form className="add-edit" onSubmit={this.prepareRecipeData}>
+        <form className="add-edit" onSubmit={e => this.handleSubmit(e)}>
           <NameField
             {...this.props}
             _isNewRecipe={this.state._isNewRecipe}
@@ -261,6 +297,8 @@ class AddEdit extends Component {
             onNewIngredQty={e => this.handleNewIngredQty(e)}
             onNewIngredUnit={e => this.handleNewIngredUnit(e)}
             onNewIngredIngred={e => this.handleNewIngredIngred(e)}
+            onUpdateIngredFocus={e => this.handleUpdateIngredFocus(e)}
+            onUpdateIngredBlur={e => this.handleUpdateIngredBlur(e)}
           />
 
           <h1>Method</h1>
@@ -270,6 +308,8 @@ class AddEdit extends Component {
             tempMethods={this.state.tempMethods}
             handleMethodChange={e => this.handleMethodChange(e)}
             setMethodDelete={e => this.setMethodDelete(e)}
+            onNewMethodVal={e => this.handleNewMethodVal(e)}
+            setMethodNew={e => this.setMethodNew(e)}
           />
 
           <button>Submit</button>

@@ -8,12 +8,9 @@ const NewMethod = props => {
         cols="75"
         rows="5"
         placeholder="Add a new step"
-        // onChange={props.handleNewMethod}
+        onChange={props.onNewMethodVal}
       />
-      <i
-        className="material-icons"
-        // onClick={props.handleMethodSubmit}
-      >
+      <i className="material-icons" onClick={e => props.setMethodNew(e)}>
         add_circle_outline
       </i>
     </li>

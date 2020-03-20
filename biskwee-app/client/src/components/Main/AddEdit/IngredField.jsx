@@ -27,7 +27,12 @@ class IngredField extends Component {
     ) : (
       this.props.tempIngredLines.length > 0 &&
         this.props.tempIngredLines.map((line, i) => (
-          <li key={i}>
+          <li
+            key={i}
+            data-key={i}
+            onFocus={e => this.props.onUpdateIngredFocus(e)}
+            onBlur={e => this.props.onUpdateIngredBlur(e)}
+          >
             <input
               id="qty"
               type="number"
